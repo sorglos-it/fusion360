@@ -1,62 +1,59 @@
 # fusion360-sketch-grid
 
-[![Fusion 360](https://img.shields.io/badge/Autodesk-Fusion%20360-F60?logo=autodesk&logoColor=white)](#requirements)
-[![Type](https://img.shields.io/badge/type-add--in-0b7285.svg)](#installation)
-[![Shapes](https://img.shields.io/badge/shapes-4-4c1.svg)](#shapes)
+[![Fusion 360](https://img.shields.io/badge/Autodesk-Fusion%20360-F60?logo=autodesk&logoColor=white)](#start-in-3-steps)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS-0078D6?logo=windows&logoColor=white)](#start-in-3-steps)
 [![Languages](https://img.shields.io/badge/UI-DE%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20IT-4c1.svg)](#languages)
-[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS-0078D6?logo=windows&logoColor=white)](#requirements)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-00457C.svg?logo=paypal)](https://www.paypal.com/donate/?hosted_button_id=6CDEVZGJWTNQQ)
 
-A Fusion 360 add-in that builds a **grid of shapes around a sketch point**. Click a point, say how big one cell is and how far apart they sit, and get the whole array in one go — rectangles, circles, slots or polygons.
+A Fusion 360 add-in that builds a **grid of shapes around a sketch point**. Click a point, say how big one cell is and
+how far apart the cells sit, and get the whole array in one go — rectangles, circles, slots or polygons.
 
-Two ways to arrive at the count. Either you give **columns and rows** outright, or you give an **area** and it fits in as many as go in completely. A read-out under the dialog says what the current settings will produce before you commit to them.
+| Folder | Purpose | Language | Start | Build |
+|---|---|---|---|---|
+| `apps/desktop/SketchGrid` | the add-in: grids of shapes around a sketch point | Python 3 (the one inside Fusion) | copy into Fusion's add-ins folder, then *Run* | – (runs as is) |
 
-See also **[fusion360-dovetail](https://github.com/sorglos-it/fusion360-dovetail)** — joinery on a sketch line — and **[fusion360-addin-template](https://github.com/sorglos-it/fusion360-addin-template)**, the scaffolding both were built from.
+## Start in 3 steps
 
-## Features
-
-- **Two counting modes** — fixed columns and rows, or as many as fit into a given area
-- **Four shapes** — rectangle, circle/ellipse, slot with rounded ends, polygon from 3 to 24 sides, stretched to the cell or kept equilateral
-- **Rounded or chamfered corners** — the rectangle’s four right angles as a fillet or a straight chamfer, up to half the shorter edge
-- **Nine anchor positions** — the picked point can be the middle of the grid, any corner, or the middle of any edge
-- **Offset X / Y** — shift the grid off the point to hold a margin, without moving the point
-- **Separate gaps** for X and Y, zero allowed for shapes that touch — and the gap is measured between the shapes themselves, whatever their form
-- **Live read-out** — *8 × 4 = 32 shapes, 94 × 26 mm overall*, updated as you type
-- **Live preview** — the sketch updates while the dialog is open
-- **Explained refusals** — an area too small for a single shape says how big it would have to be
-- **A cap that saves you** — more than 2000 shapes is refused rather than locked up
-- **Five languages** — German, English, Spanish, French, Italian, from the Fusion language setting
-- **No dependencies** — pure Python standard library
-
-## Requirements
-
-- Autodesk Fusion 360 (Windows or macOS), any recent version
-- Nothing else — the add-in uses only Python modules that ship with Fusion
-
-## Installation
-
-1. Download the latest `SketchGrid-*.zip` from **[Releases](https://github.com/sorglos-it/fusion360-sketch-grid/releases)** — or clone this repository and use the `SketchGrid` folder as it is.
-2. Unpack it into the Fusion add-ins directory, so that `SketchGrid\SketchGrid.py` ends up one level below it:
+1. Download the latest `SketchGrid-*.zip` from
+   **[Releases](https://github.com/sorglos-it/fusion360-sketch-grid/releases)** — or clone this repository and take the
+   folder `apps/desktop/SketchGrid`.
+2. Unpack or copy it into Fusion's add-ins folder, so that `SketchGrid\SketchGrid.py` ends up one level below it:
 
    | OS | Path |
    |---|---|
    | Windows | `%APPDATA%\Autodesk\Autodesk Fusion 360\API\AddIns\` |
    | macOS | `~/Library/Application Support/Autodesk/Autodesk Fusion 360/API/AddIns/` |
 
-3. In Fusion: **Utilities → ADD-INS → Add-Ins**, select the entry, tick *Run on Startup*, press **Run**.
-4. The button appears on the **SKETCH** tab in the **CREATE** panel, with the installed version in brackets after its name.
+3. In Fusion: **Utilities → ADD-INS → Add-Ins**, select the entry, tick *Run on Startup*, press **Run**. The button
+   appears on the **SKETCH** tab in the **CREATE** panel, with the installed version in brackets after its name.
 
-Replacing an older copy: stop the add-in in Fusion first, otherwise the running one stays in memory.
+You need Autodesk Fusion 360 (Windows or macOS), any recent version — nothing else to install.
+
+## Update
+
+Stop the add-in in Fusion first, otherwise the running one stays in memory. Then replace the folder, keeping its name:
+Fusion requires `<Folder>/<Folder>.py` and `<Folder>/<Folder>.manifest` to match.
 
 ## Usage
 
 1. Open or edit a sketch.
 2. Click a point — the sketch origin, or any point you placed yourself.
-3. Click the grid icon. The point you clicked is already filled into the dialog.
+3. Click the grid icon. The point is already in the dialog.
 4. Set the values, read the result line, press **OK**.
 
-Worked example, the one the add-in was built around: length 10 mm, depth 5 mm, gap 2 mm, 8 columns and 4 rows. That gives a pitch of 12 × 7 mm and a grid of 94 × 26 mm overall, 32 rectangles, centred on the point you picked.
+Example, the one the add-in was built around: length 10 mm, depth 5 mm, gap 2 mm, 8 columns and 4 rows. That gives a
+pitch of 12 × 7 mm, a grid of 94 × 26 mm and 32 rectangles, centred on the point you picked.
+
+What you get:
+
+- **Two ways to count** — columns and rows outright, or as many as fit completely into an area.
+- **Four shapes** — rectangle (corners sharp, rounded or chamfered), circle/ellipse, slot, polygon with 3 to 24 sides.
+- **Nine anchor positions** plus an X/Y offset, so the point can stay where it belongs.
+- **Separate gaps** for X and Y, 0 allowed — measured between the shapes, whatever their form.
+- **Live read-out and preview** — *8 × 4 = 32 shapes, 94 × 26 mm overall*, updated as you type.
+- **Explained refusals** — an area too small for one shape says how big it would have to be; more than 2000 shapes
+  are refused instead of freezing Fusion.
 
 ## Dialog
 
@@ -68,7 +65,7 @@ Worked example, the one the add-in was built around: length 10 mm, depth 5 mm, g
 | **Sides** | Polygon only: 3 to 24. |
 | **Regular** | Polygon only. Off: stretched to fill the cell. On: equilateral, sized by the smaller cell edge, and the pitch follows the shape. |
 | **Corners** | Rectangle only: `Sharp`, `Rounded` or `Chamfered`. |
-| **Radius / chamfer** | Rectangle only, and only once the corners are not sharp: the fillet radius, resp. the leg length of the chamfer. |
+| **Radius / chamfer** | Rectangle only, once the corners are not sharp: the fillet radius or the leg length of the chamfer. |
 | **Length (X)** / **Depth (Y)** | The size of one cell. |
 | **Gap X** / **Gap Y** | Space between neighbours. 0 makes them touch. |
 | **Columns** / **Rows** | Fixed mode: the count outright. |
@@ -79,146 +76,133 @@ Worked example, the one the add-in was built around: length 10 mm, depth 5 mm, g
 
 ## The two modes
 
-**Columns and rows** is the direct one. `n` shapes span `n × size + (n−1) × gap`, so 8 columns of 10 mm with a 2 mm gap come to 94 mm, not 96.
+**Columns and rows:** `n` shapes span `n × size + (n−1) × gap`, so 8 columns of 10 mm with a 2 mm gap come to 94 mm,
+not 96.
 
-**Fitting an area** turns that around: it fits in as many as go in *completely*, `floor((area + gap) / (size + gap))`. A partial shape at the edge is never drawn. Consequences worth knowing:
+**Fitting an area:** as many as fit in *completely*, `floor((area + gap) / (size + gap))`. A partial shape at the edge
+is never drawn.
 
-- 100 mm of width with 10 mm shapes and a 2 mm gap gives **8** columns (94 mm used, 6 mm left over). A ninth would need 106 mm.
-- The leftover sits on the far side of the grid, not distributed. Use the anchor to decide which side that is.
-- An area of exactly 94 mm gives 8. At 93.9 mm it drops to 7 — the arithmetic is exact, so a rounded-off number can cost you a whole column.
+- 100 mm with 10 mm shapes and a 2 mm gap gives **8** columns (94 mm used, 6 mm left). A ninth would need 106 mm.
+- The leftover sits on the far side of the grid; the anchor decides which side that is, the middle splits it.
+- An area of exactly 94 mm gives 8, at 93.9 mm it drops to 7 — a rounded-off number can cost a whole column.
 
 ## Anchor
 
-The field is called **Point sits in the grid**, and that is exactly what it says: where the point you clicked ends up *inside* the finished grid. It is not the direction the grid grows in — that is the opposite of each entry. A point sitting at the bottom left means the grid extends up and to the right of it.
-
-Nine positions, here with a 3 × 2 grid, `X` the picked point and `#` the shapes:
+**Point sits in the grid** means exactly that: where the point you clicked ends up *inside* the finished grid — not the
+direction the grid grows in. A point at the bottom left means the grid extends up and to the right of it. Three of
+the nine positions, with a 3 × 2 grid, `X` the point and `#` the shapes:
 
 ```
-  In the middle        Bottom left          Bottom right
-  #####.#####.#####    #####.#####.#####    #####.#####.#####
+  In the middle        Bottom left          Top centre
+  #####.#####.#####    #####.#####.#####    #####.##X##.#####
   #####.#####.#####    #####.#####.#####    #####.#####.#####
   ........X........    .................    .................
   #####.#####.#####    #####.#####.#####    #####.#####.#####
-  #####.#####.#####    X####.#####.#####    #####.#####.####X
-
-  Top left             Top right            Bottom centre
-  X####.#####.#####    #####.#####.####X    #####.#####.#####
-  #####.#####.#####    #####.#####.#####    #####.#####.#####
-  .................    .................    .................
-  #####.#####.#####    #####.#####.#####    #####.#####.#####
-  #####.#####.#####    #####.#####.#####    #####.##X##.#####
-
-  Top centre           Left centre          Right centre
-  #####.##X##.#####    #####.#####.#####    #####.#####.#####
-  #####.#####.#####    #####.#####.#####    #####.#####.#####
-  .................    X................    ................X
-  #####.#####.#####    #####.#####.#####    #####.#####.#####
-  #####.#####.#####    #####.#####.#####    #####.#####.#####
+  #####.#####.#####    X####.#####.#####    #####.#####.#####
 ```
 
-`In the middle` is the default and grows the grid symmetrically in all four directions. For the 8 × 4 example that puts the lower left corner 47 mm left and 13 mm below the point. `Bottom left` puts the point exactly on the lower left corner, so the grid occupies the space up and to the right of it.
-
-`tools/test_sketchgrid.py` derives the expected factors from each entry's own name and checks them both ways round, so a label that disagrees with the geometry fails the suite.
+`In the middle` is the default and grows the grid evenly in all four directions: for the 8 × 4 example the lower left
+corner lands 47 mm left of and 13 mm below the point.
 
 ## Offset
 
-The anchor puts the point somewhere in the grid; **Offset X** and **Offset Y** then move the whole grid off it. The two add up rather than replacing each other.
-
-The case it exists for: your point sits at 0/0, but the grid should start 2 mm in from it because you want a margin at that edge. Without the offset you would have to move the point to 2/2 and lose it as a reference. With it, the point stays where it belongs and the grid sits where you want it — and the margin does not have to match the gap, so a safety zone of any size works.
-
-Count, pitch and overall size are untouched by the offset, and in *fill an area* mode it does not change how many shapes fit — it only moves the result.
+**Offset X** and **Offset Y** move the whole grid off the point, on top of the anchor. The case it is for: your point
+sits at 0/0, but the grid should start 2 mm in, to keep a margin. The point stays where it is, and the margin does not
+have to match the gap. Count, pitch and overall size stay the same; in fill mode the offset does not change how many
+shapes fit, it only moves them.
 
 ## Shapes
 
 | Shape | Built from | Note |
 |---|---|---|
-| **Rectangle** | Length × depth | The plain case. Its four right angles can be rounded or chamfered — see [Corners](#corners). |
-| **Circle / ellipse** | Length and depth as the two axes | Equal values give a true circle, unequal an ellipse with the major axis on the longer side. |
-| **Slot** | Rectangle with semicircular ends | Rounded on the shorter axis; the radius is half of it. Equal length and depth make a circle. |
-| **Polygon** | Length × depth, first vertex pointing up | Stretched to fill the cell, so its bounding box is exactly length × depth for any corner count. Tick **Regular** to keep it equilateral instead — then the smaller cell edge sets its size. |
+| **Rectangle** | length × depth | Its corners can be rounded or chamfered — see below. |
+| **Circle / ellipse** | length and depth as the two axes | Equal values give a true circle. |
+| **Slot** | rectangle with semicircular ends | Rounded on the shorter axis; equal length and depth make a circle. |
+| **Polygon** | length × depth, first vertex pointing up | Stretched to fill the cell. Tick **Regular** to keep it equilateral — then the smaller cell edge sets its size. |
 
 ## Corners
 
-A rectangle can have its four right angles taken off, either as a fillet arc or as a straight chamfer. **Corners** picks which, **Radius / chamfer** says how much. Both fields appear for the rectangle only — the ellipse has no corners, and the slot is round already.
-
-The limit is **half the shorter edge**, and that end of the range is worth knowing, because it turns the rectangle into something else entirely:
+**Corners** picks a fillet arc or a straight chamfer, **Radius / chamfer** says how much — rectangle only. The limit
+is **half the shorter edge**, and there the rectangle turns into something else:
 
 | Radius / chamfer | Rounded | Chamfered |
 |---|---|---|
 | 1 mm on a 10 × 5 rectangle | soft corners | the corners cut off |
-| 2.5 mm on a 10 × 5 rectangle — the maximum | a slot | a hexagon; the short edges are gone |
+| 2.5 mm on a 10 × 5 rectangle — the maximum | a slot | a hexagon |
 | 5 mm on a 10 × 10 square — the maximum | a circle | a diamond |
 
-Asking for more than the limit is refused, with the value that would still fit in the message. A 3 mm radius on a 5 mm edge is a typo more often than a wish, and the two cuts on that edge would have to run past each other.
-
-**The bounding box does not change.** A rounded rectangle still measures exactly length × depth, so the count, the pitch and the overall size come out the same as with sharp corners — switching them on does not move a single shape. What changes is what sits diagonally across a corner: the gap you set is still the gap along the flat edges, and around the corners there is now more of it. That is the same reading of *gap* the ellipse already gets.
+More than the limit is refused, and the message names the value that would still fit. The bounding box stays length ×
+depth, so count, pitch and overall size do not change; the gap along the flat edges stays the gap you set, across a
+corner there is more of it.
 
 ## The gap is measured between the shapes
 
-Every shape fills its cell, so the pitch is `size + gap` and the space you see between two neighbours is the gap you asked for. That holds for the rectangle, the ellipse, the slot and a stretched polygon alike.
-
-A **regular** polygon is the one shape that cannot fill a cell of the wrong proportions — it has a single diameter. So it reports its own footprint and the pitch follows that instead:
+Every shape fills its cell, so the pitch is `size + gap` and the space between neighbours is the gap you asked for.
+A **regular** polygon is the exception — it has a single diameter and cannot fill a cell of other proportions — so the
+pitch follows its measured footprint instead:
 
 | 10 × 5 cell, gap 2, hexagon | Shape | Pitch | Gap |
 |---|---|---|---|
 | stretched (default) | 10.00 × 5.00 | 12.00 × 7.00 | 2.00 / 2.00 |
 | regular | 4.33 × 5.00 | 6.33 × 7.00 | 2.00 / 2.00 |
 
-A regular hexagon is only `cos(30°) × 5 = 4.33 mm` across, and up to 1.2.0 the pitch was still built from the full cell width — which left 7.67 mm between neighbours instead of 2. Fixed in 1.3.0.
+## Languages
 
-The footprint is measured, not assumed: with the first vertex at 90°, a square and an octagon span the full diameter both ways while a triangle and a hexagon do not, and a pentagon is not even centred on its own bounding box.
-
-## How it works
-
-1. The picked point gives an origin in sketch space. Everything is computed relative to it and only converted at the moment of drawing, so the grid does not care where in the sketch you are.
-2. `grid_layout()` works out the count, the pitch, the overall size and the offset of the bounding box from the anchor factors. It touches no Fusion API at all, which is why `tools/test_sketchgrid.py` can check it without starting Fusion.
-3. `cell_centres()` walks the cells row by row and yields their positions relative to the point.
-4. Each shape is drawn into the sketch by its own small function. The polygon chains its segments through `endSketchPoint` so the outline comes out connected; the slot relies on coincident endpoints, which is enough for Fusion to detect a profile. A rectangle with cut corners goes through `corner_outline()`, which returns its lines and arcs as plain numbers and touches no Fusion API either — so the closed contour, the arc radii and the degenerate cases are checked by the test suite like everything else.
-5. Drawing runs with `isComputeDeferred` set. With a few hundred cells that is the difference between instant and unusable.
+The interface follows **Preferences → General → User Language** in Fusion: German, English, Spanish, French or
+Italian, anything else falls back to English. The texts live in `apps/desktop/SketchGrid/lang/<code>.xml`; `en.xml` is
+the reference and a key missing elsewhere falls back to it. To add a language, copy `en.xml`, translate it, name it
+after the two-letter code and add the code to `SUPPORTED_LANGUAGES` and `FUSION_LANGUAGE_MAP` in `sketchgrid_core.py`.
 
 ## Notes & caveats
 
-- **The count is capped at 2000.** Fill mode with a small shape and a large area produces four-figure counts easily, and Fusion takes minutes over that with the sketch solver awake. The cap refuses with a message rather than appearing to hang.
-- **Only the rectangle has corners to take off.** A polygon keeps its own, sharp. The two fields are hidden for every other shape rather than ignored.
-- **A polygon uses the smaller dimension.** In a wide, flat cell it looks lost, and that is honest: a regular polygon has one diameter. Use a rectangle or an ellipse when the cell is not roughly square.
-- **The polygon's orientation is fixed** with a vertex pointing up. For flat-top hexagons, swap length and depth, or rotate the finished sketch.
-- **Shapes are plain sketch geometry, not a Fusion pattern.** They are not associative — changing the source later does not update them. That is deliberate: the result is ordinary curves you can trim, constrain and extrude without a pattern feature in the way.
-- **Gaps can be 0 but not negative.** Overlapping shapes would produce profiles that fight each other; if you want overlap, draw one grid and offset a second.
-- **The leftover in fill mode is not centred.** The grid is laid out from the anchor, and whatever does not fit is left on the far side. Anchoring to the middle splits the leftover between both sides instead.
-- **The sketch origin works as the point.** So does any point you place. What does not work is a vertex on a body — the selection filter is sketch points only.
+- **The count is capped at 2000.** Fusion takes minutes over more with the sketch solver awake; the cap refuses with a
+  message instead of appearing to hang.
+- **Only the rectangle has corners to take off.** A polygon keeps its own, sharp.
+- **A regular polygon uses the smaller cell edge.** In a wide, flat cell it looks lost — use a rectangle or an ellipse
+  when the cell is not roughly square.
+- **The polygon's orientation is fixed** with a vertex pointing up. For flat-top hexagons swap length and depth, or
+  rotate the finished sketch.
+- **Shapes are plain sketch geometry, not a Fusion pattern.** Changing the source later does not update them — on
+  purpose: you can trim, constrain and extrude them without a pattern feature in the way.
+- **Gaps can be 0 but not negative.** Overlapping shapes would make profiles that fight each other; for overlap, draw
+  one grid and offset a second.
+- **The leftover in fill mode is not centred** unless you anchor to the middle.
+- **Only sketch points can be picked** — the sketch origin or any point you place, not a vertex on a body.
 
 ## Development
 
-The grid maths has no Fusion dependency and is tested from a normal Python installation. The test stubs the `adsk` modules, imports the add-in and checks the layout, the anchor factors, both counting modes, every error key and all five language files:
+The grid maths has no Fusion dependency, so it runs in a normal Python 3 (standard library only):
 
 ```bash
-python tools/test_sketchgrid.py
-```
-
-The structural check from the template repository runs against it too — manifest, GUID, command id, icons:
-
-```bash
-python ../fusion360-addin-template/tools/test_addin.py --path SketchGrid
-```
-
-The icon is generated, not drawn by hand:
-
-```bash
+python apps/desktop/tests/test_sketchgrid.py
+python ../fusion360-addin-template/apps/desktop/tests/test_addin.py --path apps/desktop/SketchGrid
 python tools/make_icon.py
 ```
 
-Both scripts resolve paths relative to the repository. Set `SKETCHGRID_ADDIN_DIR` to point them at an installed copy instead.
+The first checks the layout, the anchor factors (derived from each entry's own name, so a label that disagrees with
+the geometry fails), both counting modes, the corner outlines, every error key and all five language files. The second
+is the structural check from the template repository, cloned next to this one — manifest, GUID, command id, icons.
+The third draws the toolbar icon. The tests and the icon script find the add-in in `apps/desktop/SketchGrid`; set
+`SKETCHGRID_ADDIN_DIR` to point them at an installed copy instead. `python tools/test_sketchgrid.py` still works and
+runs the same tests.
 
-Scaffolded from **[fusion360-addin-template](https://github.com/sorglos-it/fusion360-addin-template)**, which carries the translated-interface machinery, the handler registry and the panel lookup used here.
+How it works, in short: `grid_layout()` works out count, pitch, overall size and where the grid sits relative to the
+point, `cell_centres()` walks the cells, and `corner_outline()` returns a cut rectangle as plain lines and arcs — none
+of them touches the Fusion API, which is why the tests can check them. Each shape is then drawn by its own small
+function, with `isComputeDeferred` set; with a few hundred cells that is the difference between instant and unusable.
 
-## Support this project ❤️
+## Related
 
-If this add-in saved you time, you can support further development:
-
-[![Donate with PayPal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/donate/?hosted_button_id=6CDEVZGJWTNQQ)
-
-**[➡️ Donate via PayPal](https://www.paypal.com/donate/?hosted_button_id=6CDEVZGJWTNQQ)**
+Scaffolded from **[fusion360-addin-template](https://github.com/sorglos-it/fusion360-addin-template)**, which carries
+the translated interface, the handler registry and the panel lookup used here. See also
+[fusion360-dovetail](https://github.com/sorglos-it/fusion360-dovetail) — joints on a sketch line.
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE) — © 2026 Thomas Weirich.
+MIT — see [LICENSE](LICENSE). © 2026 Thomas Weirich.
+
+## Donate via PayPal
+
+If this add-in saved you time, a donation supports further development. Thank you!
+
+**[➡️ Donate via PayPal](https://www.paypal.com/donate/?hosted_button_id=6CDEVZGJWTNQQ)**
