@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Offline test suite for PrintGear.
 
-    python tools/test_geometry.py
+    python apps/desktop/tests/test_geometry.py
 
 The gear mathematics has no Fusion dependency, so all of it runs in a normal
 Python installation. The Fusion side is imported against stub adsk modules,
@@ -22,8 +22,8 @@ import types
 import xml.etree.ElementTree as ElementTree
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-REPO = os.path.dirname(HERE)
-ADDIN = os.environ.get('PRINTGEAR_ADDIN_DIR') or os.path.join(REPO, 'PrintGear')
+ADDINS = os.path.dirname(HERE)  # apps/desktop, where the add-in lives
+ADDIN = os.environ.get('PRINTGEAR_ADDIN_DIR') or os.path.join(ADDINS, 'PrintGear')
 LANG = os.path.join(ADDIN, 'lang')
 
 sys.path.insert(0, ADDIN)

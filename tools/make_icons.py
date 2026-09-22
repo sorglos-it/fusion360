@@ -15,7 +15,7 @@ import struct
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(_HERE)
-ADDIN = os.environ.get('PRINTGEAR_ADDIN_DIR') or os.path.join(REPO, 'PrintGear')
+ADDIN = os.environ.get('PRINTGEAR_ADDIN_DIR') or os.path.join(REPO, 'apps', 'desktop', 'PrintGear')
 OUT = os.path.join(ADDIN, 'resources', 'PrintGear')
 
 sys.path.insert(0, ADDIN)

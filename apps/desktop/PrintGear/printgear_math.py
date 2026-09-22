@@ -3,7 +3,7 @@
 Involute gear mathematics for PrintGear.
 
 Deliberately free of any adsk import, so the whole geometry can be exercised
-from a normal Python installation - see tools/test_geometry.py.
+from a normal Python installation - see apps/desktop/tests/test_geometry.py.
 
 Everything in here is in MILLIMETRES and RADIANS unless a name says otherwise.
 The Fusion side is the only place that converts to centimetres, which is what
