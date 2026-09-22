@@ -199,7 +199,7 @@ the translated interface, the handler registry and the panel lookup used here. S
 
 ## License
 
-MIT — see [LICENSE](LICENSE). © 2026 Thomas Weirich.
+MIT — see [LICENSE](LICENSE). © 2026 Sorglos Thomas Weirich.
 
 ## Donate via PayPal
 
