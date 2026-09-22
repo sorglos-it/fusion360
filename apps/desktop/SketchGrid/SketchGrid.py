@@ -207,8 +207,8 @@ def corner_outline(width, height, cut, rounded):
     Each entry is ('line', start, end) or ('arc', start, through, end), the
     points relative to the centre of the shape and running counter-clockwise,
     so the end of one segment is the start of the next and the last closes back
-    onto the first. No adsk calls, which is what lets tools/test_sketchgrid.py
-    check the geometry - _draw_cut_rectangle only hands the result to Fusion.
+    onto the first. No adsk calls, which is what lets
+    apps/desktop/tests/test_sketchgrid.py check the geometry - _draw_cut_rectangle only hands the result to Fusion.
 
     A cut of half an edge leaves no straight piece on that side, and such an
     edge is left out rather than emitted with zero length. Rounded on half of
@@ -253,7 +253,7 @@ def grid_layout(mode, width, height, gap_x, gap_y, columns, rows,
     away from it, which is how you keep a margin without moving the point.
 
     Kept free of adsk calls on purpose: this is the part worth testing, and
-    tools/test_sketchgrid.py runs it without starting Fusion.
+    apps/desktop/tests/test_sketchgrid.py runs it without starting Fusion.
     """
     if width <= EPS:
         fail('err.width')

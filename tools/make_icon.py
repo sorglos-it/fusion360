@@ -12,7 +12,7 @@ import struct
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
 ADDIN = os.environ.get('SKETCHGRID_ADDIN_DIR') or os.path.join(
-    os.path.dirname(_HERE), 'SketchGrid')
+    os.path.dirname(_HERE), 'apps', 'desktop', 'SketchGrid')
 OUT = os.path.join(ADDIN, 'resources', 'SketchGrid')
 
 DARK = (0x2E, 0x3A, 0x45)
