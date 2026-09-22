@@ -208,7 +208,8 @@ def corner_outline(width, height, cut, rounded):
     points relative to the centre of the shape and running counter-clockwise,
     so the end of one segment is the start of the next and the last closes back
     onto the first. No adsk calls, which is what lets
-    apps/desktop/tests/test_sketchgrid.py check the geometry - _draw_cut_rectangle only hands the result to Fusion.
+    apps/desktop/tests/test_sketchgrid.py check the geometry -
+    _draw_cut_rectangle only hands the result to Fusion.
 
     A cut of half an edge leaves no straight piece on that side, and such an
     edge is left out rather than emitted with zero length. Rounded on half of
