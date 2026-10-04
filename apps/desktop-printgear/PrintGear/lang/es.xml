@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Spanish. See en.xml for the reference set of keys. -->
+<strings language="es">
+
+  <!-- Command -->
+  <string key="cmd.name">PrintGear</string>
+  <string key="cmd.tooltip">Engranajes de evolvente dimensionados para la boquilla que los imprimirá.
+Un punto da un engranaje o una pareja, varios puntos dan un tren de engranajes.</string>
+  <string key="cmd.ok">Crear</string>
+
+  <!-- Groups -->
+  <string key="grp.print">Ajustes de impresión</string>
+  <string key="grp.teeth">Dentado</string>
+  <string key="grp.train">Engranajes</string>
+  <string key="grp.output">Resultado</string>
+
+  <!-- Points -->
+  <string key="in.points">Posiciones</string>
+  <string key="in.points.prompt">Seleccione puntos para los ejes</string>
+  <string key="in.points.tip">Un punto da un engranaje suelto o una pareja engranada.
+Varios puntos dan un tren: el primer punto es la entrada, el último la salida.
+Todos los puntos deben estar en un plano paralelo a XY.</string>
+
+  <!-- Print setup -->
+  <string key="in.nozzle">Boquilla</string>
+  <string key="in.nozzle.0.2">0,2 mm</string>
+  <string key="in.nozzle.0.4">0,4 mm</string>
+  <string key="in.nozzle.0.6">0,6 mm</string>
+  <string key="in.nozzle.0.8">0,8 mm</string>
+  <string key="in.nozzle.1.0">1,0 mm</string>
+  <string key="in.nozzle.custom">Definir el módulo yo mismo</string>
+  <string key="in.factor">Factor de módulo</string>
+  <string key="in.factor.tip">Módulo = boquilla * factor.
+2,5 es el valor razonable: deja unas cinco extrusiones sobre la base del diente,
+que es de lo que depende que un diente impreso no se arranque. 2,0 fino, 3,0 robusto.</string>
+  <string key="in.module">Módulo</string>
+  <string key="in.backlash">Juego entre flancos</string>
+  <string key="in.backlash.tip">Juego total entre dos engranajes que engranan.
+Cada uno cede la mitad, así que la pareja acaba con exactamente este valor.
+0,25 mm sirve para casi cualquier impresora; súbalo si sus piezas salen con sobremedida.</string>
+  <string key="in.width">Ancho del diente</string>
+
+  <!-- Teeth -->
+  <string key="in.style">Tipo de dentado</string>
+  <string key="in.style.straight">Recto</string>
+  <string key="in.style.helical">Helicoidal</string>
+  <string key="in.style.herringbone">Doble helicoidal (V)</string>
+  <string key="in.helix">Ángulo de hélice</string>
+  <string key="in.helix.tip">El dentado helicoidal es más silencioso pero empuja el eje de lado.
+El doble helicoidal anula ese empuje y se imprime sin soportes: la opción habitual al imprimir.</string>
+  <string key="in.pressure">Ángulo de presión</string>
+  <string key="in.pressure.tip">20 grados es lo normal. 25 da bases de diente más gruesas y resistentes
+a cambio de algo menos de suavidad, que en plástico suele compensar.</string>
+  <string key="in.shift">Corrección de perfil en piñones pequeños</string>
+  <string key="in.shift.tip">Por debajo de unos 17 dientes el flanco queda socavado y la base adelgaza.
+La corrección de perfil recupera esos dientes y la distancia entre centros se ajusta sola.</string>
+
+  <!-- Gears -->
+  <string key="in.size_mode">Tamaño indicado como</string>
+  <string key="in.size_mode.teeth">Número de dientes</string>
+  <string key="in.size_mode.diameter">Diámetro primitivo</string>
+  <string key="in.first">Dientes del primer engranaje</string>
+  <string key="in.first_dia">Diámetro primitivo, primer engranaje</string>
+  <string key="in.ratio">Relación</string>
+  <string key="in.ratio.tip">Reducción del primer engranaje al último.
+En un tren los intermedios sólo invierten el giro, así que la relación la fijan los extremos;
+los intermedios se dimensionan para alcanzar los puntos elegidos.</string>
+  <string key="in.mode">Los puntos indican</string>
+  <string key="in.mode.ratio">Dirección - la relación es exacta</string>
+  <string key="in.mode.position">Posiciones exactas - relación aproximada</string>
+  <string key="in.pair">Añadir un segundo engranaje</string>
+  <string key="in.pair.tip">Coloca un engranaje conjugado junto al primero, a la distancia
+entre centros correcta para la relación y el juego.</string>
+  <string key="in.pair_angle">Dirección</string>
+  <string key="in.pair_angle.tip">Dónde queda el segundo engranaje, medido desde el eje X.
+180 grados los pone en línea recta, 90 grados los pone en esquina.</string>
+
+  <!-- Output -->
+  <string key="in.bore">Taladro</string>
+  <string key="in.bore.tip">Agujero de eje en cada engranaje. 0 los deja macizos.
+Se corta después del cuerpo, de modo que un engranaje helicoidal tiene el taladro recto.</string>
+  <string key="in.components">Cada engranaje como componente</string>
+  <string key="in.preview">Vista previa</string>
+  <string key="in.preview.circles">Círculos (rápida)</string>
+  <string key="in.preview.full">Geometría completa (lenta)</string>
+  <string key="in.preview.off">Desactivada</string>
+
+  <!-- Report -->
+  <string key="info.module">Módulo</string>
+  <string key="info.nozzle">Boquilla</string>
+  <string key="info.ratio">Relación</string>
+
+  <!-- Warnings -->
+  <string key="warn.ratio_off">Los números de dientes que alcanzan sus puntos no dan la relación pedida.</string>
+  <string key="warn.distance_off">Los engranajes sobre los puntos no engranan a la distancia ideal; el juego varía.</string>
+  <string key="warn.teeth_low">Un engranaje es tan pequeño que su base queda casi sobre el eje.</string>
+  <string key="warn.twist_high">Un engranaje gira más de media vuelta a lo largo de su ancho: reduzca el ancho o el ángulo de hélice.</string>
+  <string key="warn.tip_truncated">Los dientes acababan en punta; las cabezas se han recortado a una extrusión.</string>
+
+  <!-- Validation -->
+  <string key="err.no_points">Seleccione al menos un punto para un eje.</string>
+  <string key="err.too_many_points">Como máximo {0} puntos.</string>
+  <string key="err.module_positive">El módulo debe ser mayor que 0.</string>
+  <string key="err.width_positive">El ancho del diente debe ser mayor que 0.</string>
+  <string key="err.ratio_positive">La relación debe ser mayor que 0.</string>
+  <string key="err.backlash_negative">El juego no puede ser negativo.</string>
+  <string key="err.backlash_too_big">Con tanto juego no queda diente con este módulo.</string>
+  <string key="err.teeth_low">Un engranaje necesita al menos {0} dientes.</string>
+  <string key="err.teeth_high">Como máximo {0} dientes por engranaje.</string>
+  <string key="err.pressure_range">El ángulo de presión debe estar entre 10 y 35 grados.</string>
+  <string key="err.helix_range">El ángulo de hélice debe estar entre 0 y 80 grados.</string>
+  <string key="err.points_not_coplanar">Los puntos están a alturas distintas. Los engranajes sólo engranan en un plano.</string>
+  <string key="err.points_too_close">Dos puntos están demasiado juntos para este módulo.</string>
+  <string key="err.bore_too_big">El taladro es demasiado grande para el engranaje más pequeño del tren.</string>
+  <string key="err.bore_negative">El taladro no puede ser negativo.</string>
+  <string key="err.no_design">Abra primero un diseño.</string>
+  <string key="err.profile_failed">El contorno del diente no se cerró en un perfil utilizable.</string>
+
+  <!-- Message boxes -->
+  <string key="msg.panel_missing">No se encontró ningún panel adecuado.</string>
+  <string key="msg.single_component_doc">Este documento es un diseño de pieza y sólo admite un componente, así que los engranajes se crearon como cuerpos.
+Para un componente por engranaje, cree el diseño como ensamblaje.</string>
+  <string key="msg.exec_failed">No se pudo crear la geometría:
+{0}</string>
+  <string key="msg.dialog_failed">No se pudo construir el diálogo:
+{0}</string>
+  <string key="msg.run_failed">Fallo al iniciar:
+{0}</string>
+  <string key="msg.stop_failed">Fallo al detener:
+{0}</string>
+
+</strings>
