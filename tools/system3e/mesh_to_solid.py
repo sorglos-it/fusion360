@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Turn the triangle meshes of a .3ds file into clean solids with flat faces.
 
-    python tools/mesh_to_solid.py "assets/SYSTEM 3E START.3ds" --report
+    python tools/system3e/mesh_to_solid.py "assets/system3e/SYSTEM 3E START.3ds" --report
 
 The manufacturer's 3D file holds every element as a loose triangle mesh:
 triangles that only touch along part of an edge, doubled points, slivers.

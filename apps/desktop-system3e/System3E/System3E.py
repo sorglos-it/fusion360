@@ -22,7 +22,7 @@ import adsk.fusion
 # old version until Fusion restarts. Dropping it from sys.modules before the
 # import makes "stop, run" pick up changes.
 #
-# The name is renamed per add-in by tools/new_addin.py, which is what stops two
+# The name is renamed per add-in by tools/template/new_addin.py, which is what stops two
 # add-ins built from this template from overwriting each other's core module.
 _CORE_MODULE = 'system3e_core'
 
