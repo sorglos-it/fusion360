@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- German. See en.xml for the reference set of keys. -->
+<strings language="de">
+
+  <!-- Command -->
+  <string key="cmd.name">Skizzenraster</string>
+  <string key="cmd.tooltip">Baut ein Raster aus Formen um einen Skizzenpunkt.
+Feste Anzahl Spalten und Zeilen, oder so viele wie in eine Fläche passen.</string>
+
+  <!-- Inputs -->
+  <string key="in.point">Punkt</string>
+  <string key="in.point.prompt">Skizzenpunkt wählen</string>
+  <string key="in.mode">Anzahl aus</string>
+  <string key="mode.count">Spalten und Zeilen</string>
+  <string key="mode.fill">Fläche füllen</string>
+  <string key="in.shape">Form</string>
+  <string key="shape.rectangle">Rechteck</string>
+  <string key="shape.ellipse">Kreis / Ellipse</string>
+  <string key="shape.slot">Langloch</string>
+  <string key="shape.polygon">Vieleck</string>
+  <string key="in.sides">Ecken</string>
+  <string key="in.regular">Regelmäßig</string>
+  <string key="regular.tooltip">Hält das Vieleck gleichseitig, statt es auf Länge × Tiefe zu strecken. Die kleinere der beiden bestimmt dann die Größe, und die Teilung folgt der tatsächlichen Form - der Abstand stimmt so oder so.</string>
+  <string key="in.corner">Eckenform</string>
+  <string key="corner.sharp">Scharfkantig</string>
+  <string key="corner.round">Verrundet</string>
+  <string key="corner.chamfer">Gefast</string>
+  <string key="in.corner_size">Radius / Fase</string>
+  <string key="corner.tooltip">Nimmt die vier rechten Winkel des Rechtecks weg, entweder als Rundung oder als gerade Fase. Höchstens die Hälfte der kürzeren Kante - genau dieser Radius macht aus dem Rechteck ein Langloch, diese Fase eine Raute. Die Hüllkontur ändert sich nicht, Anzahl, Teilung und Abstand bleiben also, wie sie sind.</string>
+  <string key="in.width">Länge (X)</string>
+  <string key="in.height">Tiefe (Y)</string>
+  <string key="in.gap_x">Abstand X</string>
+  <string key="in.gap_y">Abstand Y</string>
+  <string key="in.columns">Spalten</string>
+  <string key="in.rows">Zeilen</string>
+  <string key="in.area_width">Breite der Fläche</string>
+  <string key="in.area_height">Höhe der Fläche</string>
+  <string key="in.anchor">Punkt liegt im Raster</string>
+  <string key="anchor.center">In der Mitte</string>
+  <string key="anchor.bottom_left">Unten links</string>
+  <string key="anchor.bottom_right">Unten rechts</string>
+  <string key="anchor.top_left">Oben links</string>
+  <string key="anchor.top_right">Oben rechts</string>
+  <string key="anchor.bottom_center">Unten mittig</string>
+  <string key="anchor.top_center">Oben mittig</string>
+  <string key="anchor.left_center">Links mittig</string>
+  <string key="anchor.right_center">Rechts mittig</string>
+  <string key="in.offset_x">Versatz X</string>
+  <string key="in.offset_y">Versatz Y</string>
+  <string key="offset.tooltip">Verschiebt das ganze Raster gegenüber dem gewählten Punkt, zusätzlich zum Bezugspunkt. Damit hältst du einen Rand zu einer Kante ein, ohne den Punkt selbst zu versetzen. Negative Werte gehen in die andere Richtung.</string>
+  <string key="in.info">Ergebnis</string>
+  <string key="info.result">{0} × {1} = {2} Formen, {3} × {4} mm gesamt</string>
+
+  <!-- Validation -->
+  <string key="err.no_point">Bitte genau einen Skizzenpunkt wählen.</string>
+  <string key="err.width">Die Länge muss größer als 0 sein.</string>
+  <string key="err.height">Die Tiefe muss größer als 0 sein.</string>
+  <string key="err.gap_negative">Der Abstand darf nicht negativ sein.</string>
+  <string key="err.columns">Es wird mindestens eine Spalte gebraucht.</string>
+  <string key="err.rows">Es wird mindestens eine Zeile gebraucht.</string>
+  <string key="err.area_positive">Die Fläche muss in beiden Richtungen größer als 0 sein.</string>
+  <string key="err.area_too_small">In diese Fläche passt nicht einmal eine Form. Nötig sind mindestens {0} × {1} mm.</string>
+  <string key="err.sides">Ein Vieleck braucht zwischen {0} und {1} Ecken.</string>
+  <string key="err.corner_size">Radius bzw. Fase muss größer als 0 sein.</string>
+  <string key="err.corner_too_big">Radius bzw. Fase darf höchstens {0} mm betragen, die Hälfte der kürzeren Kante.</string>
+  <string key="err.too_many">Das wären {0} Formen. Erlaubt sind höchstens {1} - mehr legt Fusion lahm.</string>
+
+  <!-- Message boxes -->
+  <string key="msg.panel_missing">Kein passendes Toolbar-Panel gefunden.</string>
+  <string key="msg.exec_failed">Fehler beim Erzeugen der Geometrie:
+{0}</string>
+  <string key="msg.dialog_failed">Fehler beim Aufbau des Dialogs:
+{0}</string>
+  <string key="msg.run_failed">Start fehlgeschlagen:
+{0}</string>
+  <string key="msg.stop_failed">Stopp fehlgeschlagen:
+{0}</string>
+
+</strings>
