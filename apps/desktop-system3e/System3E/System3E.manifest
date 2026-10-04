@@ -1,0 +1,17 @@
+{
+    "autodeskProduct": "Fusion360",
+    "type": "addin",
+    "id": "7a8b6e53-8740-4d92-9370-b4be36961b40",
+    "author": "Sorglos Thomas Weirich",
+    "description": {
+        "": "Wall elements of the SYSTEM 3E dry-stack building system for Fusion 360.",
+        "de-DE": "Wandelemente des Trockenbau-Systems SYSTEM 3E fuer Fusion 360.",
+        "es-ES": "Elementos de muro del sistema de construccion en seco SYSTEM 3E para Fusion 360.",
+        "fr-FR": "Elements de mur du systeme de construction a sec SYSTEM 3E pour Fusion 360.",
+        "it-IT": "Elementi per pareti del sistema di costruzione a secco SYSTEM 3E per Fusion 360."
+    },
+    "version": "0.1.0",
+    "runOnStartup": true,
+    "supportedOS": "windows|mac",
+    "editEnabled": true
+}
