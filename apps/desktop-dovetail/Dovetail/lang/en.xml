@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Reference language file. Every other file in this folder may omit keys;
+  anything missing falls back to the value defined here.
+  Placeholders {0}, {1}, ... are filled in by the add-in and must survive
+  translation.
+-->
+<strings language="en">
+
+  <!-- Command -->
+  <string key="cmd.name">Dovetail</string>
+  <string key="cmd.tooltip">Creates dovetails on a sketch line.
+Pick a line, then set count / size / depth / tolerance.</string>
+
+  <!-- Inputs -->
+  <string key="in.line">Lines</string>
+  <string key="in.line.prompt">Select one or more sketch lines</string>
+  <string key="in.count">Count</string>
+  <string key="in.mirror">Mirror geometry</string>
+  <string key="mirror.tooltip">Half the teeth point one way and half the other, arranged so that turning the contour 180 degrees about the midpoint of the line maps it onto itself. Both parts of the cut then come out identical - one file, printed twice, the second one rotated. Needs an even count, the centred split and no offset, so those are set for you.</string>
+  <string key="in.shape">Shape</string>
+  <string key="shape.trapezoid">Trapezoid (dovetail)</string>
+  <string key="shape.triangle">Triangle</string>
+  <string key="shape.rectangle">Rectangle (box joint)</string>
+  <string key="in.width">Width (base)</string>
+  <string key="in.depth">Depth</string>
+  <string key="in.angle">Flank angle</string>
+  <string key="in.spacing">Spacing (centre to centre)</string>
+  <string key="in.offset">Offset</string>
+  <string key="in.step">Step size</string>
+  <string key="in.nudge">Move</string>
+  <string key="nudge.left">Left (towards the start point)</string>
+  <string key="nudge.center">Centre</string>
+  <string key="nudge.right">Right (towards the end point)</string>
+  <string key="nudge.tooltip">Moves the teeth along the line by one step. Limited to the range in which they still fit entirely on the line.</string>
+  <string key="in.tolerance">Tolerance</string>
+  <string key="in.reference">The line is</string>
+  <string key="reference.center">Centre line - half the tolerance each side</string>
+  <string key="reference.pocket">Pocket edge - all the tolerance on the pin</string>
+  <string key="reference.pin">Pin edge - all the tolerance on the pocket</string>
+  <string key="reference.tooltip">Decides which part gives up material for the clearance. Centred keeps two equal halves equal; the other two take the whole tolerance out of one part and leave the other exactly on the line.</string>
+  <string key="construction.tooltip">The band spans across the line, so the line would cut it into two profiles. As construction geometry it creates no profile but keeps its dimensions and constraints, which deleting it would throw away.</string>
+  <string key="in.flip">Flip direction</string>
+  <string key="in.construction">Turn the original line into construction geometry</string>
+
+  <!-- Validation -->
+  <string key="err.no_line">Please select at least one sketch line.</string>
+  <string key="err.on_line">Line {0} of {1}: {2}</string>
+  <string key="err.zero_length">The selected line has no length.</string>
+  <string key="err.width">The width must be greater than 0.</string>
+  <string key="err.depth">The depth must be greater than 0.</string>
+  <string key="err.tolerance_zero">A closed band needs a tolerance greater than 0.</string>
+  <string key="err.mirror_even">Mirrored geometry needs an even number of teeth.</string>
+  <string key="err.mirror_center">Mirrored geometry only works with the centre line, where both parts give up the same amount.</string>
+  <string key="err.mirror_offset">Mirrored geometry needs the offset at 0, otherwise the pattern is no longer symmetric about the midpoint of the line.</string>
+  <string key="err.count">At least one dovetail is required.</string>
+  <string key="err.angle_range">The flank angle must be between -89 and 89 degrees.</string>
+  <string key="err.angle_negative">The flank angle is too steeply negative - the tooth tapers away to nothing.</string>
+  <string key="err.spacing_positive">The spacing must be greater than 0.</string>
+  <string key="err.spacing_too_small">The spacing is too small - the dovetails would overlap. At least {0} mm is required.</string>
+  <string key="err.offset_range">The offset pushes the teeth past the end of the line. At most +/- {0} mm is possible.</string>
+  <string key="err.does_not_fit">The teeth are wider than the selected line ({0} mm). Reduce the count, the width or the spacing.</string>
+  <string key="err.miter_runaway">The mating contour runs away at a sharp corner.
+Make the tooth flatter (less depth / more width) or reduce the tolerance.</string>
+  <string key="err.tolerance_eats_tooth">The tolerance eats the whole tooth. Reduce the tolerance or increase the depth.</string>
+  <string key="err.tolerance_vs_depth">The tolerance is too large compared to the depth.</string>
+  <string key="err.tolerance_vs_width">The tolerance is too large compared to the width.</string>
+  <string key="err.degenerate">The contour is degenerate.</string>
+
+  <!-- Message boxes -->
+  <string key="msg.panel_missing">No suitable toolbar panel was found.</string>
+  <string key="msg.exec_failed">Error while creating the geometry:
+{0}</string>
+  <string key="msg.dialog_failed">Error while building the dialog:
+{0}</string>
+  <string key="msg.run_failed">Start-up failed:
+{0}</string>
+  <string key="msg.stop_failed">Shutdown failed:
+{0}</string>
+
+</strings>

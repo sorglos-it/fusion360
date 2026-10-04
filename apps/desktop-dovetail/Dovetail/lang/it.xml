@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Italian. See en.xml for the reference set of keys. -->
+<strings language="it">
+
+  <!-- Command -->
+  <string key="cmd.name">Coda di rondine</string>
+  <string key="cmd.tooltip">Crea code di rondine su una linea di schizzo.
+Seleziona una linea, poi imposta numero / dimensione / profondità / tolleranza.</string>
+
+  <!-- Inputs -->
+  <string key="in.line">Linee</string>
+  <string key="in.line.prompt">Seleziona una o più linee di schizzo</string>
+  <string key="in.count">Numero</string>
+  <string key="in.mirror">Rispecchia la geometria</string>
+  <string key="mirror.tooltip">Metà dei denti punta da una parte e metà dall'altra, disposti in modo che una rotazione di 180 gradi attorno alla mezzeria della linea riporti il profilo su se stesso. I due pezzi del taglio risultano così identici: un solo file, stampato due volte, il secondo ruotato. Richiede un numero pari, la divisione centrata e nessuno spostamento, che vengono impostati di conseguenza.</string>
+  <string key="in.shape">Forma</string>
+  <string key="shape.trapezoid">Trapezio (coda di rondine)</string>
+  <string key="shape.triangle">Triangolo</string>
+  <string key="shape.rectangle">Rettangolo (giunto a pettine)</string>
+  <string key="in.width">Larghezza (base)</string>
+  <string key="in.depth">Profondità</string>
+  <string key="in.angle">Angolo dei fianchi</string>
+  <string key="in.spacing">Passo (centro-centro)</string>
+  <string key="in.offset">Spostamento</string>
+  <string key="in.step">Incremento</string>
+  <string key="in.nudge">Sposta</string>
+  <string key="nudge.left">A sinistra (verso il punto iniziale)</string>
+  <string key="nudge.center">Centra</string>
+  <string key="nudge.right">A destra (verso il punto finale)</string>
+  <string key="nudge.tooltip">Sposta la dentatura di un incremento lungo la linea. Limitato all'intervallo in cui rimane interamente sulla linea.</string>
+  <string key="in.tolerance">Tolleranza</string>
+  <string key="in.reference">La linea è</string>
+  <string key="reference.center">Linea mediana - metà tolleranza per lato</string>
+  <string key="reference.pocket">Bordo della cava - tutta la tolleranza sul tenone</string>
+  <string key="reference.pin">Bordo del tenone - tutta la tolleranza sulla cava</string>
+  <string key="reference.tooltip">Stabilisce quale pezzo cede materiale per il gioco. Centrato mantiene uguali due metà uguali; gli altri due tolgono l'intera tolleranza da un solo pezzo e lasciano l'altro esattamente sulla linea.</string>
+  <string key="construction.tooltip">La fascia attraversa la linea, che quindi la taglierebbe in due profili. Come geometria di costruzione non crea alcun profilo ma conserva quote e vincoli, che eliminandola andrebbero persi.</string>
+  <string key="in.flip">Inverti direzione</string>
+  <string key="in.construction">Converti la linea originale in geometria di costruzione</string>
+
+  <!-- Validation -->
+  <string key="err.no_line">Seleziona almeno una linea di schizzo.</string>
+  <string key="err.on_line">Linea {0} di {1}: {2}</string>
+  <string key="err.zero_length">La linea selezionata ha lunghezza zero.</string>
+  <string key="err.width">La larghezza deve essere maggiore di 0.</string>
+  <string key="err.depth">La profondità deve essere maggiore di 0.</string>
+  <string key="err.tolerance_zero">Una fascia chiusa richiede una tolleranza maggiore di 0.</string>
+  <string key="err.mirror_even">La geometria rispecchiata richiede un numero pari di denti.</string>
+  <string key="err.mirror_center">La geometria rispecchiata funziona solo con la linea mediana, l’unica in cui entrambi i pezzi cedono lo stesso.</string>
+  <string key="err.mirror_offset">La geometria rispecchiata richiede spostamento 0, altrimenti il motivo non è più simmetrico rispetto alla mezzeria.</string>
+  <string key="err.count">Serve almeno una coda di rondine.</string>
+  <string key="err.angle_range">L'angolo dei fianchi deve essere compreso tra -89 e 89 gradi.</string>
+  <string key="err.angle_negative">Angolo dei fianchi troppo negativo - il dente si annulla.</string>
+  <string key="err.spacing_positive">Il passo deve essere maggiore di 0.</string>
+  <string key="err.spacing_too_small">Il passo è troppo piccolo - le code di rondine si sovrapporrebbero. Servono almeno {0} mm.</string>
+  <string key="err.offset_range">Lo spostamento porta la dentatura oltre la fine della linea. Al massimo sono possibili +/- {0} mm.</string>
+  <string key="err.does_not_fit">La dentatura è più larga della linea selezionata ({0} mm). Riduci il numero, la larghezza o il passo.</string>
+  <string key="err.miter_runaway">Il profilo di accoppiamento sbanda in uno spigolo acuto.
+Rendi il dente più basso (meno profondità / più larghezza) oppure riduci la tolleranza.</string>
+  <string key="err.tolerance_eats_tooth">La tolleranza divora l'intero dente. Riduci la tolleranza o aumenta la profondità.</string>
+  <string key="err.tolerance_vs_depth">La tolleranza è troppo grande rispetto alla profondità.</string>
+  <string key="err.tolerance_vs_width">La tolleranza è troppo grande rispetto alla larghezza.</string>
+  <string key="err.degenerate">Il profilo è degenere.</string>
+
+  <!-- Message boxes -->
+  <string key="msg.panel_missing">Nessun pannello della barra degli strumenti adatto trovato.</string>
+  <string key="msg.exec_failed">Errore durante la creazione della geometria:
+{0}</string>
+  <string key="msg.dialog_failed">Errore durante la costruzione della finestra di dialogo:
+{0}</string>
+  <string key="msg.run_failed">Avvio non riuscito:
+{0}</string>
+  <string key="msg.stop_failed">Arresto non riuscito:
+{0}</string>
+
+</strings>

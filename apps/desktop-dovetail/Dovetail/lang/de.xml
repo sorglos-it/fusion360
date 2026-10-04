@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- German. See en.xml for the reference set of keys. -->
+<strings language="de">
+
+  <!-- Command -->
+  <string key="cmd.name">Schwalbenschwanz</string>
+  <string key="cmd.tooltip">Erzeugt Schwalbenschwänze auf einer Skizzenlinie.
+Linie wählen, dann Anzahl / Größe / Tiefe / Toleranz einstellen.</string>
+
+  <!-- Inputs -->
+  <string key="in.line">Linien</string>
+  <string key="in.line.prompt">Eine oder mehrere Skizzenlinien wählen</string>
+  <string key="in.count">Anzahl</string>
+  <string key="in.mirror">Geometrie spiegeln</string>
+  <string key="mirror.tooltip">Die Hälfte der Zähne zeigt in die eine, die andere Hälfte in die andere Richtung - so angeordnet, dass die Kontur beim Drehen um 180 Grad um die Linienmitte auf sich selbst fällt. Beide Teile des Schnitts werden dadurch identisch: eine Datei, zweimal gedruckt, das zweite Teil gedreht. Braucht eine gerade Anzahl, die Mittellinie und keine Verschiebung, deshalb werden die drei mit gesetzt.</string>
+  <string key="in.shape">Form</string>
+  <string key="shape.trapezoid">Trapez (Schwalbenschwanz)</string>
+  <string key="shape.triangle">Dreieck</string>
+  <string key="shape.rectangle">Rechteck (Fingerzinken)</string>
+  <string key="in.width">Breite (Basis)</string>
+  <string key="in.depth">Tiefe</string>
+  <string key="in.angle">Flankenwinkel</string>
+  <string key="in.spacing">Abstand (Mitte-Mitte)</string>
+  <string key="in.offset">Verschiebung</string>
+  <string key="in.step">Schrittweite</string>
+  <string key="in.nudge">Verschieben</string>
+  <string key="nudge.left">Nach links (Richtung Startpunkt)</string>
+  <string key="nudge.center">Zentrieren</string>
+  <string key="nudge.right">Nach rechts (Richtung Endpunkt)</string>
+  <string key="nudge.tooltip">Verschiebt die Verzahnung um eine Schrittweite entlang der Linie. Begrenzt auf den Bereich, in dem sie noch komplett auf der Linie liegt.</string>
+  <string key="in.tolerance">Toleranz</string>
+  <string key="in.reference">Die Linie ist</string>
+  <string key="reference.center">Mittellinie - halbe Toleranz je Seite</string>
+  <string key="reference.pocket">Kante der Tasche - Toleranz ganz beim Zapfen</string>
+  <string key="reference.pin">Kante des Zapfens - Toleranz ganz bei der Tasche</string>
+  <string key="reference.tooltip">Legt fest, welches Teil das Spiel bezahlt. Mittig lässt zwei gleiche Hälften gleich; die beiden anderen nehmen die volle Toleranz von einem Teil und lassen das andere genau auf der Linie.</string>
+  <string key="construction.tooltip">Das Band liegt quer über der Linie, die Linie würde es also in zwei Profile zerschneiden. Als Konstruktionslinie erzeugt sie kein Profil, behält aber Bemaßungen und Abhängigkeiten, die beim Löschen verloren gingen.</string>
+  <string key="in.flip">Richtung umkehren</string>
+  <string key="in.construction">Originallinie in Konstruktionslinie umwandeln</string>
+
+  <!-- Validation -->
+  <string key="err.no_line">Bitte mindestens eine Skizzenlinie wählen.</string>
+  <string key="err.on_line">Linie {0} von {1}: {2}</string>
+  <string key="err.zero_length">Die gewählte Linie hat keine Länge.</string>
+  <string key="err.width">Die Breite muss größer als 0 sein.</string>
+  <string key="err.depth">Die Tiefe muss größer als 0 sein.</string>
+  <string key="err.tolerance_zero">Ein geschlossenes Band braucht eine Toleranz größer als 0.</string>
+  <string key="err.mirror_even">Gespiegelte Geometrie braucht eine gerade Anzahl Zähne.</string>
+  <string key="err.mirror_center">Gespiegelte Geometrie geht nur mit der Mittellinie, weil nur dort beide Teile gleich viel abgeben.</string>
+  <string key="err.mirror_offset">Gespiegelte Geometrie braucht die Verschiebung auf 0, sonst liegt das Muster nicht mehr symmetrisch zur Linienmitte.</string>
+  <string key="err.count">Es wird mindestens ein Schwalbenschwanz gebraucht.</string>
+  <string key="err.angle_range">Der Flankenwinkel muss zwischen -89 und 89 Grad liegen.</string>
+  <string key="err.angle_negative">Flankenwinkel zu steil negativ - der Zahn läuft auf 0 zu.</string>
+  <string key="err.spacing_positive">Der Abstand muss größer als 0 sein.</string>
+  <string key="err.spacing_too_small">Der Abstand ist zu klein - die Schwalbenschwänze würden sich überschneiden. Nötig sind mindestens {0} mm.</string>
+  <string key="err.offset_range">Die Verschiebung schiebt die Verzahnung über das Linienende hinaus. Möglich sind höchstens +/- {0} mm.</string>
+  <string key="err.does_not_fit">Die Verzahnung ist breiter als die gewählte Linie ({0} mm). Anzahl, Breite oder Abstand verkleinern.</string>
+  <string key="err.miter_runaway">Die Toleranzkontur läuft an einer spitzen Ecke aus dem Ruder.
+Zahn flacher machen (kleinere Tiefe / größere Breite) oder die Toleranz verringern.</string>
+  <string key="err.tolerance_eats_tooth">Die Toleranz frisst den Zahn komplett auf. Toleranz verkleinern oder Tiefe vergrößern.</string>
+  <string key="err.tolerance_vs_depth">Die Toleranz ist im Verhältnis zur Tiefe zu groß.</string>
+  <string key="err.tolerance_vs_width">Die Toleranz ist im Verhältnis zur Breite zu groß.</string>
+  <string key="err.degenerate">Die Kontur ist entartet.</string>
+
+  <!-- Message boxes -->
+  <string key="msg.panel_missing">Kein passendes Toolbar-Panel gefunden.</string>
+  <string key="msg.exec_failed">Fehler beim Erzeugen der Geometrie:
+{0}</string>
+  <string key="msg.dialog_failed">Fehler beim Aufbau des Dialogs:
+{0}</string>
+  <string key="msg.run_failed">Start fehlgeschlagen:
+{0}</string>
+  <string key="msg.stop_failed">Stopp fehlgeschlagen:
+{0}</string>
+
+</strings>
