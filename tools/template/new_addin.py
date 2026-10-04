@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """Scaffold a new Fusion 360 add-in from this template.
 
-    python tools/new_addin.py MyAddIn
-    python tools/new_addin.py MyAddIn --install
-    python tools/new_addin.py MyAddIn --out ../my-addin --author "Jane Doe"
+    python tools/template/new_addin.py MyAddIn
+    python tools/template/new_addin.py MyAddIn --install
+    python tools/template/new_addin.py MyAddIn --out ../my-addin --author "Jane Doe"
 
 Copies the template folder, renames every file and identifier that has to be
 unique per add-in, and stamps a fresh GUID into the manifest. Standard library
@@ -22,8 +22,8 @@ TEMPLATE_CORE = 'addin_core'
 TEMPLATE_CMD_ID = 'thwAddInTemplateCmd'
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
-REPO = os.path.dirname(_HERE)
-TEMPLATE_DIR = os.path.join(REPO, 'apps', 'desktop', TEMPLATE_NAME)
+REPO = os.path.dirname(os.path.dirname(_HERE))
+TEMPLATE_DIR = os.path.join(REPO, 'apps', 'desktop-template', TEMPLATE_NAME)
 
 NAME_PATTERN = re.compile(r'^[A-Za-z][A-Za-z0-9]*$')
 
@@ -109,7 +109,7 @@ def scaffold(name, out_dir, author, prefix, force):
 
     core_path = os.path.join(target, '%s.py' % core_name)
     write(core_path, read(core_path).replace(
-        'tools/new_addin.py renames this file to <name>_core.py when it scaffolds a new\nadd-in, so two add-ins built from this template cannot collide in sys.modules.',
+        'tools/template/new_addin.py renames this file to <name>_core.py when it scaffolds a new\nadd-in, so two add-ins built from this template cannot collide in sys.modules.',
         'Scaffolded from AddInTemplate. This file is the shared machinery; the\nadd-in specific code lives in %s.py.' % name))
 
     manifest = os.path.join(target, '%s.manifest' % name)

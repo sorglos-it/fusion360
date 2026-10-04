@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Generate the toolbar icon for SketchGrid (standard library only).
 
-    python tools/make_icon.py
+    python tools/sketch-grid/make_icon.py
 
 A 3x3 grid of rounded-off cells with the anchor point marked in the middle,
 which is exactly what the command does.
@@ -12,7 +12,7 @@ import struct
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
 ADDIN = os.environ.get('SKETCHGRID_ADDIN_DIR') or os.path.join(
-    os.path.dirname(_HERE), 'apps', 'desktop', 'SketchGrid')
+    os.path.dirname(os.path.dirname(_HERE)), 'apps', 'desktop-sketch-grid', 'SketchGrid')
 OUT = os.path.join(ADDIN, 'resources', 'SketchGrid')
 
 DARK = (0x2E, 0x3A, 0x45)

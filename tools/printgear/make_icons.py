@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Generate the toolbar icons for the PrintGear add-in (standard library only).
 
-    python tools/make_icons.py
+    python tools/printgear/make_icons.py
 
 The icon is not a drawing of a gear - it is a gear, rasterised straight from
 printgear_math. A meshing pair, because the pair is the point of the add-in.
@@ -14,8 +14,8 @@ import zlib
 import struct
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
-REPO = os.path.dirname(_HERE)
-ADDIN = os.environ.get('PRINTGEAR_ADDIN_DIR') or os.path.join(REPO, 'apps', 'desktop', 'PrintGear')
+REPO = os.path.dirname(os.path.dirname(_HERE))
+ADDIN = os.environ.get('PRINTGEAR_ADDIN_DIR') or os.path.join(REPO, 'apps', 'desktop-printgear', 'PrintGear')
 OUT = os.path.join(ADDIN, 'resources', 'PrintGear')
 
 sys.path.insert(0, ADDIN)

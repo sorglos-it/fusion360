@@ -11,7 +11,7 @@ add-in needs and that are easy to get wrong:
 * keeping event handlers alive so they are not garbage collected
 * an exception type that reports a language-independent key
 
-tools/new_addin.py renames this file to <name>_core.py when it scaffolds a new
+tools/template/new_addin.py renames this file to <name>_core.py when it scaffolds a new
 add-in, so two add-ins built from this template cannot collide in sys.modules.
 """
 
