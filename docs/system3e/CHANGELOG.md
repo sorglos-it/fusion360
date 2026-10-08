@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.2 – 2026-10-08
+
+- Two more points to click on every element: at the height of the next course, in the middle of the length, on the
+  right and on the left wall face. Elements already placed get the missing points the next time the same element
+  is placed.
+
 ## 0.3.1 – 2026-10-08
 
 - New field *Offset Z* in mm.

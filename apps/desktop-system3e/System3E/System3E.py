@@ -8,7 +8,7 @@ The reusable machinery sits in addin_core.py next to this file.
 The command places one SYSTEM 3E wall element: pick a point, pick the element
 from the list - a picture shows which one it is - and it is created as a new
 component. Which spot of the element lands on the point can be chosen, and
-every element carries six points of its own to click for the next one.
+every element carries eight points of its own to click for the next one.
 """
 
 import os
@@ -123,12 +123,17 @@ def snap_points(block):
     stands - front end, middle and back end, each in the middle of the wall
     thickness. A wall in bond is built by putting the bottom middle of the
     next element on the upper front or back point of the one below.
+
+    Two more at that height, in the middle of the length on the two wall
+    faces: right and left as seen from the front end looking along the wall.
     """
     length, width = block['size'][0], block['size'][1]
     level = block.get('stack', block['size'][2])
     spots = (('front', 0.0), ('centre', length / 2.0), ('back', float(length)))
     return ([('point.bottom.' + key, (x, width / 2.0, 0.0)) for key, x in spots]
-            + [('point.top.' + key, (x, width / 2.0, float(level))) for key, x in spots])
+            + [('point.top.' + key, (x, width / 2.0, float(level))) for key, x in spots]
+            + [('point.top.right', (length / 2.0, 0.0, float(level))),
+               ('point.top.left', (length / 2.0, float(width), float(level)))])
 
 
 def point_types():
@@ -281,21 +286,28 @@ def find_component(design, block):
 
 
 def add_snap_points(design, component, block, base):
-    """Give the component its clickable points, unless it has them already.
+    """Give the component the clickable points it does not have yet.
 
-    With the timeline on, a point at plain coordinates has to live in a base
-    feature: `base` while it is open for editing, otherwise one of its own.
+    A component made by an older version has none or fewer; only the missing
+    ones are added. With the timeline on, a point at plain coordinates has to
+    live in a base feature: `base` while it is open for editing, otherwise one
+    of its own.
     """
     points = component.constructionPoints
+    present = set()
     for i in range(points.count):
-        if points.item(i).attributes.itemByName(ATTRIBUTE_GROUP, ATTRIBUTE_POINT):
-            return
+        mark = points.item(i).attributes.itemByName(ATTRIBUTE_GROUP, ATTRIBUTE_POINT)
+        if mark:
+            present.add(mark.value)
+    missing = [(key, position) for key, position in snap_points(block) if key not in present]
+    if not missing:
+        return
     own = None
     if base is None and design.designType == adsk.fusion.DesignTypes.ParametricDesignType:
         own = base = component.features.baseFeatures.add()
         own.startEdit()
     try:
-        for key, position in snap_points(block):
+        for key, position in missing:
             definition = points.createInput()
             definition.setByPoint(adsk.core.Point3D.create(
                 position[0] / 10.0, position[1] / 10.0, position[2] / 10.0))

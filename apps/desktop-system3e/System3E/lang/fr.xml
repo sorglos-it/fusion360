@@ -29,6 +29,8 @@ Choisissez un point, puis l'élément dans la liste : il est créé sur ce point
   <string key="point.top.front">dessus avant</string>
   <string key="point.top.centre">dessus milieu</string>
   <string key="point.top.back">dessus arrière</string>
+  <string key="point.top.right">dessus milieu droite</string>
+  <string key="point.top.left">dessus milieu gauche</string>
 
   <!-- Element families, in catalogue order -->
   <string key="family.starter">Départ</string>

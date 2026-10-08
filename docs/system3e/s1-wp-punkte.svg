@@ -140,11 +140,15 @@
 <circle cx="70.0" cy="165.6" r="7" class="y"/>
 <circle cx="282.1" cy="165.6" r="7" class="y"/>
 <circle cx="494.2" cy="165.6" r="7" class="y"/>
+<circle cx="282.1" cy="271.2" r="10" class="y"/>
+<circle cx="282.1" cy="60.0" r="10" class="y"/>
 <circle cx="70.0" cy="271.2" r="10" class="r"/>
 <text x="83" y="155" class="n">1 + 4</text>
 <text x="295" y="155" class="n">2 + 5</text>
 <text x="507" y="155" class="n">3 + 6</text>
-<text x="83" y="260" class="n">7</text>
+<text x="295" y="260" class="n">7</text>
+<text x="295" y="49" class="n">8</text>
+<text x="83" y="260" class="n">9</text>
 <text x="70" y="316" class="t">Von der langen Seite</text>
 <line x1="494.2" y1="510.0" x2="492.4" y2="510.0" class="e"/>
 <line x1="494.2" y1="510.0" x2="494.2" y2="330.0" class="e"/>
@@ -284,12 +288,14 @@
 <circle cx="70.0" cy="360.0" r="10" class="y"/>
 <circle cx="282.1" cy="360.0" r="10" class="y"/>
 <circle cx="494.2" cy="360.0" r="10" class="y"/>
+<circle cx="282.1" cy="360.0" r="7" class="y"/>
+<circle cx="282.1" cy="360.0" r="4" class="y"/>
 <circle cx="70.0" cy="510.0" r="7" class="r"/>
-<text x="83" y="499" class="n">1 + 7</text>
+<text x="83" y="499" class="n">1 + 9</text>
 <text x="295" y="499" class="n">2</text>
 <text x="507" y="499" class="n">3</text>
 <text x="83" y="349" class="n">4</text>
-<text x="295" y="349" class="n">5</text>
+<text x="295" y="349" class="n">5 + 7 + 8</text>
 <text x="507" y="349" class="n">6</text>
 <text x="600" y="316" class="t">Vom vorderen Ende</text>
 <line x1="758.6" y1="510.0" x2="759.6" y2="510.0" class="e"/>
@@ -430,10 +436,14 @@
 <circle cx="705.6" cy="360.0" r="10" class="y"/>
 <circle cx="705.6" cy="360.0" r="7" class="y"/>
 <circle cx="705.6" cy="360.0" r="4" class="y"/>
+<circle cx="600.0" cy="360.0" r="10" class="y"/>
+<circle cx="811.2" cy="360.0" r="10" class="y"/>
 <circle cx="600.0" cy="510.0" r="10" class="r"/>
 <text x="719" y="499" class="n">1 + 2 + 3</text>
 <text x="719" y="349" class="n">4 + 5 + 6</text>
-<text x="613" y="499" class="n">7</text>
+<text x="613" y="349" class="n">7</text>
+<text x="824" y="349" class="n">8</text>
+<text x="613" y="499" class="n">9</text>
 <text x="600" y="46" class="t">Schräg von vorne links</text>
 <polygon points="864.7,163.8 871.3,158.9 813.9,187.2 813.9,188.8" class="f"/>
 <polygon points="813.9,188.8 813.9,187.2 779.3,170.1 785.9,175.0" class="f"/>
@@ -470,8 +480,12 @@
 <text x="801" y="129" class="n">5</text>
 <circle cx="883.0" cy="91.8" r="8" class="y" fill-opacity="0.85"/>
 <text x="894" y="83" class="n">6</text>
+<circle cx="836.3" cy="160.4" r="8" class="y" fill-opacity="0.85"/>
+<text x="847" y="151" class="n">7</text>
+<circle cx="743.7" cy="114.8" r="8" class="y" fill-opacity="0.85"/>
+<text x="755" y="106" class="n">8</text>
 <circle cx="743.3" cy="287.1" r="8" class="r" fill-opacity="0.85"/>
-<text x="754" y="278" class="n">7</text>
+<text x="754" y="278" class="n">9</text>
 <text x="70" y="580" class="t">Punkte (mm: Länge / Wanddicke / Höhe)</text>
 <circle cx="80" cy="601" r="8" class="g"/>
 <text x="98" y="606" class="l">1  unten vorne  –  0 / 176 / 0  –  beides</text>
@@ -485,8 +499,12 @@
 <text x="98" y="702" class="l">5  oben Mitte  –  353.5 / 176 / 250  –  anklickbar</text>
 <circle cx="80" cy="721" r="8" class="y"/>
 <text x="98" y="726" class="l">6  oben hinten  –  707 / 176 / 250  –  anklickbar</text>
-<circle cx="80" cy="745" r="8" class="r"/>
-<text x="98" y="750" class="l">7  Ecke unten vorne links  –  0 / 0 / 0  –  Ausrichtungspunkt</text>
+<circle cx="80" cy="745" r="8" class="y"/>
+<text x="98" y="750" class="l">7  oben Mitte rechts  –  353.5 / 0 / 250  –  anklickbar</text>
+<circle cx="80" cy="769" r="8" class="y"/>
+<text x="98" y="774" class="l">8  oben Mitte links  –  353.5 / 352 / 250  –  anklickbar</text>
+<circle cx="80" cy="793" r="8" class="r"/>
+<text x="98" y="798" class="l">9  Ecke unten vorne links  –  0 / 0 / 0  –  Ausrichtungspunkt</text>
 <circle cx="560" cy="601" r="8" class="y"/>
 <text x="578" y="606" class="l">Gelb: kann angeklickt werden (Ziel für den nächsten Stein)</text>
 <circle cx="560" cy="625" r="8" class="r"/>
