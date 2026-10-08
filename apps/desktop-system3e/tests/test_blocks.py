@@ -234,7 +234,27 @@ def main():
         for family, members in families:
             text = addin.T('family.' + family)
             check(text and text != 'family.' + family, '%s: family "%s" has a name' % (code, family))
+        for key in (['in.anchor', 'in.dx', 'in.dy'] + ['anchor.' + a for a in addin.ANCHORS]
+                    + [k for k, position in addin.snap_points(blocks[0])]):
+            check(addin.T(key) != key, '%s: "%s" has a text' % (code, key))
     check(addin._last[addin.IN_BLOCK] in by_id, 'the default element exists')
+    check(addin._last[addin.IN_ANCHOR] in addin.ANCHORS, 'the default anchor exists')
+
+    print('5) Points for clicking')
+    s1 = by_id['s1-wp']
+    check(s1.get('stack') == 250, 'the next course stands 250 mm up on S1 WP, found %s' % s1.get('stack'))
+    check(by_id['eu-200-w'].get('stack') == 200, 'a flat element carries the next course on top')
+    check(addin.anchor_position(s1, 'corner') == (0.0, 0.0, 0.0), 'anchor corner')
+    check(addin.anchor_position(s1, 'centre') == (353.5, 176.0, 0.0), 'anchor bottom middle')
+    for block in blocks:
+        spots = addin.snap_points(block)
+        check(len(spots) == 6 and len({key for key, p in spots}) == 6, '%s: six named points' % block['name'])
+        check(all(0 <= p[i] <= block['size'][i] for key, p in spots for i in range(3)),
+              '%s: every point lies on the element' % block['name'])
+        check(0 < block.get('stack', 0) <= block['size'][2], '%s: a sensible stacking height' % block['name'])
+        # Bond: bottom middle of the next element on the upper end point of this one.
+        check([p for key, p in spots if key == 'point.bottom.centre'][0]
+              == addin.anchor_position(block, 'centre'), '%s: anchor and point agree' % block['name'])
     for block in blocks:
         recorder.vertices, recorder.edges, recorder.faces, recorder.uses = [], [], [], {}
         addin.make_body(block)

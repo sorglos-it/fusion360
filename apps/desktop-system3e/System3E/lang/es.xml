@@ -5,7 +5,7 @@
   <!-- Command -->
   <string key="cmd.name">Elemento SYSTEM 3E</string>
   <string key="cmd.tooltip">Coloca un elemento de muro SYSTEM 3E.
-Seleccione un punto y elija el elemento de la lista: se crea con su esquina inferior delantera izquierda en ese punto.</string>
+Seleccione un punto y elija el elemento de la lista: se crea en ese punto.</string>
 
   <!-- Inputs -->
   <string key="in.point">Punto</string>
@@ -13,6 +13,21 @@ Seleccione un punto y elija el elemento de la lista: se crea con su esquina infe
   <string key="in.family">Familia</string>
   <string key="in.block">Elemento</string>
   <string key="in.angle">Giro</string>
+  <string key="in.anchor">Colocar por</string>
+  <string key="anchor.corner">Esquina inferior delantera izquierda</string>
+  <string key="anchor.front">Abajo, extremo delantero</string>
+  <string key="anchor.centre">Abajo, centro</string>
+  <string key="anchor.back">Abajo, extremo trasero</string>
+  <string key="in.dx">Desplazamiento X</string>
+  <string key="in.dy">Desplazamiento Y</string>
+
+  <!-- Names of the points every element carries -->
+  <string key="point.bottom.front">abajo delante</string>
+  <string key="point.bottom.centre">abajo centro</string>
+  <string key="point.bottom.back">abajo detrás</string>
+  <string key="point.top.front">arriba delante</string>
+  <string key="point.top.centre">arriba centro</string>
+  <string key="point.top.back">arriba detrás</string>
 
   <!-- Element families, in catalogue order -->
   <string key="family.starter">Arranque</string>

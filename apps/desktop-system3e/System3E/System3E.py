@@ -7,7 +7,8 @@ The reusable machinery sits in addin_core.py next to this file.
 
 The command places one SYSTEM 3E wall element: pick a point, pick the element
 from the list - a picture shows which one it is - and it is created as a new
-component with its lower front left corner on that point.
+component. Which spot of the element lands on the point can be chosen, and
+every element carries six points of its own to click for the next one.
 """
 
 import os
@@ -53,6 +54,9 @@ IN_FAMILY = 's3eFamily'
 IN_BLOCK = 's3eBlock'
 IN_IMAGE = 's3eImage'
 IN_ANGLE = 's3eAngle'
+IN_ANCHOR = 's3eAnchor'
+IN_DX = 's3eDx'
+IN_DY = 's3eDy'
 
 RESOURCE_FOLDER = os.path.join(_DIR, 'resources', 'System3E')
 LANG_DIR = os.path.join(_DIR, 'lang')
@@ -61,12 +65,16 @@ BLOCK_DIR = os.path.join(_DIR, 'blocks')
 # The mark on a component that says which element it is.
 ATTRIBUTE_GROUP = 'System3E'
 ATTRIBUTE_BLOCK = 'block'
+ATTRIBUTE_POINT = 'point'
 
 # Last used values, kept for the duration of the Fusion session.
 _last = {
     IN_FAMILY: 'basic',
     IN_BLOCK: 's1-wp',
     IN_ANGLE: 0.0,      # radians
+    IN_ANCHOR: 'corner',
+    IN_DX: 0.0,         # cm
+    IN_DY: 0.0,
 }
 
 # =============================================================================
@@ -88,6 +96,38 @@ def fail(key, *args):
 
 
 # ============================================================ YOUR CODE HERE ==
+
+# Which spot of the element lands on the clicked point. The three "bottom"
+# spots lie on the underside, in the middle of the wall thickness.
+ANCHORS = ('corner', 'front', 'centre', 'back')
+
+
+def anchor_position(block, anchor):
+    """The anchor in the element's own coordinates, mm."""
+    length, width = block['size'][0], block['size'][1]
+    if anchor == 'front':
+        return (0.0, width / 2.0, 0.0)
+    if anchor == 'centre':
+        return (length / 2.0, width / 2.0, 0.0)
+    if anchor == 'back':
+        return (float(length), width / 2.0, 0.0)
+    return (0.0, 0.0, 0.0)
+
+
+def snap_points(block):
+    """The points every element carries for clicking: (text key, position in mm).
+
+    Three on the underside and three at the height where the next course
+    stands - front end, middle and back end, each in the middle of the wall
+    thickness. A wall in bond is built by putting the bottom middle of the
+    next element on the upper front or back point of the one below.
+    """
+    length, width = block['size'][0], block['size'][1]
+    level = block.get('stack', block['size'][2])
+    spots = (('front', 0.0), ('centre', length / 2.0), ('back', float(length)))
+    return ([('point.bottom.' + key, (x, width / 2.0, 0.0)) for key, x in spots]
+            + [('point.top.' + key, (x, width / 2.0, float(level))) for key, x in spots])
+
 
 def point_types():
     """What may be clicked as the place for the element."""
@@ -139,6 +179,11 @@ def selected_block(inputs):
     return None
 
 
+def selected_anchor(inputs):
+    item = inputs.itemById(IN_ANCHOR).selectedItem
+    return ANCHORS[item.index] if item and item.index < len(ANCHORS) else ANCHORS[0]
+
+
 def point_of(entity):
     """Where a clicked sketch point, body corner or construction point is in the design."""
     if entity.objectType == adsk.fusion.SketchPoint.classType():
@@ -163,6 +208,9 @@ def read_inputs(inputs):
         family=selected_family(inputs),
         block=selected_block(inputs),
         angle=inputs.itemById(IN_ANGLE).value,
+        anchor=selected_anchor(inputs),
+        dx=inputs.itemById(IN_DX).value,      # cm
+        dy=inputs.itemById(IN_DY).value,
     )
 
 
@@ -229,6 +277,35 @@ def find_component(design, block):
     return by_name
 
 
+def add_snap_points(design, component, block, base):
+    """Give the component its clickable points, unless it has them already.
+
+    With the timeline on, a point at plain coordinates has to live in a base
+    feature: `base` while it is open for editing, otherwise one of its own.
+    """
+    points = component.constructionPoints
+    for i in range(points.count):
+        if points.item(i).attributes.itemByName(ATTRIBUTE_GROUP, ATTRIBUTE_POINT):
+            return
+    own = None
+    if base is None and design.designType == adsk.fusion.DesignTypes.ParametricDesignType:
+        own = base = component.features.baseFeatures.add()
+        own.startEdit()
+    try:
+        for key, position in snap_points(block):
+            definition = points.createInput()
+            definition.setByPoint(adsk.core.Point3D.create(
+                position[0] / 10.0, position[1] / 10.0, position[2] / 10.0))
+            if base is not None:
+                definition.targetBaseOrFormFeature = base
+            point = points.add(definition)
+            point.name = T(key)
+            point.attributes.add(ATTRIBUTE_GROUP, ATTRIBUTE_POINT, key)
+    finally:
+        if own is not None:
+            own.finishEdit()
+
+
 def build_result(values):
     """Create the element as a new component. Everything is validated by now."""
     block = values['block']
@@ -236,21 +313,31 @@ def build_result(values):
     if not design:
         fail('err.no_design')
 
-    # Turn about the vertical axis first, then move the corner onto the point.
+    # Bring the anchor to the origin, turn about the vertical axis, then move
+    # to the clicked point plus the offset. The offset runs along the design's
+    # X and Y, not along the turned element.
+    anchor = anchor_position(block, values['anchor'])
     placement = adsk.core.Matrix3D.create()
-    placement.setToRotation(values['angle'], adsk.core.Vector3D.create(0, 0, 1),
-                            adsk.core.Point3D.create(0, 0, 0))
-    if values['point'] is not None:
-        move = adsk.core.Matrix3D.create()
-        move.translation = adsk.core.Vector3D.create(
-            values['point'].x, values['point'].y, values['point'].z)
-        placement.transformBy(move)
+    placement.translation = adsk.core.Vector3D.create(
+        -anchor[0] / 10.0, -anchor[1] / 10.0, -anchor[2] / 10.0)
+    turn = adsk.core.Matrix3D.create()
+    turn.setToRotation(values['angle'], adsk.core.Vector3D.create(0, 0, 1),
+                       adsk.core.Point3D.create(0, 0, 0))
+    placement.transformBy(turn)
+    target = values['point']
+    move = adsk.core.Matrix3D.create()
+    move.translation = adsk.core.Vector3D.create(
+        (target.x if target else 0.0) + values['dx'],
+        (target.y if target else 0.0) + values['dy'],
+        target.z if target else 0.0)
+    placement.transformBy(move)
 
     # The same element again is another copy of the same component, not a new
     # one - otherwise a parts list shows "S1 WP", "S1 WP (1)", "S1 WP (2)"
     # as three different parts instead of one part, three times.
     known = find_component(design, block)
     if known:
+        add_snap_points(design, known, block, None)     # elements from before 0.3.0 have none
         design.rootComponent.occurrences.addExistingComponent(known, placement)
         return
 
@@ -265,10 +352,12 @@ def build_result(values):
         base.startEdit()
         try:
             created = component.bRepBodies.add(body, base)
+            add_snap_points(design, component, block, base)
         finally:
             base.finishEdit()
     else:
         created = component.bRepBodies.add(body)
+        add_snap_points(design, component, block, None)
     if created:
         created.name = block['name']
 
@@ -315,8 +404,16 @@ def build_inputs(inputs):
     image = inputs.addImageCommandInput(IN_IMAGE, '', first)
     image.isFullWidth = True
 
+    anchors = inputs.addDropDownCommandInput(
+        IN_ANCHOR, T('in.anchor'), adsk.core.DropDownStyles.TextListDropDownStyle)
+    for name in ANCHORS:
+        anchors.listItems.add(T('anchor.' + name), name == _last[IN_ANCHOR], '')
+
     inputs.addValueInput(IN_ANGLE, T('in.angle'), 'deg',
                          adsk.core.ValueInput.createByReal(_last[IN_ANGLE]))
+    # 'mm' is what the field shows; the value itself is cm, Fusion's own unit.
+    inputs.addValueInput(IN_DX, T('in.dx'), 'mm', adsk.core.ValueInput.createByReal(_last[IN_DX]))
+    inputs.addValueInput(IN_DY, T('in.dy'), 'mm', adsk.core.ValueInput.createByReal(_last[IN_DY]))
     return selection
 
 
@@ -325,6 +422,9 @@ def remember(values):
     _last[IN_FAMILY] = values['family']
     _last[IN_BLOCK] = values['block']['id']
     _last[IN_ANGLE] = values['angle']
+    _last[IN_ANCHOR] = values['anchor']
+    _last[IN_DX] = values['dx']
+    _last[IN_DY] = values['dy']
 
 
 def on_input_changed(inputs, changed):

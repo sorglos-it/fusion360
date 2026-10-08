@@ -153,6 +153,19 @@ def bend(solid):
     return worst
 
 
+def stack_level(solid):
+    """The height at which the next course stands on this element, in mm.
+
+    Elements with the raised top profile carry the next course 50 mm below
+    their highest point, on the floor between the ridges; flat ones on top.
+    """
+    top = max(p[2] for p in solid['points'])
+    for face in solid['faces']:
+        if face['normal'][2] > 0.999 and abs(solid['points'][face['loops'][0][0]][2] - (top - 50.0)) < 0.01:
+            return top - 50.0
+    return top
+
+
 def outline_key(solid):
     return sorted(tuple(round(c) for c in p) for p in solid['points'])
 
@@ -302,6 +315,7 @@ def main():
             size = [round(max(p[i] for p in solid['points'])) for i in range(3)]
             blocks.append({
                 'id': block_id(name), 'name': name, 'family': family, 'size': size,
+                'stack': round(stack_level(solid), 1),
                 'points': [[round(c, 1) for c in p] for p in solid['points']],
                 'faces': [{'normal': [round(c, 9) for c in face['normal']], 'loops': face['loops']}
                           for face in solid['faces']],

@@ -11,7 +11,7 @@
   <!-- Command -->
   <string key="cmd.name">SYSTEM 3E element</string>
   <string key="cmd.tooltip">Places a SYSTEM 3E wall element.
-Pick a point, choose the element from the list - it is created with its lower front left corner on that point.</string>
+Pick a point, choose the element from the list - it is created on that point.</string>
 
   <!-- Inputs -->
   <string key="in.point">Point</string>
@@ -19,6 +19,21 @@ Pick a point, choose the element from the list - it is created with its lower fr
   <string key="in.family">Family</string>
   <string key="in.block">Element</string>
   <string key="in.angle">Rotation</string>
+  <string key="in.anchor">Placed by</string>
+  <string key="anchor.corner">Lower front left corner</string>
+  <string key="anchor.front">Bottom, front end</string>
+  <string key="anchor.centre">Bottom, middle</string>
+  <string key="anchor.back">Bottom, back end</string>
+  <string key="in.dx">Offset X</string>
+  <string key="in.dy">Offset Y</string>
+
+  <!-- Names of the points every element carries -->
+  <string key="point.bottom.front">bottom front</string>
+  <string key="point.bottom.centre">bottom middle</string>
+  <string key="point.bottom.back">bottom back</string>
+  <string key="point.top.front">top front</string>
+  <string key="point.top.centre">top middle</string>
+  <string key="point.top.back">top back</string>
 
   <!-- Element families, in catalogue order -->
   <string key="family.starter">Starter</string>

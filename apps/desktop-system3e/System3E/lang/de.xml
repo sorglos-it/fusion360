@@ -5,7 +5,7 @@
   <!-- Command -->
   <string key="cmd.name">SYSTEM 3E Baustein</string>
   <string key="cmd.tooltip">Setzt einen SYSTEM 3E Wandbaustein.
-Punkt anklicken, Baustein aus der Liste wählen - er entsteht mit der unteren vorderen linken Ecke auf diesem Punkt.</string>
+Punkt anklicken, Baustein aus der Liste wählen - er entsteht an diesem Punkt.</string>
 
   <!-- Inputs -->
   <string key="in.point">Punkt</string>
@@ -13,6 +13,21 @@ Punkt anklicken, Baustein aus der Liste wählen - er entsteht mit der unteren vo
   <string key="in.family">Gruppe</string>
   <string key="in.block">Baustein</string>
   <string key="in.angle">Drehung</string>
+  <string key="in.anchor">Setzen an</string>
+  <string key="anchor.corner">Ecke unten vorne links</string>
+  <string key="anchor.front">Unten, vorderes Ende</string>
+  <string key="anchor.centre">Unten, Mitte</string>
+  <string key="anchor.back">Unten, hinteres Ende</string>
+  <string key="in.dx">Versatz X</string>
+  <string key="in.dy">Versatz Y</string>
+
+  <!-- Names of the points every element carries -->
+  <string key="point.bottom.front">unten vorne</string>
+  <string key="point.bottom.centre">unten Mitte</string>
+  <string key="point.bottom.back">unten hinten</string>
+  <string key="point.top.front">oben vorne</string>
+  <string key="point.top.centre">oben Mitte</string>
+  <string key="point.top.back">oben hinten</string>
 
   <!-- Element families, in catalogue order -->
   <string key="family.starter">Starter</string>

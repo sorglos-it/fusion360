@@ -5,7 +5,7 @@
   <!-- Command -->
   <string key="cmd.name">Élément SYSTEM 3E</string>
   <string key="cmd.tooltip">Place un élément de mur SYSTEM 3E.
-Choisissez un point, puis l'élément dans la liste : il est créé avec son coin inférieur avant gauche sur ce point.</string>
+Choisissez un point, puis l'élément dans la liste : il est créé sur ce point.</string>
 
   <!-- Inputs -->
   <string key="in.point">Point</string>
@@ -13,6 +13,21 @@ Choisissez un point, puis l'élément dans la liste : il est créé avec son coi
   <string key="in.family">Famille</string>
   <string key="in.block">Élément</string>
   <string key="in.angle">Rotation</string>
+  <string key="in.anchor">Poser par</string>
+  <string key="anchor.corner">Coin inférieur avant gauche</string>
+  <string key="anchor.front">Dessous, extrémité avant</string>
+  <string key="anchor.centre">Dessous, milieu</string>
+  <string key="anchor.back">Dessous, extrémité arrière</string>
+  <string key="in.dx">Décalage X</string>
+  <string key="in.dy">Décalage Y</string>
+
+  <!-- Names of the points every element carries -->
+  <string key="point.bottom.front">dessous avant</string>
+  <string key="point.bottom.centre">dessous milieu</string>
+  <string key="point.bottom.back">dessous arrière</string>
+  <string key="point.top.front">dessus avant</string>
+  <string key="point.top.centre">dessus milieu</string>
+  <string key="point.top.back">dessus arrière</string>
 
   <!-- Element families, in catalogue order -->
   <string key="family.starter">Départ</string>

@@ -5,7 +5,7 @@
   <!-- Command -->
   <string key="cmd.name">Elemento SYSTEM 3E</string>
   <string key="cmd.tooltip">Posiziona un elemento per pareti SYSTEM 3E.
-Seleziona un punto e scegli l'elemento dall'elenco: viene creato con l'angolo inferiore anteriore sinistro su quel punto.</string>
+Seleziona un punto e scegli l'elemento dall'elenco: viene creato su quel punto.</string>
 
   <!-- Inputs -->
   <string key="in.point">Punto</string>
@@ -13,6 +13,21 @@ Seleziona un punto e scegli l'elemento dall'elenco: viene creato con l'angolo in
   <string key="in.family">Famiglia</string>
   <string key="in.block">Elemento</string>
   <string key="in.angle">Rotazione</string>
+  <string key="in.anchor">Posiziona da</string>
+  <string key="anchor.corner">Angolo inferiore anteriore sinistro</string>
+  <string key="anchor.front">Sotto, estremità anteriore</string>
+  <string key="anchor.centre">Sotto, centro</string>
+  <string key="anchor.back">Sotto, estremità posteriore</string>
+  <string key="in.dx">Spostamento X</string>
+  <string key="in.dy">Spostamento Y</string>
+
+  <!-- Names of the points every element carries -->
+  <string key="point.bottom.front">sotto davanti</string>
+  <string key="point.bottom.centre">sotto centro</string>
+  <string key="point.bottom.back">sotto dietro</string>
+  <string key="point.top.front">sopra davanti</string>
+  <string key="point.top.centre">sopra centro</string>
+  <string key="point.top.back">sopra dietro</string>
 
   <!-- Element families, in catalogue order -->
   <string key="family.starter">Partenza</string>

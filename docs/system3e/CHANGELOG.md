@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.0 – 2026-10-08
+
+- Every element carries six points to click: front end, middle and back end, once on the underside and once at the
+  height where the next course stands (50 mm below the top on elements with the raised profile). Elements placed
+  with an older version get them the next time the same element is placed.
+- New field *Placed by*: lower front left corner, or bottom front end / middle / back end. A wall in bond: place the
+  next element by its bottom middle on the upper front or back point of the one below.
+- New fields *Offset X* and *Offset Y* in mm, along the design's axes.
+- Not yet confirmed inside Fusion.
+
 ## 0.2.1 – 2026-10-08
 
 - Parts list: placing an element a second time adds another copy of the same component instead of a new component
