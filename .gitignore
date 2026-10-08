@@ -33,3 +33,6 @@ desktop.ini
 # SYSTEM 3E Herstellerdateien - nur lokal, nie ins Repo
 assets/system3e/*
 !assets/system3e/.gitkeep
+
+# Wissensgraph von graphify - erzeugt, nicht Teil des Projekts
+graphify-out/
