@@ -51,7 +51,7 @@ def all_points(addin, block):
                 entry[2] = 'both'
                 break
         else:
-            found.append([addin.T('anchor.' + anchor), position, 'anchor'])
+            found.append([addin.T(addin.anchor_text(anchor)), position, 'anchor'])
     return found
 
 

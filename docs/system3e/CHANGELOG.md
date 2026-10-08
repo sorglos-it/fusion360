@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.7 – 2026-10-08
+
+- *Placed by* now offers every point of the element: the three corners and all twelve points that can be clicked.
+
 ## 0.3.6 – 2026-10-08
 
 - *Placed by*: the two top corners of the front end, right and left. The second bottom corner from 0.3.5 was a

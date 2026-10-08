@@ -99,29 +99,37 @@ def fail(key, *args):
 
 # ============================================================ YOUR CODE HERE ==
 
-# Which spot of the element lands on the clicked point: a bottom corner of
-# the front end, its two top corners - right and left as seen from that end
-# looking along the wall - and three on the underside in the middle of the
-# wall thickness.
-ANCHORS = ('corner', 'top-right', 'top-left', 'front', 'centre', 'back')
-
 # How far one course reaches into the next, mm.
 INTERLOCK = 50.0
+
+# The points every element carries for clicking, in the order they are made.
+POINT_KEYS = ('point.bottom.front', 'point.bottom.centre', 'point.bottom.back',
+              'point.top.front', 'point.top.centre', 'point.top.back',
+              'point.top.right', 'point.top.left',
+              'point.bottom.right', 'point.bottom.left',
+              'point.low.right', 'point.low.left')
+
+# Which spot of the element lands on the clicked point ("Placed by"): three
+# corners of the front end - right and left as seen from that end looking
+# along the wall - and every point that can be clicked.
+CORNERS = ('corner', 'top-right', 'top-left')
+ANCHORS = CORNERS + POINT_KEYS
+
+
+def anchor_text(anchor):
+    """The text key of an anchor."""
+    return 'anchor.' + anchor if anchor in CORNERS else anchor
 
 
 def anchor_position(block, anchor):
     """The anchor in the element's own coordinates, mm."""
-    length, width = block['size'][0], block['size'][1]
     if anchor == 'top-right':
         return (0.0, 0.0, float(block['size'][2]))
     if anchor == 'top-left':
-        return (0.0, float(width), float(block['size'][2]))
-    if anchor == 'front':
-        return (0.0, width / 2.0, 0.0)
-    if anchor == 'centre':
-        return (length / 2.0, width / 2.0, 0.0)
-    if anchor == 'back':
-        return (float(length), width / 2.0, 0.0)
+        return (0.0, float(block['size'][1]), float(block['size'][2]))
+    for key, position in snap_points(block):
+        if key == anchor:
+            return position
     return (0.0, 0.0, 0.0)
 
 
@@ -147,7 +155,7 @@ def snap_points(block):
                ('point.bottom.right', (length / 2.0, 0.0, 0.0)),
                ('point.bottom.left', (length / 2.0, float(width), 0.0)),
                ('point.low.right', (length / 2.0, 0.0, INTERLOCK)),
-               ('point.low.left', (length / 2.0, float(width), INTERLOCK))])
+               ('point.low.left', (length / 2.0, float(width), INTERLOCK))])     # same order as POINT_KEYS
 
 
 def point_types():
@@ -436,7 +444,7 @@ def build_inputs(inputs):
     anchors = inputs.addDropDownCommandInput(
         IN_ANCHOR, T('in.anchor'), adsk.core.DropDownStyles.TextListDropDownStyle)
     for name in ANCHORS:
-        anchors.listItems.add(T('anchor.' + name), name == _last[IN_ANCHOR], '')
+        anchors.listItems.add(T(anchor_text(name)), name == _last[IN_ANCHOR], '')
 
     inputs.addValueInput(IN_ANGLE, T('in.angle'), 'deg',
                          adsk.core.ValueInput.createByReal(_last[IN_ANGLE]))

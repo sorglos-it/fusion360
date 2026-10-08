@@ -17,9 +17,6 @@ Choisissez un point, puis l'élément dans la liste : il est créé sur ce point
   <string key="anchor.corner">Coin inférieur avant droit</string>
   <string key="anchor.top-right">Coin supérieur avant droit</string>
   <string key="anchor.top-left">Coin supérieur avant gauche</string>
-  <string key="anchor.front">Dessous, extrémité avant</string>
-  <string key="anchor.centre">Dessous, milieu</string>
-  <string key="anchor.back">Dessous, extrémité arrière</string>
   <string key="in.dx">Décalage X</string>
   <string key="in.dy">Décalage Y</string>
   <string key="in.dz">Décalage Z</string>

@@ -234,7 +234,7 @@ def main():
         for family, members in families:
             text = addin.T('family.' + family)
             check(text and text != 'family.' + family, '%s: family "%s" has a name' % (code, family))
-        for key in (['in.anchor', 'in.dx', 'in.dy', 'in.dz'] + ['anchor.' + a for a in addin.ANCHORS]
+        for key in (['in.anchor', 'in.dx', 'in.dy', 'in.dz'] + [addin.anchor_text(a) for a in addin.ANCHORS]
                     + [k for k, position in addin.snap_points(blocks[0])]):
             check(addin.T(key) != key, '%s: "%s" has a text' % (code, key))
     check(addin._last[addin.IN_BLOCK] in by_id, 'the default element exists')
@@ -245,7 +245,9 @@ def main():
     check(s1.get('stack') == 250, 'the next course stands 250 mm up on S1 WP, found %s' % s1.get('stack'))
     check(by_id['eu-200-w'].get('stack') == 200, 'a flat element carries the next course on top')
     check(addin.anchor_position(s1, 'corner') == (0.0, 0.0, 0.0), 'anchor corner')
-    check(addin.anchor_position(s1, 'centre') == (353.5, 176.0, 0.0), 'anchor bottom middle')
+    check(addin.anchor_position(s1, 'point.bottom.centre') == (353.5, 176.0, 0.0), 'anchor bottom middle')
+    check([key for key, p in addin.snap_points(s1)] == list(addin.POINT_KEYS), 'the point list and its keys agree')
+    check(all(a in addin.ANCHORS for a in addin.POINT_KEYS), 'every point can be the anchor')
     check(addin.anchor_position(s1, 'top-right') == (0.0, 0.0, 300.0), 'anchor top front right corner')
     check(addin.anchor_position(s1, 'top-left') == (0.0, 352.0, 300.0), 'anchor top front left corner')
     check(len({addin.anchor_position(s1, a) for a in addin.ANCHORS}) == len(addin.ANCHORS), 'every anchor is a place of its own')
@@ -258,7 +260,7 @@ def main():
         check(0 < block.get('stack', 0) <= block['size'][2], '%s: a sensible stacking height' % block['name'])
         # Bond: bottom middle of the next element on the upper end point of this one.
         check([p for key, p in spots if key == 'point.bottom.centre'][0]
-              == addin.anchor_position(block, 'centre'), '%s: anchor and point agree' % block['name'])
+              == addin.anchor_position(block, 'point.bottom.centre'), '%s: anchor and point agree' % block['name'])
     for block in blocks:
         recorder.vertices, recorder.edges, recorder.faces, recorder.uses = [], [], [], {}
         addin.make_body(block)

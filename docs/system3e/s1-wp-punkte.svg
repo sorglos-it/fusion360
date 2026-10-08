@@ -137,15 +137,15 @@
 <circle cx="70.0" cy="165.6" r="10" class="g"/>
 <circle cx="282.1" cy="165.6" r="10" class="g"/>
 <circle cx="494.2" cy="165.6" r="10" class="g"/>
-<circle cx="70.0" cy="165.6" r="7" class="y"/>
-<circle cx="282.1" cy="165.6" r="7" class="y"/>
-<circle cx="494.2" cy="165.6" r="7" class="y"/>
-<circle cx="282.1" cy="271.2" r="10" class="y"/>
-<circle cx="282.1" cy="60.0" r="10" class="y"/>
-<circle cx="282.1" cy="271.2" r="7" class="y"/>
-<circle cx="282.1" cy="60.0" r="7" class="y"/>
-<circle cx="282.1" cy="271.2" r="4" class="y"/>
-<circle cx="282.1" cy="60.0" r="4" class="y"/>
+<circle cx="70.0" cy="165.6" r="7" class="g"/>
+<circle cx="282.1" cy="165.6" r="7" class="g"/>
+<circle cx="494.2" cy="165.6" r="7" class="g"/>
+<circle cx="282.1" cy="271.2" r="10" class="g"/>
+<circle cx="282.1" cy="60.0" r="10" class="g"/>
+<circle cx="282.1" cy="271.2" r="7" class="g"/>
+<circle cx="282.1" cy="60.0" r="7" class="g"/>
+<circle cx="282.1" cy="271.2" r="4" class="g"/>
+<circle cx="282.1" cy="60.0" r="4" class="g"/>
 <circle cx="70.0" cy="271.2" r="10" class="r"/>
 <circle cx="70.0" cy="271.2" r="7" class="r"/>
 <circle cx="70.0" cy="60.0" r="10" class="r"/>
@@ -292,15 +292,15 @@
 <circle cx="70.0" cy="510.0" r="10" class="g"/>
 <circle cx="282.1" cy="510.0" r="10" class="g"/>
 <circle cx="494.2" cy="510.0" r="10" class="g"/>
-<circle cx="70.0" cy="360.0" r="10" class="y"/>
-<circle cx="282.1" cy="360.0" r="10" class="y"/>
-<circle cx="494.2" cy="360.0" r="10" class="y"/>
-<circle cx="282.1" cy="360.0" r="7" class="y"/>
-<circle cx="282.1" cy="360.0" r="4" class="y"/>
-<circle cx="282.1" cy="510.0" r="7" class="y"/>
-<circle cx="282.1" cy="510.0" r="4" class="y"/>
-<circle cx="282.1" cy="480.0" r="10" class="y"/>
-<circle cx="282.1" cy="480.0" r="7" class="y"/>
+<circle cx="70.0" cy="360.0" r="10" class="g"/>
+<circle cx="282.1" cy="360.0" r="10" class="g"/>
+<circle cx="494.2" cy="360.0" r="10" class="g"/>
+<circle cx="282.1" cy="360.0" r="7" class="g"/>
+<circle cx="282.1" cy="360.0" r="4" class="g"/>
+<circle cx="282.1" cy="510.0" r="7" class="g"/>
+<circle cx="282.1" cy="510.0" r="4" class="g"/>
+<circle cx="282.1" cy="480.0" r="10" class="g"/>
+<circle cx="282.1" cy="480.0" r="7" class="g"/>
 <circle cx="70.0" cy="510.0" r="7" class="r"/>
 <circle cx="70.0" cy="330.0" r="10" class="r"/>
 <circle cx="70.0" cy="330.0" r="7" class="r"/>
@@ -448,15 +448,15 @@
 <circle cx="705.6" cy="510.0" r="10" class="g"/>
 <circle cx="705.6" cy="510.0" r="7" class="g"/>
 <circle cx="705.6" cy="510.0" r="4" class="g"/>
-<circle cx="705.6" cy="360.0" r="10" class="y"/>
-<circle cx="705.6" cy="360.0" r="7" class="y"/>
-<circle cx="705.6" cy="360.0" r="4" class="y"/>
-<circle cx="600.0" cy="360.0" r="10" class="y"/>
-<circle cx="811.2" cy="360.0" r="10" class="y"/>
-<circle cx="600.0" cy="510.0" r="10" class="y"/>
-<circle cx="811.2" cy="510.0" r="10" class="y"/>
-<circle cx="600.0" cy="480.0" r="10" class="y"/>
-<circle cx="811.2" cy="480.0" r="10" class="y"/>
+<circle cx="705.6" cy="360.0" r="10" class="g"/>
+<circle cx="705.6" cy="360.0" r="7" class="g"/>
+<circle cx="705.6" cy="360.0" r="4" class="g"/>
+<circle cx="600.0" cy="360.0" r="10" class="g"/>
+<circle cx="811.2" cy="360.0" r="10" class="g"/>
+<circle cx="600.0" cy="510.0" r="10" class="g"/>
+<circle cx="811.2" cy="510.0" r="10" class="g"/>
+<circle cx="600.0" cy="480.0" r="10" class="g"/>
+<circle cx="811.2" cy="480.0" r="10" class="g"/>
 <circle cx="600.0" cy="510.0" r="7" class="r"/>
 <circle cx="600.0" cy="330.0" r="10" class="r"/>
 <circle cx="811.2" cy="330.0" r="10" class="r"/>
@@ -500,23 +500,23 @@
 <text x="801" y="210" class="n">2</text>
 <circle cx="883.0" cy="172.8" r="8" class="g" fill-opacity="0.85"/>
 <text x="894" y="164" class="n">3</text>
-<circle cx="697.0" cy="183.4" r="8" class="y" fill-opacity="0.85"/>
+<circle cx="697.0" cy="183.4" r="8" class="g" fill-opacity="0.85"/>
 <text x="708" y="174" class="n">4</text>
-<circle cx="790.0" cy="137.6" r="8" class="y" fill-opacity="0.85"/>
+<circle cx="790.0" cy="137.6" r="8" class="g" fill-opacity="0.85"/>
 <text x="801" y="129" class="n">5</text>
-<circle cx="883.0" cy="91.8" r="8" class="y" fill-opacity="0.85"/>
+<circle cx="883.0" cy="91.8" r="8" class="g" fill-opacity="0.85"/>
 <text x="894" y="83" class="n">6</text>
-<circle cx="836.3" cy="160.4" r="8" class="y" fill-opacity="0.85"/>
+<circle cx="836.3" cy="160.4" r="8" class="g" fill-opacity="0.85"/>
 <text x="847" y="151" class="n">7</text>
-<circle cx="743.7" cy="114.8" r="8" class="y" fill-opacity="0.85"/>
+<circle cx="743.7" cy="114.8" r="8" class="g" fill-opacity="0.85"/>
 <text x="755" y="106" class="n">8</text>
-<circle cx="836.3" cy="241.4" r="8" class="y" fill-opacity="0.85"/>
+<circle cx="836.3" cy="241.4" r="8" class="g" fill-opacity="0.85"/>
 <text x="847" y="232" class="n">9</text>
-<circle cx="743.7" cy="195.8" r="8" class="y" fill-opacity="0.85"/>
+<circle cx="743.7" cy="195.8" r="8" class="g" fill-opacity="0.85"/>
 <text x="755" y="187" class="n">10</text>
-<circle cx="836.3" cy="225.2" r="8" class="y" fill-opacity="0.85"/>
+<circle cx="836.3" cy="225.2" r="8" class="g" fill-opacity="0.85"/>
 <text x="847" y="216" class="n">11</text>
-<circle cx="743.7" cy="179.6" r="8" class="y" fill-opacity="0.85"/>
+<circle cx="743.7" cy="179.6" r="8" class="g" fill-opacity="0.85"/>
 <text x="755" y="171" class="n">12</text>
 <circle cx="743.3" cy="287.1" r="8" class="r" fill-opacity="0.85"/>
 <text x="754" y="278" class="n">13</text>
@@ -531,24 +531,24 @@
 <text x="98" y="630" class="l">2  unten Mitte  –  353.5 / 176 / 0  –  beides</text>
 <circle cx="80" cy="649" r="8" class="g"/>
 <text x="98" y="654" class="l">3  unten hinten  –  707 / 176 / 0  –  beides</text>
-<circle cx="80" cy="673" r="8" class="y"/>
-<text x="98" y="678" class="l">4  oben vorne  –  0 / 176 / 250  –  anklickbar</text>
-<circle cx="80" cy="697" r="8" class="y"/>
-<text x="98" y="702" class="l">5  oben Mitte  –  353.5 / 176 / 250  –  anklickbar</text>
-<circle cx="80" cy="721" r="8" class="y"/>
-<text x="98" y="726" class="l">6  oben hinten  –  707 / 176 / 250  –  anklickbar</text>
-<circle cx="80" cy="745" r="8" class="y"/>
-<text x="98" y="750" class="l">7  oben Mitte rechts  –  353.5 / 0 / 250  –  anklickbar</text>
-<circle cx="80" cy="769" r="8" class="y"/>
-<text x="98" y="774" class="l">8  oben Mitte links  –  353.5 / 352 / 250  –  anklickbar</text>
-<circle cx="80" cy="793" r="8" class="y"/>
-<text x="98" y="798" class="l">9  unten Mitte rechts  –  353.5 / 0 / 0  –  anklickbar</text>
-<circle cx="80" cy="817" r="8" class="y"/>
-<text x="98" y="822" class="l">10  unten Mitte links  –  353.5 / 352 / 0  –  anklickbar</text>
-<circle cx="80" cy="841" r="8" class="y"/>
-<text x="98" y="846" class="l">11  Mitte rechts, 50 mm hoch  –  353.5 / 0 / 50  –  anklickbar</text>
-<circle cx="80" cy="865" r="8" class="y"/>
-<text x="98" y="870" class="l">12  Mitte links, 50 mm hoch  –  353.5 / 352 / 50  –  anklickbar</text>
+<circle cx="80" cy="673" r="8" class="g"/>
+<text x="98" y="678" class="l">4  oben vorne  –  0 / 176 / 250  –  beides</text>
+<circle cx="80" cy="697" r="8" class="g"/>
+<text x="98" y="702" class="l">5  oben Mitte  –  353.5 / 176 / 250  –  beides</text>
+<circle cx="80" cy="721" r="8" class="g"/>
+<text x="98" y="726" class="l">6  oben hinten  –  707 / 176 / 250  –  beides</text>
+<circle cx="80" cy="745" r="8" class="g"/>
+<text x="98" y="750" class="l">7  oben Mitte rechts  –  353.5 / 0 / 250  –  beides</text>
+<circle cx="80" cy="769" r="8" class="g"/>
+<text x="98" y="774" class="l">8  oben Mitte links  –  353.5 / 352 / 250  –  beides</text>
+<circle cx="80" cy="793" r="8" class="g"/>
+<text x="98" y="798" class="l">9  unten Mitte rechts  –  353.5 / 0 / 0  –  beides</text>
+<circle cx="80" cy="817" r="8" class="g"/>
+<text x="98" y="822" class="l">10  unten Mitte links  –  353.5 / 352 / 0  –  beides</text>
+<circle cx="80" cy="841" r="8" class="g"/>
+<text x="98" y="846" class="l">11  Mitte rechts, 50 mm hoch  –  353.5 / 0 / 50  –  beides</text>
+<circle cx="80" cy="865" r="8" class="g"/>
+<text x="98" y="870" class="l">12  Mitte links, 50 mm hoch  –  353.5 / 352 / 50  –  beides</text>
 <circle cx="80" cy="889" r="8" class="r"/>
 <text x="98" y="894" class="l">13  Ecke unten vorne rechts  –  0 / 0 / 0  –  Ausrichtungspunkt</text>
 <circle cx="80" cy="913" r="8" class="r"/>
