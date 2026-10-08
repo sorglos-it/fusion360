@@ -58,6 +58,10 @@ RESOURCE_FOLDER = os.path.join(_DIR, 'resources', 'System3E')
 LANG_DIR = os.path.join(_DIR, 'lang')
 BLOCK_DIR = os.path.join(_DIR, 'blocks')
 
+# The mark on a component that says which element it is.
+ATTRIBUTE_GROUP = 'System3E'
+ATTRIBUTE_BLOCK = 'block'
+
 # Last used values, kept for the duration of the Fusion session.
 _last = {
     IN_FAMILY: 'basic',
@@ -201,6 +205,30 @@ def make_body(block):
     return body
 
 
+def component_name(block):
+    return 'SYSTEM 3E %s' % block['name']
+
+
+def find_component(design, block):
+    """The component of this element, if the design already has one.
+
+    Found by the mark the add-in leaves on it, so renaming it does no harm.
+    Elements placed before the mark existed are found by their name.
+    """
+    by_name = None
+    components = design.allComponents
+    for i in range(components.count):
+        component = components.item(i)
+        if component.bRepBodies.count == 0:
+            continue
+        mark = component.attributes.itemByName(ATTRIBUTE_GROUP, ATTRIBUTE_BLOCK)
+        if mark and mark.value == block['id']:
+            return component
+        if by_name is None and not mark and component.name == component_name(block):
+            by_name = component
+    return by_name
+
+
 def build_result(values):
     """Create the element as a new component. Everything is validated by now."""
     block = values['block']
@@ -218,10 +246,19 @@ def build_result(values):
             values['point'].x, values['point'].y, values['point'].z)
         placement.transformBy(move)
 
+    # The same element again is another copy of the same component, not a new
+    # one - otherwise a parts list shows "S1 WP", "S1 WP (1)", "S1 WP (2)"
+    # as three different parts instead of one part, three times.
+    known = find_component(design, block)
+    if known:
+        design.rootComponent.occurrences.addExistingComponent(known, placement)
+        return
+
     body = make_body(block)
     occurrence = design.rootComponent.occurrences.addNewComponent(placement)
     component = occurrence.component
-    component.name = 'SYSTEM 3E %s' % block['name']
+    component.name = component_name(block)
+    component.attributes.add(ATTRIBUTE_GROUP, ATTRIBUTE_BLOCK, block['id'])
     if design.designType == adsk.fusion.DesignTypes.ParametricDesignType:
         # With the timeline on, a ready-made body has to arrive inside a base feature.
         base = component.features.baseFeatures.add()

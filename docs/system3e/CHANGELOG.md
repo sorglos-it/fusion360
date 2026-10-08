@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.1 – 2026-10-08
+
+- Parts list: placing an element a second time adds another copy of the same component instead of a new component
+  `(1)`, `(2)` … – a parts list now counts equal elements together. Elements placed with 0.2.0 stay separate
+  components; the first of them is reused from now on.
+- Preview pictures redrawn with a depth buffer: 16 pictures showed faces in the wrong order.
+
 ## 0.2.0 – 2026-10-08
 
 - New command *SYSTEM 3E element*: pick a point, a family and an element; a picture shows the element, and it is

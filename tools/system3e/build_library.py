@@ -181,33 +181,84 @@ def _cross(a, b):
 
 
 def picture(solid, path, width=280, height=200):
-    """A shaded view from the front left, drawn large and scaled down for smooth lines."""
-    from PIL import Image, ImageDraw
+    """A shaded view from the front left, with hidden surfaces removed per pixel.
+
+    Every face that looks towards the eye is filled row by row where it is
+    nearer than what is already there (a depth buffer). An outline is drawn
+    only where its own face is the visible one. Drawn three times as large and
+    scaled down for smooth lines.
+    """
+    from PIL import Image
     over = 3
+    w, h = width * over, height * over
     eye = _unit((-1.0, -1.0, 0.8))
     right = _unit(_cross((0.0, 0.0, 1.0), eye))
     up = _cross(eye, right)
     points = solid['points']
     mid = [(max(p[i] for p in points) + min(p[i] for p in points)) / 2.0 for i in range(3)]
     rel = [tuple(p[i] - mid[i] for i in range(3)) for p in points]
-    scale = (width * over - 24 * over) / 830.0
-    img = Image.new('RGB', (width * over, height * over), 'white')
-    draw = ImageDraw.Draw(img)
-    visible = []
+    scale = (w - 24 * over) / 830.0
+    screen = [(w / 2.0 + _dot(p, right) * scale, h / 2.0 - _dot(p, up) * scale) for p in rel]
+
+    nearest = [-1e9] * (w * h)          # mm towards the eye, per pixel
+    shade = bytearray([255]) * (w * h)
+    front = []
     for face in solid['faces']:
-        if _dot(face['normal'], eye) <= 1e-6:
-            continue
-        loop = face['loops'][0]
-        depth = min(_dot(rel[i], eye) for i in loop) + sum(_dot(rel[i], eye) for i in loop) / len(loop)
-        visible.append((depth, face))
-    for depth, face in sorted(visible, key=lambda item: item[0]):
         n = face['normal']
+        facing = _dot(n, eye)
+        if facing <= 1e-6:
+            continue
+        # Nearness of the face's plane at pixel (x, y): kx * x + ky * y + k0.
+        kx = -_dot(n, right) / facing / scale
+        ky = _dot(n, up) / facing / scale
+        k0 = _dot(n, rel[face['loops'][0][0]]) / facing - kx * w / 2.0 - ky * h / 2.0
+        front.append((face, kx, ky, k0))
         grey = int(168 + 72 * max(0.0, n[2]) + 28 * max(0.0, _dot(n, right)))
-        outline = [(width * over / 2.0 + _dot(rel[i], right) * scale,
-                    height * over / 2.0 - _dot(rel[i], up) * scale) for i in face['loops'][0]]
-        draw.polygon(outline, fill=(grey, grey, grey))
-        draw.line(outline + [outline[0]], fill=(40, 40, 40), width=over)
-    img.resize((width, height), Image.LANCZOS).save(path)
+        edges = []
+        for loop in face['loops']:
+            for i in range(len(loop)):
+                a, b = screen[loop[i]], screen[loop[(i + 1) % len(loop)]]
+                if a[1] != b[1]:
+                    edges.append((a, b) if a[1] < b[1] else (b, a))
+        if not edges:
+            continue
+        top = max(0, int(math.ceil(min(a[1] for a, b in edges) - 0.5)))
+        bottom = min(h - 1, int(math.floor(max(b[1] for a, b in edges) - 0.5)))
+        for row in range(top, bottom + 1):
+            y = row + 0.5
+            crossings = sorted(a[0] + (y - a[1]) * (b[0] - a[0]) / (b[1] - a[1])
+                               for a, b in edges if a[1] <= y < b[1])
+            for left, stop in zip(crossings[0::2], crossings[1::2]):
+                first = max(0, int(math.ceil(left - 0.5)))
+                last = min(w - 1, int(math.floor(stop - 0.5)))
+                at = row * w + first
+                near = kx * (first + 0.5) + ky * y + k0
+                for column in range(first, last + 1):
+                    if near > nearest[at]:
+                        nearest[at] = near
+                        shade[at] = grey
+                    at += 1
+                    near += kx
+
+    reach = over // 2
+    for face, kx, ky, k0 in front:
+        for loop in face['loops']:
+            for i in range(len(loop)):
+                a, b = screen[loop[i]], screen[loop[(i + 1) % len(loop)]]
+                steps = int(max(abs(b[0] - a[0]), abs(b[1] - a[1]))) + 1
+                for step in range(steps + 1):
+                    x = a[0] + (b[0] - a[0]) * step / steps
+                    y = a[1] + (b[1] - a[1]) * step / steps
+                    near = kx * x + ky * y + k0
+                    column, row = int(x), int(y)
+                    for dy in range(-reach, reach + 1):
+                        for dx in range(-reach, reach + 1):
+                            cx, cy = column + dx, row + dy
+                            # 2 mm of slack: an edge is shared by two faces
+                            if 0 <= cx < w and 0 <= cy < h and near > nearest[cy * w + cx] - 2.0:
+                                shade[cy * w + cx] = 40
+
+    Image.frombytes('L', (w, h), bytes(shade)).resize((width, height), Image.LANCZOS).save(path)
 
 
 def build():
