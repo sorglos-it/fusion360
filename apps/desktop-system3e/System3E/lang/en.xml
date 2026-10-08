@@ -20,7 +20,8 @@ Pick a point, choose the element from the list - it is created on that point.</s
   <string key="in.block">Element</string>
   <string key="in.angle">Rotation</string>
   <string key="in.anchor">Placed by</string>
-  <string key="anchor.corner">Lower front left corner</string>
+  <string key="anchor.corner">Bottom corner, front right</string>
+  <string key="anchor.corner-left">Bottom corner, front left</string>
   <string key="anchor.front">Bottom, front end</string>
   <string key="anchor.centre">Bottom, middle</string>
   <string key="anchor.back">Bottom, back end</string>

@@ -99,9 +99,11 @@ def fail(key, *args):
 
 # ============================================================ YOUR CODE HERE ==
 
-# Which spot of the element lands on the clicked point. The three "bottom"
-# spots lie on the underside, in the middle of the wall thickness.
-ANCHORS = ('corner', 'front', 'centre', 'back')
+# Which spot of the element lands on the clicked point. All lie on the
+# underside: the two corners of the front end - right and left as seen from
+# that end looking along the wall - and three in the middle of the wall
+# thickness.
+ANCHORS = ('corner', 'corner-left', 'front', 'centre', 'back')
 
 # How far one course reaches into the next, mm.
 INTERLOCK = 50.0
@@ -110,6 +112,8 @@ INTERLOCK = 50.0
 def anchor_position(block, anchor):
     """The anchor in the element's own coordinates, mm."""
     length, width = block['size'][0], block['size'][1]
+    if anchor == 'corner-left':
+        return (0.0, float(width), 0.0)
     if anchor == 'front':
         return (0.0, width / 2.0, 0.0)
     if anchor == 'centre':

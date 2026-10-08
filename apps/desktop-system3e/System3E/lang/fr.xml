@@ -14,7 +14,8 @@ Choisissez un point, puis l'élément dans la liste : il est créé sur ce point
   <string key="in.block">Élément</string>
   <string key="in.angle">Rotation</string>
   <string key="in.anchor">Poser par</string>
-  <string key="anchor.corner">Coin inférieur avant gauche</string>
+  <string key="anchor.corner">Coin inférieur avant droit</string>
+  <string key="anchor.corner-left">Coin inférieur avant gauche</string>
   <string key="anchor.front">Dessous, extrémité avant</string>
   <string key="anchor.centre">Dessous, milieu</string>
   <string key="anchor.back">Dessous, extrémité arrière</string>

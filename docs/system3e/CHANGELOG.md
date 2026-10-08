@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.5 – 2026-10-08
+
+- *Placed by* has a second corner: the other bottom corner of the front end. The two are now named front right
+  (the one there has always been) and front left, as seen from the front end looking along the wall.
+
 ## 0.3.4 – 2026-10-08
 
 - Two more points on the wall faces at mid length, 50 mm above the underside – twelve points per element.

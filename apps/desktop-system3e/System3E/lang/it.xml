@@ -14,7 +14,8 @@ Seleziona un punto e scegli l'elemento dall'elenco: viene creato su quel punto.<
   <string key="in.block">Elemento</string>
   <string key="in.angle">Rotazione</string>
   <string key="in.anchor">Posiziona da</string>
-  <string key="anchor.corner">Angolo inferiore anteriore sinistro</string>
+  <string key="anchor.corner">Angolo inferiore anteriore destro</string>
+  <string key="anchor.corner-left">Angolo inferiore anteriore sinistro</string>
   <string key="anchor.front">Sotto, estremità anteriore</string>
   <string key="anchor.centre">Sotto, centro</string>
   <string key="anchor.back">Sotto, estremità posteriore</string>

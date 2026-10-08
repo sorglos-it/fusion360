@@ -14,7 +14,8 @@ Seleccione un punto y elija el elemento de la lista: se crea en ese punto.</stri
   <string key="in.block">Elemento</string>
   <string key="in.angle">Giro</string>
   <string key="in.anchor">Colocar por</string>
-  <string key="anchor.corner">Esquina inferior delantera izquierda</string>
+  <string key="anchor.corner">Esquina inferior delantera derecha</string>
+  <string key="anchor.corner-left">Esquina inferior delantera izquierda</string>
   <string key="anchor.front">Abajo, extremo delantero</string>
   <string key="anchor.centre">Abajo, centro</string>
   <string key="anchor.back">Abajo, extremo trasero</string>
