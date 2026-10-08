@@ -39,6 +39,8 @@ Pick a point, choose the element from the list - it is created on that point.</s
   <string key="point.top.left">top middle left</string>
   <string key="point.bottom.right">bottom middle right</string>
   <string key="point.bottom.left">bottom middle left</string>
+  <string key="point.low.right">middle right, 50 mm up</string>
+  <string key="point.low.left">middle left, 50 mm up</string>
 
   <!-- Element families, in catalogue order -->
   <string key="family.starter">Starter</string>

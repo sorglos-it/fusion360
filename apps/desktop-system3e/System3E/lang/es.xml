@@ -33,6 +33,8 @@ Seleccione un punto y elija el elemento de la lista: se crea en ese punto.</stri
   <string key="point.top.left">arriba centro izquierda</string>
   <string key="point.bottom.right">abajo centro derecha</string>
   <string key="point.bottom.left">abajo centro izquierda</string>
+  <string key="point.low.right">centro derecha, 50 mm arriba</string>
+  <string key="point.low.left">centro izquierda, 50 mm arriba</string>
 
   <!-- Element families, in catalogue order -->
   <string key="family.starter">Arranque</string>

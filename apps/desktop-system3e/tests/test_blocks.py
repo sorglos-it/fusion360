@@ -248,8 +248,8 @@ def main():
     check(addin.anchor_position(s1, 'centre') == (353.5, 176.0, 0.0), 'anchor bottom middle')
     for block in blocks:
         spots = addin.snap_points(block)
-        check(len(spots) == 10 and len({key for key, p in spots}) == 10, '%s: ten named points' % block['name'])
-        check(len({p for key, p in spots}) == 10, '%s: no two points in one place' % block['name'])
+        check(len(spots) == 12 and len({key for key, p in spots}) == 12, '%s: twelve named points' % block['name'])
+        check(len({p for key, p in spots}) == 12, '%s: no two points in one place' % block['name'])
         check(all(0 <= p[i] <= block['size'][i] for key, p in spots for i in range(3)),
               '%s: every point lies on the element' % block['name'])
         check(0 < block.get('stack', 0) <= block['size'][2], '%s: a sensible stacking height' % block['name'])

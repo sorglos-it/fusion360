@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.4 – 2026-10-08
+
+- Two more points on the wall faces at mid length, 50 mm above the underside – twelve points per element.
+
 ## 0.3.3 – 2026-10-08
 
 - The two points on the wall faces at mid length now exist on the underside as well – ten points per element.

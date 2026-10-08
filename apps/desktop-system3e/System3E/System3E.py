@@ -8,7 +8,7 @@ The reusable machinery sits in addin_core.py next to this file.
 The command places one SYSTEM 3E wall element: pick a point, pick the element
 from the list - a picture shows which one it is - and it is created as a new
 component. Which spot of the element lands on the point can be chosen, and
-every element carries ten points of its own to click for the next one.
+every element carries twelve points of its own to click for the next one.
 """
 
 import os
@@ -103,6 +103,9 @@ def fail(key, *args):
 # spots lie on the underside, in the middle of the wall thickness.
 ANCHORS = ('corner', 'front', 'centre', 'back')
 
+# How far one course reaches into the next, mm.
+INTERLOCK = 50.0
+
 
 def anchor_position(block, anchor):
     """The anchor in the element's own coordinates, mm."""
@@ -124,9 +127,9 @@ def snap_points(block):
     thickness. A wall in bond is built by putting the bottom middle of the
     next element on the upper front or back point of the one below.
 
-    Four more in the middle of the length on the two wall faces, at that
-    height and on the underside: right and left as seen from the front end
-    looking along the wall.
+    Six more in the middle of the length on the two wall faces: at that
+    height, on the underside and INTERLOCK mm above the underside. Right and
+    left are as seen from the front end looking along the wall.
     """
     length, width = block['size'][0], block['size'][1]
     level = block.get('stack', block['size'][2])
@@ -136,7 +139,9 @@ def snap_points(block):
             + [('point.top.right', (length / 2.0, 0.0, float(level))),
                ('point.top.left', (length / 2.0, float(width), float(level))),
                ('point.bottom.right', (length / 2.0, 0.0, 0.0)),
-               ('point.bottom.left', (length / 2.0, float(width), 0.0))])
+               ('point.bottom.left', (length / 2.0, float(width), 0.0)),
+               ('point.low.right', (length / 2.0, 0.0, INTERLOCK)),
+               ('point.low.left', (length / 2.0, float(width), INTERLOCK))])
 
 
 def point_types():

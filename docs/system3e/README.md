@@ -6,7 +6,7 @@
 
 A Fusion 360 add-in for planning walls with the dry-stack elements of [SYSTEM 3E](https://www.system3e.com/).
 Click a point, choose one of the 74 elements from a list with a preview picture, and the element is created there
-as a solid body. Every element brings ten points of its own to click, so the next course snaps on in bond. **Status: not yet tested inside Fusion.** Not affiliated with SYSTEM 3E.
+as a solid body. Every element brings twelve points of its own to click, so the next course snaps on in bond. **Status: not yet tested inside Fusion.** Not affiliated with SYSTEM 3E.
 
 | Folder | Purpose | Language | Start | Build |
 | --- | --- | --- | --- | --- |

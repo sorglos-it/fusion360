@@ -33,6 +33,8 @@ Choisissez un point, puis l'élément dans la liste : il est créé sur ce point
   <string key="point.top.left">dessus milieu gauche</string>
   <string key="point.bottom.right">dessous milieu droite</string>
   <string key="point.bottom.left">dessous milieu gauche</string>
+  <string key="point.low.right">milieu droite, 50 mm plus haut</string>
+  <string key="point.low.left">milieu gauche, 50 mm plus haut</string>
 
   <!-- Element families, in catalogue order -->
   <string key="family.starter">Départ</string>
