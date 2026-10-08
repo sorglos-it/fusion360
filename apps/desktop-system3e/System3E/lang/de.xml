@@ -31,6 +31,8 @@ Punkt anklicken, Baustein aus der Liste wählen - er entsteht an diesem Punkt.</
   <string key="point.top.back">oben hinten</string>
   <string key="point.top.right">oben Mitte rechts</string>
   <string key="point.top.left">oben Mitte links</string>
+  <string key="point.bottom.right">unten Mitte rechts</string>
+  <string key="point.bottom.left">unten Mitte links</string>
 
   <!-- Element families, in catalogue order -->
   <string key="family.starter">Starter</string>

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.3 – 2026-10-08
+
+- The two points on the wall faces at mid length now exist on the underside as well – ten points per element.
+
 ## 0.3.2 – 2026-10-08
 
 - Two more points to click on every element: at the height of the next course, in the middle of the length, on the

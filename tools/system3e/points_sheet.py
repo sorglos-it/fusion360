@@ -148,13 +148,14 @@ def main():
     out.append('<text x="560" y="690" class="l">„Vorne“ ist das Ende bei Länge 0, „hinten“ das andere Ende.</text>')
     out.append('<text x="560" y="714" class="l">Baustein %s: %d x %d x %d mm</text>' % (name, length, width, height))
 
-    svg = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 790" font-family="Arial, sans-serif">\n'
+    tall = max(790, 620 + len(spots) * 24)       # room for the legend
+    svg = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 %d" font-family="Arial, sans-serif">\n'
            '<style>.e{stroke:#444;stroke-width:1}.f{fill:#f2f2f2;stroke:#444;stroke-width:1}'
            '.y{fill:#ffd400;stroke:#191919;stroke-width:1.5}.r{fill:#e02020;stroke:#191919;stroke-width:1.5}'
            '.g{fill:#2fb344;stroke:#191919;stroke-width:1.5}.t{font-size:17px;font-weight:bold;fill:#191919}'
            '.n{font-size:16px;font-weight:bold;fill:#191919}.l{font-size:15px;fill:#191919}'
-           '.a{font-size:12px;fill:#777}</style>\n<rect width="1000" height="790" fill="#fff"/>\n'
-           + '\n'.join(out) + '\n</svg>\n')
+           '.a{font-size:12px;fill:#777}</style>\n<rect width="1000" height="%d" fill="#fff"/>\n'
+           ) % (tall, tall) + '\n'.join(out) + '\n</svg>\n'
     with open(target, 'w', encoding='utf-8', newline='\n') as handle:
         handle.write(svg)
     print('written %s, %d points' % (target, len(spots)))

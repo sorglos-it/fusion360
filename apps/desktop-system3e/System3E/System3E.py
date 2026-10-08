@@ -8,7 +8,7 @@ The reusable machinery sits in addin_core.py next to this file.
 The command places one SYSTEM 3E wall element: pick a point, pick the element
 from the list - a picture shows which one it is - and it is created as a new
 component. Which spot of the element lands on the point can be chosen, and
-every element carries eight points of its own to click for the next one.
+every element carries ten points of its own to click for the next one.
 """
 
 import os
@@ -124,8 +124,9 @@ def snap_points(block):
     thickness. A wall in bond is built by putting the bottom middle of the
     next element on the upper front or back point of the one below.
 
-    Two more at that height, in the middle of the length on the two wall
-    faces: right and left as seen from the front end looking along the wall.
+    Four more in the middle of the length on the two wall faces, at that
+    height and on the underside: right and left as seen from the front end
+    looking along the wall.
     """
     length, width = block['size'][0], block['size'][1]
     level = block.get('stack', block['size'][2])
@@ -133,7 +134,9 @@ def snap_points(block):
     return ([('point.bottom.' + key, (x, width / 2.0, 0.0)) for key, x in spots]
             + [('point.top.' + key, (x, width / 2.0, float(level))) for key, x in spots]
             + [('point.top.right', (length / 2.0, 0.0, float(level))),
-               ('point.top.left', (length / 2.0, float(width), float(level)))])
+               ('point.top.left', (length / 2.0, float(width), float(level))),
+               ('point.bottom.right', (length / 2.0, 0.0, 0.0)),
+               ('point.bottom.left', (length / 2.0, float(width), 0.0))])
 
 
 def point_types():
