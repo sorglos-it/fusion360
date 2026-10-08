@@ -13,13 +13,13 @@ boilerplate.
 
 | Folder | Purpose | Language | Start | Build |
 |---|---|---|---|---|
-| `apps/desktop/AddInTemplate` | the template: a demo command plus the shared machinery every new add-in gets | Python 3 (the one inside Fusion) | `python tools/new_addin.py MyAddIn --install`, then *Run* in Fusion | – (runs as is) |
+| `apps/desktop-template/AddInTemplate` | the template: a demo command plus the shared machinery every new add-in gets | Python 3 (the one inside Fusion) | `python tools/template/new_addin.py MyAddIn --install`, then *Run* in Fusion | – (runs as is) |
 
 ## Start in 3 steps
 
 1. You need Autodesk Fusion 360 (Windows or macOS) and, for the tools, Python 3 — the add-in itself only uses what
    Fusion brings. Download or clone this repository.
-2. In the repository folder run `python tools/new_addin.py MyAddIn --install` — it creates the add-in *MyAddIn* straight
+2. In the repository folder run `python tools/template/new_addin.py MyAddIn --install` — it creates the add-in *MyAddIn* straight
    in Fusion's add-ins folder.
 3. In Fusion: **Utilities → ADD-INS → Add-Ins**, select *MyAddIn*, tick *Run on Startup*, press **Run**. The button
    sits on the **SKETCH** tab: click a sketch line, press it — a small tick at the line's midpoint proves that
@@ -35,7 +35,7 @@ Extracted from [fusion360-dovetail](https://github.com/sorglos-it/fusion360-dove
 ## Create an add-in
 
 ```bash
-python tools/new_addin.py MyAddIn --install
+python tools/template/new_addin.py MyAddIn --install
 ```
 
 It copies the template, renames the folder, the entry point, the core module, the icon folder and the command id,
@@ -110,17 +110,17 @@ open a `.py` file.
 Check an add-in without starting Fusion — manifest, GUID, command id, language files, icons:
 
 ```bash
-python apps/desktop/tests/test_addin.py                    # the template itself
-python apps/desktop/tests/test_addin.py --path ../MyAddIn  # an add-in next to this repository
+python apps/desktop-template/tests/test_addin.py                    # the template itself
+python apps/desktop-template/tests/test_addin.py --path ../MyAddIn  # an add-in next to this repository
 ```
 
 For one made with `--install`, give its folder in Fusion's add-ins folder to `--path`.
 
-Draw the toolbar icons (16, 32 and 64 px) from the polygons in the `SHAPES` list of `tools/make_icon.py`:
+Draw the toolbar icons (16, 32 and 64 px) from the polygons in the `SHAPES` list of `tools/template/make_icon.py`:
 
 ```bash
-python tools/make_icon.py                            # the template's placeholder
-python tools/make_icon.py --root .. --addin MyAddIn  # an add-in next to this repository
+python tools/template/make_icon.py                            # the template's placeholder
+python tools/template/make_icon.py --root .. --addin MyAddIn  # an add-in next to this repository
 ```
 
 The shipped glyph — corner brackets and a diagonal — is an obvious placeholder on purpose, so an unreplaced icon is

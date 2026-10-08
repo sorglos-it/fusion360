@@ -11,13 +11,13 @@ how far apart the cells sit, and get the whole array in one go — rectangles, c
 
 | Folder | Purpose | Language | Start | Build |
 |---|---|---|---|---|
-| `apps/desktop/SketchGrid` | the add-in: grids of shapes around a sketch point | Python 3 (the one inside Fusion) | copy into Fusion's add-ins folder, then *Run* | – (runs as is) |
+| `apps/desktop-sketch-grid/SketchGrid` | the add-in: grids of shapes around a sketch point | Python 3 (the one inside Fusion) | copy into Fusion's add-ins folder, then *Run* | – (runs as is) |
 
 ## Start in 3 steps
 
 1. Download the latest `SketchGrid-*.zip` from
    **[Releases](https://github.com/sorglos-it/fusion360-sketch-grid/releases)** — or clone this repository and take the
-   folder `apps/desktop/SketchGrid`.
+   folder `apps/desktop-sketch-grid/SketchGrid`.
 2. Unpack or copy it into Fusion's add-ins folder, so that `SketchGrid\SketchGrid.py` ends up one level below it:
 
    | OS | Path |
@@ -149,7 +149,7 @@ pitch follows its measured footprint instead:
 ## Languages
 
 The interface follows **Preferences → General → User Language** in Fusion: German, English, Spanish, French or
-Italian, anything else falls back to English. The texts live in `apps/desktop/SketchGrid/lang/<code>.xml`; `en.xml` is
+Italian, anything else falls back to English. The texts live in `apps/desktop-sketch-grid/SketchGrid/lang/<code>.xml`; `en.xml` is
 the reference and a key missing elsewhere falls back to it. To add a language, copy `en.xml`, translate it, name it
 after the two-letter code and add the code to `SUPPORTED_LANGUAGES` and `FUSION_LANGUAGE_MAP` in `sketchgrid_core.py`.
 
@@ -174,16 +174,16 @@ after the two-letter code and add the code to `SUPPORTED_LANGUAGES` and `FUSION_
 The grid maths has no Fusion dependency, so it runs in a normal Python 3 (standard library only):
 
 ```bash
-python apps/desktop/tests/test_sketchgrid.py
-python ../fusion360-addin-template/apps/desktop/tests/test_addin.py --path apps/desktop/SketchGrid
-python tools/make_icon.py
+python apps/desktop-sketch-grid/tests/test_sketchgrid.py
+python apps/desktop-template/tests/test_addin.py --path apps/desktop-sketch-grid/SketchGrid
+python tools/sketch-grid/make_icon.py
 ```
 
 The first checks the layout, the anchor factors (derived from each entry's own name, so a label that disagrees with
 the geometry fails), both counting modes, the corner outlines, every error key and all five language files. The second
 is the structural check from the template repository, cloned next to this one — manifest, GUID, command id, icons.
-The third draws the toolbar icon. The tests and the icon script find the add-in in `apps/desktop/SketchGrid`; set
-`SKETCHGRID_ADDIN_DIR` to point them at an installed copy instead. `python tools/test_sketchgrid.py` still works and
+The third draws the toolbar icon. The tests and the icon script find the add-in in `apps/desktop-sketch-grid/SketchGrid`; set
+`SKETCHGRID_ADDIN_DIR` to point them at an installed copy instead. `python tools/sketch-grid/test_sketchgrid.py` still works and
 runs the same tests.
 
 How it works, in short: `grid_layout()` works out count, pitch, overall size and where the grid sits relative to the

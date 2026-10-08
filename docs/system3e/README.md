@@ -10,12 +10,12 @@ not built yet. Not affiliated with SYSTEM 3E.
 
 | Folder | Purpose | Language | Start | Build |
 | --- | --- | --- | --- | --- |
-| `apps/desktop/System3E` | the add-in | Python 3 (the one inside Fusion) | copy the folder into Fusion's add-ins folder, then *Run* in Fusion | – (runs as is) |
+| `apps/desktop-system3e/System3E` | the add-in | Python 3 (the one inside Fusion) | copy the folder into Fusion's add-ins folder, then *Run* in Fusion | – (runs as is) |
 
 ## Start in 3 steps
 
 1. Download or clone this repository.
-2. Copy `apps/desktop/System3E` to `%APPDATA%\Autodesk\Autodesk Fusion 360\API\AddIns\`
+2. Copy `apps/desktop-system3e/System3E` to `%APPDATA%\Autodesk\Autodesk Fusion 360\API\AddIns\`
    (macOS: `~/Library/Application Support/Autodesk/Autodesk Fusion 360/API/AddIns/`).
 3. In Fusion: **Utilities → ADD-INS → Add-Ins**, select *System3E*, press **Run**.
 
@@ -24,7 +24,7 @@ not built yet. Not affiliated with SYSTEM 3E.
 Checks manifest, command id, the five language files (de, en, es, fr, it) and icons without starting Fusion:
 
 ```bash
-python apps/desktop/tests/test_addin.py
+python apps/desktop-system3e/tests/test_addin.py
 ```
 
 ## License

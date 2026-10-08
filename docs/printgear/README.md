@@ -11,11 +11,11 @@ Pick one point for a gear or a meshing pair, several points for a whole gear tra
 
 | Folder | Purpose | Language | Start | Build |
 |---|---|---|---|---|
-| `apps/desktop/PrintGear` | the add-in: printable gears, pairs and gear trains | Python 3 (the one inside Fusion) | copy into Fusion's add-ins folder, then *Run* | – (runs as is) |
+| `apps/desktop-printgear/PrintGear` | the add-in: printable gears, pairs and gear trains | Python 3 (the one inside Fusion) | copy into Fusion's add-ins folder, then *Run* | – (runs as is) |
 
 ## Start in 3 steps
 
-1. Clone or copy this repository and take the folder `apps/desktop/PrintGear`.
+1. Clone or copy this repository and take the folder `apps/desktop-printgear/PrintGear`.
 2. Copy it into Fusion's add-ins folder, so that `PrintGear\PrintGear.py` ends up one level below it:
 
    | OS | Path |
@@ -141,7 +141,7 @@ so the middle gears are sized to reach your points.
 ## Languages
 
 The interface follows **Preferences → General → User Language** in Fusion: German, English, Spanish, French or
-Italian, anything else falls back to English. The texts live in `apps/desktop/PrintGear/lang/<code>.xml`; `en.xml` is
+Italian, anything else falls back to English. The texts live in `apps/desktop-printgear/PrintGear/lang/<code>.xml`; `en.xml` is
 the reference. To add a language, copy `en.xml`, translate it, name it after the two-letter code and add the code to
 `SUPPORTED_LANGUAGES` and `FUSION_LANGUAGE_MAP` in `printgear_core.py`.
 
@@ -151,14 +151,14 @@ The gear mathematics lives in `printgear_math.py` and imports nothing from Fusio
 (standard library only):
 
 ```bash
-python apps/desktop/tests/test_geometry.py
-python tools/make_icons.py
+python apps/desktop-printgear/tests/test_geometry.py
+python tools/printgear/make_icons.py
 ```
 
 The tests check the involute round trip, the outline against root and tip circles, tip truncation, the chord
 tolerance, backlash, train layout in both modes, and roll meshing pairs through a full tooth pitch looking for
 collisions — which proves the phasing. The icons are a real gear pair rasterised straight from `printgear_math`. Both
-scripts find the add-in in `apps/desktop/PrintGear`; set `PRINTGEAR_ADDIN_DIR` to point them at an installed copy
+scripts find the add-in in `apps/desktop-printgear/PrintGear`; set `PRINTGEAR_ADDIN_DIR` to point them at an installed copy
 instead.
 
 ## Related

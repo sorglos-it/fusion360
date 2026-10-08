@@ -34,8 +34,8 @@ python apps/desktop-dovetail/tests/test_geometry.py
 
 ## Known limits
 
-- The READMEs under `docs/<name>/` were written for the former single repositories; paths and download links in
-  them still name the old layout.
+- The READMEs under `docs/<name>/` were written for the former single repositories; their download and
+  cross links still point to those repositories.
 - `tools/system3e/mesh_to_solid.py` expects the SYSTEM 3E model files under `assets/system3e/`; they are not part
   of the repository.
 

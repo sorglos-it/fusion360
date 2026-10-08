@@ -12,12 +12,12 @@ are left with two parts that fit.
 
 | Folder | Purpose | Language | Start | Build |
 |---|---|---|---|---|
-| `apps/desktop/Dovetail` | the add-in: joints on sketch lines | Python 3 (the one inside Fusion) | copy into Fusion's add-ins folder, then *Run* | – (runs as is) |
+| `apps/desktop-dovetail/Dovetail` | the add-in: joints on sketch lines | Python 3 (the one inside Fusion) | copy into Fusion's add-ins folder, then *Run* | – (runs as is) |
 
 ## Start in 3 steps
 
 1. Download the latest `Dovetail-*.zip` from **[Releases](https://github.com/sorglos-it/fusion360-dovetail/releases)**
-   — or clone this repository and take the folder `apps/desktop/Dovetail`.
+   — or clone this repository and take the folder `apps/desktop-dovetail/Dovetail`.
 2. Unpack or copy it into Fusion's add-ins folder, so that `Dovetail\Dovetail.py` ends up one level below it:
 
    | OS | Path |
@@ -135,7 +135,7 @@ would break that, so the dialog sets them for you:
 ## Languages
 
 The interface follows **Preferences → General → User Language** in Fusion: German, English, Spanish, French or
-Italian, anything else falls back to English. The texts live in `apps/desktop/Dovetail/lang/<code>.xml`:
+Italian, anything else falls back to English. The texts live in `apps/desktop-dovetail/Dovetail/lang/<code>.xml`:
 
 ```xml
 <string key="in.width">Width (base)</string>
@@ -163,13 +163,13 @@ the tests check that for every file.
 The geometry is pure maths without Fusion, so everything runs in a normal Python 3 (standard library only):
 
 ```bash
-python apps/desktop/tests/test_geometry.py   # tests: points, parallel offset, alignment, limits, error keys, languages
-python tools/make_icons.py                   # toolbar icon
-python tools/make_arrow_icons.py             # icons of the move buttons
+python apps/desktop-dovetail/tests/test_geometry.py   # tests: points, parallel offset, alignment, limits, error keys, languages
+python tools/dovetail/make_icons.py                   # toolbar icon
+python tools/dovetail/make_arrow_icons.py             # icons of the move buttons
 ```
 
-The scripts find the add-in in `apps/desktop/Dovetail`; set `DOVETAIL_ADDIN_DIR` to point them at an installed copy
-instead. `python tools/test_geometry.py` still works and runs the same tests.
+The scripts find the add-in in `apps/desktop-dovetail/Dovetail`; set `DOVETAIL_ADDIN_DIR` to point them at an installed copy
+instead. `python tools/dovetail/test_geometry.py` still works and runs the same tests.
 
 How it works, in short: the selected line gives an origin, a direction and a normal; `build_contours()` lays out the
 teeth around `length / 2 + offset` in that frame; `_offset_polyline()` offsets every segment by the tolerance and
