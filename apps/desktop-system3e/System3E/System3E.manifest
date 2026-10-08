@@ -10,7 +10,7 @@
         "fr-FR": "Elements de mur du systeme de construction a sec SYSTEM 3E pour Fusion 360.",
         "it-IT": "Elementi per pareti del sistema di costruzione a secco SYSTEM 3E per Fusion 360."
     },
-    "version": "0.3.5",
+    "version": "0.3.6",
     "runOnStartup": true,
     "supportedOS": "windows|mac",
     "editEnabled": true

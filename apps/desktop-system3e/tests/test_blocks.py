@@ -246,7 +246,8 @@ def main():
     check(by_id['eu-200-w'].get('stack') == 200, 'a flat element carries the next course on top')
     check(addin.anchor_position(s1, 'corner') == (0.0, 0.0, 0.0), 'anchor corner')
     check(addin.anchor_position(s1, 'centre') == (353.5, 176.0, 0.0), 'anchor bottom middle')
-    check(addin.anchor_position(s1, 'corner-left') == (0.0, 352.0, 0.0), 'anchor front left corner')
+    check(addin.anchor_position(s1, 'top-right') == (0.0, 0.0, 300.0), 'anchor top front right corner')
+    check(addin.anchor_position(s1, 'top-left') == (0.0, 352.0, 300.0), 'anchor top front left corner')
     check(len({addin.anchor_position(s1, a) for a in addin.ANCHORS}) == len(addin.ANCHORS), 'every anchor is a place of its own')
     for block in blocks:
         spots = addin.snap_points(block)

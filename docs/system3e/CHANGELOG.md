@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.6 – 2026-10-08
+
+- *Placed by*: the two top corners of the front end, right and left. The second bottom corner from 0.3.5 was a
+  misunderstanding and is gone again.
+
 ## 0.3.5 – 2026-10-08
 
 - *Placed by* has a second corner: the other bottom corner of the front end. The two are now named front right
