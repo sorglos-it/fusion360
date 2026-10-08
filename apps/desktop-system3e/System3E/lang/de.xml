@@ -20,6 +20,7 @@ Punkt anklicken, Baustein aus der Liste wählen - er entsteht an diesem Punkt.</
   <string key="anchor.back">Unten, hinteres Ende</string>
   <string key="in.dx">Versatz X</string>
   <string key="in.dy">Versatz Y</string>
+  <string key="in.dz">Versatz Z</string>
 
   <!-- Names of the points every element carries -->
   <string key="point.bottom.front">unten vorne</string>

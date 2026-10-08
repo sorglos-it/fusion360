@@ -20,6 +20,7 @@ Seleziona un punto e scegli l'elemento dall'elenco: viene creato su quel punto.<
   <string key="anchor.back">Sotto, estremità posteriore</string>
   <string key="in.dx">Spostamento X</string>
   <string key="in.dy">Spostamento Y</string>
+  <string key="in.dz">Spostamento Z</string>
 
   <!-- Names of the points every element carries -->
   <string key="point.bottom.front">sotto davanti</string>

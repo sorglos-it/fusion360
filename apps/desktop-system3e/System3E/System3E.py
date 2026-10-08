@@ -57,6 +57,7 @@ IN_ANGLE = 's3eAngle'
 IN_ANCHOR = 's3eAnchor'
 IN_DX = 's3eDx'
 IN_DY = 's3eDy'
+IN_DZ = 's3eDz'
 
 RESOURCE_FOLDER = os.path.join(_DIR, 'resources', 'System3E')
 LANG_DIR = os.path.join(_DIR, 'lang')
@@ -75,6 +76,7 @@ _last = {
     IN_ANCHOR: 'corner',
     IN_DX: 0.0,         # cm
     IN_DY: 0.0,
+    IN_DZ: 0.0,
 }
 
 # =============================================================================
@@ -211,6 +213,7 @@ def read_inputs(inputs):
         anchor=selected_anchor(inputs),
         dx=inputs.itemById(IN_DX).value,      # cm
         dy=inputs.itemById(IN_DY).value,
+        dz=inputs.itemById(IN_DZ).value,
     )
 
 
@@ -315,7 +318,7 @@ def build_result(values):
 
     # Bring the anchor to the origin, turn about the vertical axis, then move
     # to the clicked point plus the offset. The offset runs along the design's
-    # X and Y, not along the turned element.
+    # X, Y and Z, not along the turned element.
     anchor = anchor_position(block, values['anchor'])
     placement = adsk.core.Matrix3D.create()
     placement.translation = adsk.core.Vector3D.create(
@@ -329,7 +332,7 @@ def build_result(values):
     move.translation = adsk.core.Vector3D.create(
         (target.x if target else 0.0) + values['dx'],
         (target.y if target else 0.0) + values['dy'],
-        target.z if target else 0.0)
+        (target.z if target else 0.0) + values['dz'])
     placement.transformBy(move)
 
     # The same element again is another copy of the same component, not a new
@@ -414,6 +417,7 @@ def build_inputs(inputs):
     # 'mm' is what the field shows; the value itself is cm, Fusion's own unit.
     inputs.addValueInput(IN_DX, T('in.dx'), 'mm', adsk.core.ValueInput.createByReal(_last[IN_DX]))
     inputs.addValueInput(IN_DY, T('in.dy'), 'mm', adsk.core.ValueInput.createByReal(_last[IN_DY]))
+    inputs.addValueInput(IN_DZ, T('in.dz'), 'mm', adsk.core.ValueInput.createByReal(_last[IN_DZ]))
     return selection
 
 
@@ -425,6 +429,7 @@ def remember(values):
     _last[IN_ANCHOR] = values['anchor']
     _last[IN_DX] = values['dx']
     _last[IN_DY] = values['dy']
+    _last[IN_DZ] = values['dz']
 
 
 def on_input_changed(inputs, changed):

@@ -234,7 +234,7 @@ def main():
         for family, members in families:
             text = addin.T('family.' + family)
             check(text and text != 'family.' + family, '%s: family "%s" has a name' % (code, family))
-        for key in (['in.anchor', 'in.dx', 'in.dy'] + ['anchor.' + a for a in addin.ANCHORS]
+        for key in (['in.anchor', 'in.dx', 'in.dy', 'in.dz'] + ['anchor.' + a for a in addin.ANCHORS]
                     + [k for k, position in addin.snap_points(blocks[0])]):
             check(addin.T(key) != key, '%s: "%s" has a text' % (code, key))
     check(addin._last[addin.IN_BLOCK] in by_id, 'the default element exists')

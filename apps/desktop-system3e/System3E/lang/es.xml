@@ -20,6 +20,7 @@ Seleccione un punto y elija el elemento de la lista: se crea en ese punto.</stri
   <string key="anchor.back">Abajo, extremo trasero</string>
   <string key="in.dx">Desplazamiento X</string>
   <string key="in.dy">Desplazamiento Y</string>
+  <string key="in.dz">Desplazamiento Z</string>
 
   <!-- Names of the points every element carries -->
   <string key="point.bottom.front">abajo delante</string>

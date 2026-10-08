@@ -20,6 +20,7 @@ Choisissez un point, puis l'élément dans la liste : il est créé sur ce point
   <string key="anchor.back">Dessous, extrémité arrière</string>
   <string key="in.dx">Décalage X</string>
   <string key="in.dy">Décalage Y</string>
+  <string key="in.dz">Décalage Z</string>
 
   <!-- Names of the points every element carries -->
   <string key="point.bottom.front">dessous avant</string>

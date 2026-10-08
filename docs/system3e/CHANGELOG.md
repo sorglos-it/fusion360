@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.1 – 2026-10-08
+
+- New field *Offset Z* in mm.
+- `tools/system3e/points_sheet.py` draws an element with every point the add-in knows on it as an SVG
+  (`docs/system3e/s1-wp-punkte.svg`): yellow can be clicked, red is an alignment point, green is both.
+
 ## 0.3.0 – 2026-10-08
 
 - Every element carries six points to click: front end, middle and back end, once on the underside and once at the
