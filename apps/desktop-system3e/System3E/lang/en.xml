@@ -9,21 +9,32 @@
 <strings language="en">
 
   <!-- Command -->
-  <string key="cmd.name">System3E</string>
-  <string key="cmd.tooltip">System3E
-TODO: describe what this command does.</string>
+  <string key="cmd.name">SYSTEM 3E element</string>
+  <string key="cmd.tooltip">Places a SYSTEM 3E wall element.
+Pick a point, choose the element from the list - it is created with its lower front left corner on that point.</string>
 
   <!-- Inputs -->
-  <string key="in.line">Line</string>
-  <string key="in.line.prompt">Select a sketch line</string>
-  <string key="in.length">Length</string>
-  <string key="in.flip">Flip direction</string>
+  <string key="in.point">Point</string>
+  <string key="in.point.prompt">Select a point (none: origin)</string>
+  <string key="in.family">Family</string>
+  <string key="in.block">Element</string>
+  <string key="in.angle">Rotation</string>
+
+  <!-- Element families, in catalogue order -->
+  <string key="family.starter">Starter</string>
+  <string key="family.basic">Basic</string>
+  <string key="family.complementary">Complementary</string>
+  <string key="family.lintel">Lintel</string>
+  <string key="family.window">Window framing</string>
+  <string key="family.top">Top</string>
+  <string key="family.corner">Corner</string>
+  <string key="family.partition">Partition wall</string>
 
   <!-- Validation -->
-  <string key="err.no_selection">Please select exactly one sketch line.</string>
-  <string key="err.length_positive">The length must be greater than 0.</string>
-  <string key="err.zero_length">The selected line has no length.</string>
-  <string key="err.too_long">The length exceeds the selected line ({0} mm).</string>
+  <string key="err.no_block">Please choose an element.</string>
+  <string key="err.no_design">Please open a design first.</string>
+  <string key="err.body_failed">The element {0} could not be created:
+{1}</string>
 
   <!-- Message boxes -->
   <string key="msg.panel_missing">No suitable toolbar panel was found.</string>

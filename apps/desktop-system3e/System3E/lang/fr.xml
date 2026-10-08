@@ -3,21 +3,32 @@
 <strings language="fr">
 
   <!-- Command -->
-  <string key="cmd.name">System3E</string>
-  <string key="cmd.tooltip">System3E
-TODO: describe what this command does.</string>
+  <string key="cmd.name">Élément SYSTEM 3E</string>
+  <string key="cmd.tooltip">Place un élément de mur SYSTEM 3E.
+Choisissez un point, puis l'élément dans la liste : il est créé avec son coin inférieur avant gauche sur ce point.</string>
 
   <!-- Inputs -->
-  <string key="in.line">Ligne</string>
-  <string key="in.line.prompt">Sélectionner une ligne d'esquisse</string>
-  <string key="in.length">Longueur</string>
-  <string key="in.flip">Inverser la direction</string>
+  <string key="in.point">Point</string>
+  <string key="in.point.prompt">Sélectionnez un point (aucun : origine)</string>
+  <string key="in.family">Famille</string>
+  <string key="in.block">Élément</string>
+  <string key="in.angle">Rotation</string>
+
+  <!-- Element families, in catalogue order -->
+  <string key="family.starter">Départ</string>
+  <string key="family.basic">Base</string>
+  <string key="family.complementary">Complément</string>
+  <string key="family.lintel">Linteau</string>
+  <string key="family.window">Cadre de fenêtre</string>
+  <string key="family.top">Couronnement</string>
+  <string key="family.corner">Angle</string>
+  <string key="family.partition">Cloison</string>
 
   <!-- Validation -->
-  <string key="err.no_selection">Sélectionnez exactement une ligne d'esquisse.</string>
-  <string key="err.length_positive">La longueur doit être supérieure à 0.</string>
-  <string key="err.zero_length">La ligne sélectionnée n'a aucune longueur.</string>
-  <string key="err.too_long">La longueur dépasse la ligne sélectionnée ({0} mm).</string>
+  <string key="err.no_block">Veuillez choisir un élément.</string>
+  <string key="err.no_design">Veuillez d'abord ouvrir une conception.</string>
+  <string key="err.body_failed">L'élément {0} n'a pas pu être créé :
+{1}</string>
 
   <!-- Message boxes -->
   <string key="msg.panel_missing">Aucun panneau de barre d'outils approprié n'a été trouvé.</string>

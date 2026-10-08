@@ -5,8 +5,8 @@
 [![Donate](https://img.shields.io/badge/Donate-PayPal-blue)](https://www.paypal.com/donate/?hosted_button_id=6CDEVZGJWTNQQ)
 
 A Fusion 360 add-in for planning walls with the dry-stack elements of [SYSTEM 3E](https://www.system3e.com/).
-**Status: scaffold only** — the add-in loads and shows the demo command of the template, the SYSTEM 3E functions are
-not built yet. Not affiliated with SYSTEM 3E.
+Click a point, choose one of the 74 elements from a list with a preview picture, and the element is created there
+as a solid body. **Status: not yet tested inside Fusion.** Not affiliated with SYSTEM 3E.
 
 | Folder | Purpose | Language | Start | Build |
 | --- | --- | --- | --- | --- |
@@ -17,7 +17,8 @@ not built yet. Not affiliated with SYSTEM 3E.
 1. Download or clone this repository.
 2. Copy `apps/desktop-system3e/System3E` to `%APPDATA%\Autodesk\Autodesk Fusion 360\API\AddIns\`
    (macOS: `~/Library/Application Support/Autodesk/Autodesk Fusion 360/API/AddIns/`).
-3. In Fusion: **Utilities → ADD-INS → Add-Ins**, select *System3E*, press **Run**.
+3. In Fusion: **Utilities → ADD-INS → Add-Ins**, select *System3E*, press **Run**. The button *SYSTEM 3E element*
+   is on the **SOLID** tab under *Create*.
 
 ## Check
 

@@ -5,13 +5,14 @@ System3E - Fusion 360 add-in entry point.
 Everything you edit lives between the CONFIGURE and END OF TEMPLATE markers.
 The reusable machinery sits in addin_core.py next to this file.
 
-The demo command asks for one sketch line and a length, then draws a
-perpendicular tick at its midpoint. Replace build_result() and the inputs in
-CommandCreatedHandler with your own; the rest of the file can stay as it is.
+The command places one SYSTEM 3E wall element: pick a point, pick the element
+from the list - a picture shows which one it is - and it is created as a new
+component with its lower front left corner on that point.
 """
 
 import os
 import sys
+import json
 import importlib
 
 import adsk.core
@@ -43,27 +44,25 @@ CMD_ID = 'thwSystem3ECmd'
 # Where the button goes. FusionSolidEnvironment is the design workspace.
 WORKSPACE_ID = 'FusionSolidEnvironment'
 
-# Tried in order, first one that exists wins. Common ids:
-#   SketchCreatePanel, SketchModifyPanel  - the SKETCH tab
-#   SolidCreatePanel, SolidModifyPanel    - the SOLID tab
-#   InspectPanel, ToolsPanel              - the UTILITIES tab
-PANEL_IDS = ('SketchCreatePanel', 'SolidCreatePanel')
+# Tried in order, first one that exists wins.
+PANEL_IDS = ('SolidCreatePanel',)
 
-# Command input ids. Keep the prefix unique-ish; they only have to be unique
-# inside this command.
-IN_LINE = 'tplLine'
-IN_LENGTH = 'tplLength'
-IN_FLIP = 'tplFlip'
+# Command input ids. They only have to be unique inside this command.
+IN_POINT = 's3ePoint'
+IN_FAMILY = 's3eFamily'
+IN_BLOCK = 's3eBlock'
+IN_IMAGE = 's3eImage'
+IN_ANGLE = 's3eAngle'
 
 RESOURCE_FOLDER = os.path.join(_DIR, 'resources', 'System3E')
 LANG_DIR = os.path.join(_DIR, 'lang')
+BLOCK_DIR = os.path.join(_DIR, 'blocks')
 
 # Last used values, kept for the duration of the Fusion session.
-# Lengths are in cm - Fusion's internal unit - regardless of what the value
-# input displays.
 _last = {
-    IN_LENGTH: 1.0,     # 10 mm
-    IN_FLIP: False,
+    IN_FAMILY: 'basic',
+    IN_BLOCK: 's1-wp',
+    IN_ANGLE: 0.0,      # radians
 }
 
 # =============================================================================
@@ -86,100 +85,223 @@ def fail(key, *args):
 
 # ============================================================ YOUR CODE HERE ==
 
+def point_types():
+    """What may be clicked as the place for the element."""
+    return (adsk.fusion.SketchPoint.classType(),
+            adsk.fusion.BRepVertex.classType(),
+            adsk.fusion.ConstructionPoint.classType())
+
+
+_library = None
+
+
+def library():
+    """The elements from blocks/blocks.json, read once.
+
+    Returns (families, by_id): the family ids in catalogue order with their
+    elements, and every element by its id. Lengths in the file are mm.
+    """
+    global _library
+    if _library is None:
+        with open(os.path.join(BLOCK_DIR, 'blocks.json'), 'r', encoding='utf-8') as handle:
+            blocks = json.load(handle)['blocks']
+        families, by_id = [], {}
+        for block in blocks:
+            by_id[block['id']] = block
+            if not families or families[-1][0] != block['family']:
+                families.append((block['family'], []))
+            families[-1][1].append(block)
+        _library = (families, by_id)
+    return _library
+
+
+def block_label(block):
+    return '%s   %d x %d x %d' % ((block['name'],) + tuple(block['size']))
+
+
+def selected_family(inputs):
+    item = inputs.itemById(IN_FAMILY).selectedItem
+    families = library()[0]
+    return families[item.index][0] if item else families[0][0]
+
+
+def selected_block(inputs):
+    item = inputs.itemById(IN_BLOCK).selectedItem
+    if not item:
+        return None
+    for family, blocks in library()[0]:
+        if family == selected_family(inputs):
+            return blocks[item.index] if item.index < len(blocks) else None
+    return None
+
+
+def point_of(entity):
+    """Where a clicked sketch point, body corner or construction point is in the design."""
+    if entity.objectType == adsk.fusion.SketchPoint.classType():
+        return entity.worldGeometry
+    return entity.geometry
+
+
 def read_inputs(inputs):
     """Pull every value out of the dialog in one place.
 
     Doing this once keeps execute, executePreview and validateInputs looking at
-    exactly the same numbers.
+    exactly the same values.
     """
-    selection = inputs.itemById(IN_LINE)
-    line = None
+    selection = inputs.itemById(IN_POINT)
+    point = None
     if selection.selectionCount == 1:
         entity = selection.selection(0).entity
-        if entity and entity.objectType == adsk.fusion.SketchLine.classType():
-            line = entity
+        if entity and entity.objectType in point_types():
+            point = point_of(entity)
     return dict(
-        line=line,
-        length=inputs.itemById(IN_LENGTH).value,
-        flip=inputs.itemById(IN_FLIP).value,
+        point=point,            # None: the origin
+        family=selected_family(inputs),
+        block=selected_block(inputs),
+        angle=inputs.itemById(IN_ANGLE).value,
     )
 
 
 def validate(values):
-    """Raise an AddInError for anything the user has to fix.
+    """Raise an AddInError for anything the user has to fix."""
+    if values['block'] is None:
+        fail('err.no_block')
 
-    Called before drawing and again from validateInputs, so an impossible
-    combination disables OK instead of failing halfway through.
+
+def make_body(block):
+    """A solid body from the element's points and flat faces.
+
+    Every face is a plane bounded by straight edges; an edge is defined once
+    and used by its two faces in opposite directions. Fusion works in cm.
     """
-    if values['line'] is None:
-        fail('err.no_selection')
-    if values['length'] <= 1e-9:
-        fail('err.length_positive')
-
-    start = values['line'].startSketchPoint.geometry
-    end = values['line'].endSketchPoint.geometry
-    span = ((end.x - start.x) ** 2 + (end.y - start.y) ** 2) ** 0.5
-    if span <= 1e-9:
-        fail('err.zero_length')
-    if values['length'] > span:
-        fail('err.too_long', '%.2f' % (span * 10.0))
+    definition = adsk.fusion.BRepBodyDefinition.create()
+    definition.doFullCheck = True
+    points = [adsk.core.Point3D.create(p[0] / 10.0, p[1] / 10.0, p[2] / 10.0)
+              for p in block['points']]
+    vertices = [definition.createVertexDefinition(p) for p in points]
+    shell = definition.lumpDefinitions.add().shellDefinitions.add()
+    edges = {}
+    for face in block['faces']:
+        normal = adsk.core.Vector3D.create(*face['normal'])
+        plane = adsk.core.Plane.create(points[face['loops'][0][0]], normal)
+        face_definition = shell.faceDefinitions.add(plane, False)
+        for loop in face['loops']:
+            loop_definition = face_definition.loopDefinitions.add()
+            for i, start in enumerate(loop):
+                end = loop[(i + 1) % len(loop)]
+                low, high = min(start, end), max(start, end)
+                if (low, high) not in edges:
+                    edges[(low, high)] = definition.createEdgeDefinitionByCurve(
+                        vertices[low], vertices[high],
+                        adsk.core.Line3D.create(points[low], points[high]))
+                loop_definition.bRepCoEdgeDefinitions.add(edges[(low, high)], start > end)
+    body = definition.createBody()
+    if body is None:
+        fail('err.body_failed', block['name'], '; '.join(definition.outcomeInfo))
+    return body
 
 
 def build_result(values):
-    """Do the actual work. Everything is already validated at this point."""
-    line = values['line']
-    sketch = line.parentSketch
-    start = line.startSketchPoint.geometry
-    end = line.endSketchPoint.geometry
+    """Create the element as a new component. Everything is validated by now."""
+    block = values['block']
+    design = adsk.fusion.Design.cast(adsk.core.Application.get().activeProduct)
+    if not design:
+        fail('err.no_design')
 
-    span = ((end.x - start.x) ** 2 + (end.y - start.y) ** 2) ** 0.5
-    u = ((end.x - start.x) / span, (end.y - start.y) / span)
-    n = (-u[1], u[0])
-    if values['flip']:
-        n = (-n[0], -n[1])
+    # Turn about the vertical axis first, then move the corner onto the point.
+    placement = adsk.core.Matrix3D.create()
+    placement.setToRotation(values['angle'], adsk.core.Vector3D.create(0, 0, 1),
+                            adsk.core.Point3D.create(0, 0, 0))
+    if values['point'] is not None:
+        move = adsk.core.Matrix3D.create()
+        move.translation = adsk.core.Vector3D.create(
+            values['point'].x, values['point'].y, values['point'].z)
+        placement.transformBy(move)
 
-    mid = ((start.x + end.x) / 2.0, (start.y + end.y) / 2.0)
-    tip = (mid[0] + n[0] * values['length'], mid[1] + n[1] * values['length'])
+    body = make_body(block)
+    occurrence = design.rootComponent.occurrences.addNewComponent(placement)
+    component = occurrence.component
+    component.name = 'SYSTEM 3E %s' % block['name']
+    if design.designType == adsk.fusion.DesignTypes.ParametricDesignType:
+        # With the timeline on, a ready-made body has to arrive inside a base feature.
+        base = component.features.baseFeatures.add()
+        base.startEdit()
+        try:
+            created = component.bRepBodies.add(body, base)
+        finally:
+            base.finishEdit()
+    else:
+        created = component.bRepBodies.add(body)
+    if created:
+        created.name = block['name']
 
-    # isComputeDeferred keeps the solver quiet until the whole run is drawn.
-    # Always reset it in a finally block, or a raised error leaves the sketch
-    # in a state where nothing updates any more.
-    sketch.isComputeDeferred = True
-    try:
-        sketch.sketchCurves.sketchLines.addByTwoPoints(
-            adsk.core.Point3D.create(mid[0], mid[1], 0.0),
-            adsk.core.Point3D.create(tip[0], tip[1], 0.0))
-    finally:
-        sketch.isComputeDeferred = False
+
+def fill_blocks(inputs, family, wanted=None):
+    """Put the elements of one family into the element list."""
+    items = inputs.itemById(IN_BLOCK).listItems
+    items.clear()
+    for known, blocks in library()[0]:
+        if known == family:
+            chosen = wanted if any(b['id'] == wanted for b in blocks) else blocks[0]['id']
+            for block in blocks:
+                items.add(block_label(block), block['id'] == chosen, '')
+
+
+def show_picture(inputs):
+    block = selected_block(inputs)
+    if block:
+        picture = os.path.join(BLOCK_DIR, block['id'] + '.png')
+        if os.path.isfile(picture):
+            inputs.itemById(IN_IMAGE).imageFile = picture
 
 
 def build_inputs(inputs):
     """Lay out the dialog. Every label comes from the text catalogue."""
-    selection = inputs.addSelectionInput(IN_LINE, T('in.line'), T('in.line.prompt'))
-    selection.addSelectionFilter('SketchLines')
-    selection.setSelectionLimits(1, 1)
+    selection = inputs.addSelectionInput(IN_POINT, T('in.point'), T('in.point.prompt'))
+    for kind in ('SketchPoints', 'Vertices', 'ConstructionPoints'):
+        selection.addSelectionFilter(kind)
+    selection.setSelectionLimits(0, 1)
 
-    # 'mm' is the display unit; createByReal takes cm. A value input respects
-    # the document's units and accepts expressions like "2 * 3 mm".
-    inputs.addValueInput(IN_LENGTH, T('in.length'), 'mm',
-                         adsk.core.ValueInput.createByReal(_last[IN_LENGTH]))
-    inputs.addBoolValueInput(IN_FLIP, T('in.flip'), True, '', _last[IN_FLIP])
+    families = library()[0]
+    known = [family for family, blocks in families]
+    family = _last[IN_FAMILY] if _last[IN_FAMILY] in known else known[0]
+    dropdown = inputs.addDropDownCommandInput(
+        IN_FAMILY, T('in.family'), adsk.core.DropDownStyles.TextListDropDownStyle)
+    for name in known:
+        dropdown.listItems.add(T('family.' + name), name == family, '')
+
+    inputs.addDropDownCommandInput(
+        IN_BLOCK, T('in.block'), adsk.core.DropDownStyles.TextListDropDownStyle)
+    fill_blocks(inputs, family, _last[IN_BLOCK])
+
+    first = os.path.join(BLOCK_DIR, (selected_block(inputs) or families[0][1][0])['id'] + '.png')
+    image = inputs.addImageCommandInput(IN_IMAGE, '', first)
+    image.isFullWidth = True
+
+    inputs.addValueInput(IN_ANGLE, T('in.angle'), 'deg',
+                         adsk.core.ValueInput.createByReal(_last[IN_ANGLE]))
     return selection
 
 
 def remember(values):
     """Carry settings over to the next invocation within this session."""
-    _last[IN_LENGTH] = values['length']
-    _last[IN_FLIP] = values['flip']
+    _last[IN_FAMILY] = values['family']
+    _last[IN_BLOCK] = values['block']['id']
+    _last[IN_ANGLE] = values['angle']
 
 
 def on_input_changed(inputs, changed):
-    """React to one field to enable, disable or adjust another.
-
-    Set _updating around any value you write back here, otherwise the write
-    re-enters this handler.
-    """
-    return
+    """A new family refills the element list; a new element changes the picture."""
+    global _updating
+    if changed.id not in (IN_FAMILY, IN_BLOCK):
+        return
+    _updating = True
+    try:
+        if changed.id == IN_FAMILY:
+            fill_blocks(inputs, selected_family(inputs))
+        show_picture(inputs)
+    finally:
+        _updating = False
 
 
 # ========================================================= END OF TEMPLATE ====
@@ -246,11 +368,11 @@ class CommandCreatedHandler(adsk.core.CommandCreatedEventHandler):
 
             # Whatever was selected before the button was pressed. Read it
             # before the inputs exist, then hand it to the selection input, so
-            # clicking a line and then the button just works.
+            # clicking a point and then the button just works.
             preselected = []
             for i in range(ui.activeSelections.count):
                 entity = ui.activeSelections.item(i).entity
-                if entity and entity.objectType == adsk.fusion.SketchLine.classType():
+                if entity and entity.objectType in point_types():
                     preselected.append(entity)
 
             selection = build_inputs(inputs)

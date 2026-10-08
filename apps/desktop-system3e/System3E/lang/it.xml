@@ -3,21 +3,32 @@
 <strings language="it">
 
   <!-- Command -->
-  <string key="cmd.name">System3E</string>
-  <string key="cmd.tooltip">System3E
-TODO: describe what this command does.</string>
+  <string key="cmd.name">Elemento SYSTEM 3E</string>
+  <string key="cmd.tooltip">Posiziona un elemento per pareti SYSTEM 3E.
+Seleziona un punto e scegli l'elemento dall'elenco: viene creato con l'angolo inferiore anteriore sinistro su quel punto.</string>
 
   <!-- Inputs -->
-  <string key="in.line">Linea</string>
-  <string key="in.line.prompt">Seleziona una linea di schizzo</string>
-  <string key="in.length">Lunghezza</string>
-  <string key="in.flip">Inverti direzione</string>
+  <string key="in.point">Punto</string>
+  <string key="in.point.prompt">Seleziona un punto (nessuno: origine)</string>
+  <string key="in.family">Famiglia</string>
+  <string key="in.block">Elemento</string>
+  <string key="in.angle">Rotazione</string>
+
+  <!-- Element families, in catalogue order -->
+  <string key="family.starter">Partenza</string>
+  <string key="family.basic">Base</string>
+  <string key="family.complementary">Complementare</string>
+  <string key="family.lintel">Architrave</string>
+  <string key="family.window">Telaio finestra</string>
+  <string key="family.top">Chiusura</string>
+  <string key="family.corner">Angolo</string>
+  <string key="family.partition">Parete divisoria</string>
 
   <!-- Validation -->
-  <string key="err.no_selection">Seleziona esattamente una linea di schizzo.</string>
-  <string key="err.length_positive">La lunghezza deve essere maggiore di 0.</string>
-  <string key="err.zero_length">La linea selezionata ha lunghezza zero.</string>
-  <string key="err.too_long">La lunghezza supera la linea selezionata ({0} mm).</string>
+  <string key="err.no_block">Scegli un elemento.</string>
+  <string key="err.no_design">Apri prima un progetto.</string>
+  <string key="err.body_failed">Impossibile creare l'elemento {0}:
+{1}</string>
 
   <!-- Message boxes -->
   <string key="msg.panel_missing">Nessun pannello della barra degli strumenti adatto trovato.</string>

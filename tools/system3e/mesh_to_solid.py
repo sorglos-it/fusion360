@@ -15,8 +15,8 @@ import struct
 import sys
 
 WELD = 0.3          # mm - points closer than this are one point
-PLANE_ANGLE = 1e-4  # 1 - cos of the angle two triangles may differ by
-PLANE_DIST = 0.2    # mm
+PLANE_FACING = 0.99 # cos of the angle a triangle may differ from its plane (8 degrees)
+PLANE_DIST = 0.2    # mm - how far a triangle's points may lie off its plane
 ON_EDGE = 0.05      # mm - a point this close to an edge splits it
 
 
@@ -164,7 +164,10 @@ def solid_from_mesh(mesh):
     points = [tuple(round(p[i] - low[i], 3) for i in range(3)) for p in points]
 
     # --- sort the triangles into planes ---------------------------------------
-    planes = []          # [normal, distance, [triangles]]
+    # Large triangles first: they give a plane its direction. A narrow one has
+    # an unreliable normal of its own, so it joins the plane its three points
+    # lie in instead of being compared by direction alone.
+    sized = []
     for tri in mesh['triangles']:
         a, b, c = (remap[i] for i in tri)
         if len({a, b, c}) < 3:
@@ -175,14 +178,23 @@ def solid_from_mesh(mesh):
                       _length(_sub(points[a], points[c])))
         if size / longest < ON_EDGE:   # a sliver: no area, its points split the neighbours
             continue
-        normal = tuple(n / size for n in normal)
-        distance = _dot(normal, points[a])
+        sized.append((size, (a, b, c), tuple(n / size for n in normal)))
+    sized.sort(key=lambda item: -item[0])
+
+    planes = []          # [normal, distance, [triangles]]
+    for size, tri, normal in sized:
+        best = None
         for plane in planes:
-            if 1.0 - _dot(plane[0], normal) < PLANE_ANGLE and abs(plane[1] - distance) < PLANE_DIST:
-                plane[2].append((a, b, c))
-                break
+            facing = _dot(plane[0], normal)
+            if facing < PLANE_FACING:
+                continue
+            if max(abs(_dot(plane[0], points[i]) - plane[1]) for i in tri) < PLANE_DIST:
+                if best is None or facing > best[0]:
+                    best = (facing, plane)
+        if best:
+            best[1][2].append(tri)
         else:
-            planes.append([normal, distance, [(a, b, c)]])
+            planes.append([normal, _dot(normal, points[tri[0]]), [tri]])
 
     # --- outline of every plane -----------------------------------------------
     everything = range(len(points))

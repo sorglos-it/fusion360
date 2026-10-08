@@ -3,21 +3,32 @@
 <strings language="es">
 
   <!-- Command -->
-  <string key="cmd.name">System3E</string>
-  <string key="cmd.tooltip">System3E
-TODO: describe what this command does.</string>
+  <string key="cmd.name">Elemento SYSTEM 3E</string>
+  <string key="cmd.tooltip">Coloca un elemento de muro SYSTEM 3E.
+Seleccione un punto y elija el elemento de la lista: se crea con su esquina inferior delantera izquierda en ese punto.</string>
 
   <!-- Inputs -->
-  <string key="in.line">Línea</string>
-  <string key="in.line.prompt">Selecciona una línea de boceto</string>
-  <string key="in.length">Longitud</string>
-  <string key="in.flip">Invertir la dirección</string>
+  <string key="in.point">Punto</string>
+  <string key="in.point.prompt">Seleccione un punto (ninguno: origen)</string>
+  <string key="in.family">Familia</string>
+  <string key="in.block">Elemento</string>
+  <string key="in.angle">Giro</string>
+
+  <!-- Element families, in catalogue order -->
+  <string key="family.starter">Arranque</string>
+  <string key="family.basic">Básico</string>
+  <string key="family.complementary">Complementario</string>
+  <string key="family.lintel">Dintel</string>
+  <string key="family.window">Marco de ventana</string>
+  <string key="family.top">Remate</string>
+  <string key="family.corner">Esquina</string>
+  <string key="family.partition">Tabique</string>
 
   <!-- Validation -->
-  <string key="err.no_selection">Selecciona exactamente una línea de boceto.</string>
-  <string key="err.length_positive">La longitud debe ser mayor que 0.</string>
-  <string key="err.zero_length">La línea seleccionada no tiene longitud.</string>
-  <string key="err.too_long">La longitud supera la línea seleccionada ({0} mm).</string>
+  <string key="err.no_block">Elija un elemento.</string>
+  <string key="err.no_design">Abra primero un diseño.</string>
+  <string key="err.body_failed">No se pudo crear el elemento {0}:
+{1}</string>
 
   <!-- Message boxes -->
   <string key="msg.panel_missing">No se encontró ningún panel de barra de herramientas adecuado.</string>

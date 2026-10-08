@@ -11,7 +11,7 @@ none of them needs anything installed besides Fusion 360.
 | `apps/desktop-dovetail` | Sketch lines become dovetail, triangle or box joints | Python | copy `Dovetail` into the add-in folder | – |
 | `apps/desktop-sketch-grid` | Grid of shapes around a sketch point | Python | copy `SketchGrid` into the add-in folder | – |
 | `apps/desktop-printgear` | Involute gears for 3D printing | Python | copy `PrintGear` into the add-in folder | – |
-| `apps/desktop-system3e` | Walls from SYSTEM 3E elements – scaffold only, functions not built yet | Python | copy `System3E` into the add-in folder | – |
+| `apps/desktop-system3e` | Places SYSTEM 3E wall elements (74 types) on a clicked point – not yet tested inside Fusion | Python | copy `System3E` into the add-in folder | – |
 | `apps/desktop-template` | Starting point for a new add-in | Python | `python tools/template/new_addin.py MyAddIn` | – |
 
 Every add-in keeps its own version in `apps/desktop-<name>/VERSION` and its own notes in `docs/<name>/`

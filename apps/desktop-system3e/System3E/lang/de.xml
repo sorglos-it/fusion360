@@ -3,21 +3,32 @@
 <strings language="de">
 
   <!-- Command -->
-  <string key="cmd.name">System3E</string>
-  <string key="cmd.tooltip">System3E
-TODO: describe what this command does.</string>
+  <string key="cmd.name">SYSTEM 3E Baustein</string>
+  <string key="cmd.tooltip">Setzt einen SYSTEM 3E Wandbaustein.
+Punkt anklicken, Baustein aus der Liste wählen - er entsteht mit der unteren vorderen linken Ecke auf diesem Punkt.</string>
 
   <!-- Inputs -->
-  <string key="in.line">Linie</string>
-  <string key="in.line.prompt">Skizzenlinie wählen</string>
-  <string key="in.length">Länge</string>
-  <string key="in.flip">Richtung umkehren</string>
+  <string key="in.point">Punkt</string>
+  <string key="in.point.prompt">Punkt wählen (ohne: Ursprung)</string>
+  <string key="in.family">Gruppe</string>
+  <string key="in.block">Baustein</string>
+  <string key="in.angle">Drehung</string>
+
+  <!-- Element families, in catalogue order -->
+  <string key="family.starter">Starter</string>
+  <string key="family.basic">Basis</string>
+  <string key="family.complementary">Ergänzung</string>
+  <string key="family.lintel">Sturz</string>
+  <string key="family.window">Fensterrahmen</string>
+  <string key="family.top">Abschluss</string>
+  <string key="family.corner">Ecke</string>
+  <string key="family.partition">Trennwand</string>
 
   <!-- Validation -->
-  <string key="err.no_selection">Bitte genau eine Skizzenlinie wählen.</string>
-  <string key="err.length_positive">Die Länge muss größer als 0 sein.</string>
-  <string key="err.zero_length">Die gewählte Linie hat keine Länge.</string>
-  <string key="err.too_long">Die Länge überschreitet die gewählte Linie ({0} mm).</string>
+  <string key="err.no_block">Bitte einen Baustein wählen.</string>
+  <string key="err.no_design">Bitte zuerst eine Konstruktion öffnen.</string>
+  <string key="err.body_failed">Der Baustein {0} konnte nicht erzeugt werden:
+{1}</string>
 
   <!-- Message boxes -->
   <string key="msg.panel_missing">Kein passendes Toolbar-Panel gefunden.</string>
