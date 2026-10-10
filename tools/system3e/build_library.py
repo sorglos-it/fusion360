@@ -133,7 +133,11 @@ def straighten(solid, within=0.25):
 
 
 def bend(solid):
-    """How far the worst point lies off its face, in mm."""
+    """How far the worst point lies off its face, in mm.
+
+    Also replaces every face normal by the one its straightened outline
+    really has - that is the normal blocks.json gets.
+    """
     worst = 0.0
     points = solid['points']
     for face in solid['faces']:

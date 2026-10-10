@@ -169,12 +169,23 @@ check(abs(tooth_centres(nominal_left, 3, dt.SHAPE_TRIANGLE)[1]
 limit = dt.max_offset(length, 3, 30 * MM, 10 * MM, 6 * MM, 0.0, dt.SHAPE_TRIANGLE)
 check(abs(limit - (150 - 30 - 5) * MM) < 1e-12,
       'max_offset is 115 mm (%.3f mm)' % (limit * 10))
-dt.build_contours(length, 3, 30 * MM, 10 * MM, 6 * MM, 0.0, 0.25 * MM,
-                  dt.SHAPE_TRIANGLE, reference=dt.REF_POCKET, offset=limit)
-check(True, 'an offset exactly at the limit is still valid')
+# With a tolerance the teeth stay that far, plus a hair, away from the line
+# end: right at the end the pocket would run past it and have to turn back.
+limit_tol = dt.max_offset(length, 3, 30 * MM, 10 * MM, 6 * MM, 0.0, dt.SHAPE_TRIANGLE, 0.25 * MM)
+check(abs(limit_tol - (limit - 0.25 * MM - dt.SPACING_MARGIN)) < 1e-12,
+      'with 0.25 mm tolerance the limit is %.3f mm' % (limit_tol * 10))
+for ref in (dt.REF_POCKET, dt.REF_CENTER, dt.REF_PIN):
+    for sign in (1, -1):
+        p_edge, q_edge = dt.build_contours(length, 3, 30 * MM, 10 * MM, 6 * MM, 0.0, 0.25 * MM,
+                                           dt.SHAPE_TRIANGLE, reference=ref, offset=sign * limit_tol)
+        check(all(-1e-9 <= p[0] <= length + 1e-9 for p in p_edge + q_edge),
+              'an offset exactly at the limit stays on the line (%s, %+d)' % (ref, sign))
 expect_error('err.offset_range',
              (length, 3, 30 * MM, 10 * MM, 6 * MM, 0.0, 0.25 * MM,
-              dt.SHAPE_TRIANGLE, limit + 0.1 * MM), 'beyond the limit')
+              dt.SHAPE_TRIANGLE, limit_tol + 0.1 * MM), 'beyond the limit')
+expect_error('err.offset_range',
+             (length, 3, 30 * MM, 10 * MM, 6 * MM, 0.0, 0.25 * MM,
+              dt.SHAPE_TRIANGLE, limit), 'at the old limit, where the contour ran past the line end')
 limit_trapezoid = dt.max_offset(200 * MM, 1, 25 * MM, 12 * MM, 8 * MM,
                                 math.radians(15), dt.SHAPE_TRAPEZOID)
 check(abs(limit_trapezoid - (100 * MM - top_half)) < 1e-12,
@@ -305,8 +316,6 @@ verify_offset(pocket, pin, MTOL)
 band = dt.closed_band(pocket, pin)
 check(len(band) == len(pocket) + len(pin),
       'the band closes as before (%d points)' % len(band))
-check(same(turn(band[:len(pocket)], 200 * MM), band[len(pocket):][::-1][::-1]) or True,
-      'the band is built from the two halves of one symmetric cut')
 
 print('   what mirroring refuses')
 for count, key, label in ((3, 'err.mirror_even', 'an odd count'),):

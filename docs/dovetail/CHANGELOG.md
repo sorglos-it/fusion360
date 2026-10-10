@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0.0.1 – 2026-10-10
+
+Fixes from a code review; nothing new.
+
+- Teeth now keep the tolerance plus 0.01 mm away from the ends of the line. Right at the end the pocket contour ran
+  past the line and turned back, which gave a loop crossing itself. The largest offset is smaller by that amount.
+- Two teeth need 0.01 mm more spacing than before; at exactly the old minimum a stretch of the contour had no length.
+- A contour that would cross itself is refused instead of drawn (narrow trapezoid tips with a large tolerance).
+- If drawing fails half way, Fusion undoes the lines already drawn.
+- A test that could never fail is gone; a comment about the offset direction said the opposite of the code.
+- Checked with 34,317 random valid contours, none crossing itself. Not yet confirmed inside Fusion.
+
 ## 1.0.0.0 – 2026-10-10
 
 - Version numbers now have four parts, `v.x.y.z` (version, release, feature, build). All add-ins of this repository

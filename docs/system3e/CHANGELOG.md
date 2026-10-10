@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.0.1 – 2026-10-10
+
+Fixes from a code review; nothing new.
+
+- A failed placement is undone completely instead of leaving an empty component behind.
+- The body gets its name while its base feature is still open.
+- An element of a linked design is no longer taken for one of this design.
+- The dialog keeps working when the point picked beforehand cannot be taken over.
+- Not yet confirmed inside Fusion.
+
 ## 1.0.0.0 – 2026-10-10
 
 - Version numbers now have four parts, `v.x.y.z` (version, release, feature, build). All add-ins of this repository

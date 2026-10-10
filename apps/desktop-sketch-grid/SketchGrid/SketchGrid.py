@@ -296,7 +296,10 @@ def grid_layout(mode, width, height, gap_x, gap_y, columns, rows,
 
 
 def cell_centres(layout):
-    """Centre of every cell, relative to the picked point, row by row."""
+    """Lower left corner of every cell, relative to the picked point, row by row.
+
+    The name is historical: the caller adds half a cell to get the centre.
+    """
     (columns, rows, pitch_x, pitch_y, _total_width, _total_height,
      origin_x, origin_y, _extent_x, _extent_y) = layout
     out = []
@@ -717,14 +720,19 @@ class CommandCreatedHandler(adsk.core.CommandCreatedEventHandler):
                     preselected.append(entity)
 
             selection = build_inputs(inputs)
-            if preselected and selection and selection.selectionCount == 0:
-                selection.addSelection(preselected[0])
-            refresh(inputs)
 
+            # Handlers first: whatever fails below, the dialog must still work.
             _handlers.add(command.execute, ExecuteHandler())
             _handlers.add(command.executePreview, PreviewHandler())
             _handlers.add(command.validateInputs, ValidateHandler())
             _handlers.add(command.inputChanged, InputChangedHandler())
+
+            if preselected and selection and selection.selectionCount == 0:
+                try:
+                    selection.addSelection(preselected[0])
+                except Exception:
+                    pass        # then the user picks the point in the dialog
+            refresh(inputs)
         except Exception:
             core.report(ui, S, 'msg.dialog_failed')
 

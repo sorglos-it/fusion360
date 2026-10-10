@@ -3,7 +3,7 @@
 System3E - Fusion 360 add-in entry point.
 
 Everything you edit lives between the CONFIGURE and END OF TEMPLATE markers.
-The reusable machinery sits in addin_core.py next to this file.
+The reusable machinery sits in system3e_core.py next to this file.
 
 The command places one SYSTEM 3E wall element: pick a point, pick the element
 from the list - a picture shows which one it is - and it is created as a new
@@ -299,6 +299,12 @@ def find_component(design, block):
         component = components.item(i)
         if component.bRepBodies.count == 0:
             continue
+        try:
+            # A component of a linked design cannot be changed from here.
+            if component.parentDesign != design:
+                continue
+        except Exception:
+            pass
         mark = component.attributes.itemByName(ATTRIBUTE_GROUP, ATTRIBUTE_BLOCK)
         if mark and mark.value == block['id']:
             return component
@@ -389,14 +395,16 @@ def build_result(values):
         base.startEdit()
         try:
             created = component.bRepBodies.add(body, base)
+            if created:
+                created.name = block['name']    # while the base feature is still open
             add_snap_points(design, component, block, base)
         finally:
             base.finishEdit()
     else:
         created = component.bRepBodies.add(body)
+        if created:
+            created.name = block['name']
         add_snap_points(design, component, block, None)
-    if created:
-        created.name = block['name']
 
 
 def fill_blocks(inputs, family, wanted=None):
@@ -495,8 +503,10 @@ class ExecuteHandler(adsk.core.CommandEventHandler):
         try:
             remember(_run_command(args.firingEvent.sender.commandInputs))
         except core.AddInError as err:
+            args.executeFailed = True       # Fusion undoes what was built so far
             ui.messageBox(str(err), T('cmd.name'))
         except Exception:
+            args.executeFailed = True
             core.report(ui, S, 'msg.exec_failed')
 
 
@@ -552,13 +562,18 @@ class CommandCreatedHandler(adsk.core.CommandCreatedEventHandler):
                     preselected.append(entity)
 
             selection = build_inputs(inputs)
-            if preselected and selection and selection.selectionCount == 0:
-                selection.addSelection(preselected[0])
 
+            # Handlers first: whatever fails below, the dialog must still work.
             _handlers.add(command.execute, ExecuteHandler())
             _handlers.add(command.executePreview, PreviewHandler())
             _handlers.add(command.validateInputs, ValidateHandler())
             _handlers.add(command.inputChanged, InputChangedHandler())
+
+            if preselected and selection and selection.selectionCount == 0:
+                try:
+                    selection.addSelection(preselected[0])
+                except Exception:
+                    pass        # then the user picks the point in the dialog
         except Exception:
             core.report(ui, S, 'msg.dialog_failed')
 

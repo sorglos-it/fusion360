@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.0.1 – 2026-10-10
+
+Fixes from a code review; nothing new.
+
+- The dialog keeps working when the point picked beforehand cannot be taken over.
+- Two comments corrected: `cell_centres` returns the lower left corner of each cell, and the test path in `en.xml`.
+- Known and left as it is: slots and rounded rectangles are drawn as separate curves, and the limit of 2000 counts
+  shapes, not curves. Both need a look inside Fusion first.
+
 ## 1.0.0.0 – 2026-10-10
 
 - Version numbers now have four parts, `v.x.y.z` (version, release, feature, build). All add-ins of this repository

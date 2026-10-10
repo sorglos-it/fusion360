@@ -304,9 +304,54 @@ def _top_half(width, depth, angle, shape):
     return top
 
 
-def max_offset(length, count, spacing, width, depth, angle, shape):
+SLACK = 1e-6       # cm - below this a segment has no length worth drawing
+SPACING_MARGIN = 1e-3   # cm - what has to stay between two teeth beyond the clearance
+
+
+def _crossing(a, b, c, d):
+    """Do the segments a-b and c-d cross each other in their interiors?"""
+    def side(p, q, r):
+        return (q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0])
+    return (side(a, b, c) * side(a, b, d) < -1e-15 and
+            side(c, d, a) * side(c, d, b) < -1e-15)
+
+
+def _check_contour(points, length):
+    """Refuse a contour that cannot be cut.
+
+    Offsetting mitres every corner on its own, so nothing stops a short
+    segment from shrinking to nothing or flipping round, and a tooth close to
+    the end of the line can push the contour past that end. Each of these
+    gives a loop that crosses itself.
+    """
+    if abs(points[0][0]) > SLACK or abs(points[-1][0] - length) > SLACK:
+        raise GeometryError('err.does_not_fit', '%.2f' % (length * 10.0))
+    for p in points:
+        if p[0] < -SLACK or p[0] > length + SLACK:
+            raise GeometryError('err.does_not_fit', '%.2f' % (length * 10.0))
+    for i in range(len(points) - 1):
+        if math.hypot(points[i + 1][0] - points[i][0], points[i + 1][1] - points[i][1]) < SLACK:
+            raise GeometryError('err.tolerance_eats_tooth')
+    for i in range(len(points) - 1):
+        for j in range(i + 2, len(points) - 1):
+            if _crossing(points[i], points[i + 1], points[j], points[j + 1]):
+                raise GeometryError('err.tolerance_eats_tooth')
+
+
+def end_room(tolerance):
+    """What has to stay free between the outermost tooth and the line end.
+
+    The pocket opens up by as much as the tolerance, and the stretch beside it
+    still needs some length - otherwise the contour runs past the end of the
+    line and has to turn back.
+    """
+    return tolerance + SPACING_MARGIN if tolerance > EPS else 0.0
+
+
+def max_offset(length, count, spacing, width, depth, angle, shape, tolerance=0.0):
     """Largest offset that still keeps every tooth on the line.
 
+    With a tolerance the teeth also keep end_room() away from the line ends.
     Returns 0.0 when the teeth do not fit in the first place.
     """
     try:
@@ -314,7 +359,7 @@ def max_offset(length, count, spacing, width, depth, angle, shape):
     except GeometryError:
         return 0.0
     outer = max(width / 2.0, top)
-    span = (max(count, 1) - 1) / 2.0 * spacing + outer
+    span = (max(count, 1) - 1) / 2.0 * spacing + outer + end_room(tolerance)
     return max(0.0, length / 2.0 - span)
 
 
@@ -375,11 +420,14 @@ def build_contours(length, count, spacing, width, depth, angle, tolerance,
     if count > 1:
         if spacing <= EPS:
             raise GeometryError('err.spacing_positive')
-        if spacing < 2 * outer + 2 * tolerance:
+        # A little more than the bare minimum: at exactly the minimum the
+        # stretch between two pockets has no length left.
+        if spacing < 2 * outer + 2 * tolerance + SPACING_MARGIN:
             raise GeometryError('err.spacing_too_small',
-                                '%.2f' % ((2 * outer + 2 * tolerance) * 10.0))
-    if centres[0] - outer < -EPS or centres[-1] + outer > length + EPS:
-        limit = max_offset(length, count, spacing, width, depth, angle, shape)
+                                '%.2f' % ((2 * outer + 2 * tolerance + SPACING_MARGIN) * 10.0))
+    room = end_room(tolerance)
+    if centres[0] - outer - room < -EPS or centres[-1] + outer + room > length + EPS:
+        limit = max_offset(length, count, spacing, width, depth, angle, shape, tolerance)
         if limit > EPS and abs(offset) > limit:
             raise GeometryError('err.offset_range', '%.2f' % (limit * 10.0))
         raise GeometryError('err.does_not_fit', '%.2f' % (length * 10.0))
@@ -401,10 +449,13 @@ def build_contours(length, count, spacing, width, depth, angle, tolerance,
     outward = tolerance * grow          # how far the pocket opens up
     inward = tolerance * shrink         # how far the pin is pulled back
 
-    # A negative distance offsets to the left of the run, which is away from
-    # the teeth - that is the direction the pocket has to open in.
+    # A negative distance offsets to the left of the run, the side the teeth
+    # point to - the pocket opens up around them. A positive one pulls the pin
+    # back from them.
     pocket = _offset_polyline(nominal, -outward) if outward > EPS else nominal
     pin = _offset_polyline(nominal, inward) if inward > EPS else nominal
+    _check_contour(pocket, length)
+    _check_contour(pin, length)
 
     # Sanity: every tooth has to survive above its own part's base line. An
     # upward tooth belongs to the lower part and is trimmed by `inward`; a
@@ -601,8 +652,10 @@ class ExecuteHandler(adsk.core.CommandEventHandler):
                 IN_FLIP: values['flip'],
             })
         except GeometryError as err:
+            args.executeFailed = True       # Fusion undoes what was drawn so far
             adsk.core.Application.get().userInterface.messageBox(str(err), T('cmd.name'))
         except Exception:
+            args.executeFailed = True
             adsk.core.Application.get().userInterface.messageBox(
                 T('msg.exec_failed', traceback.format_exc()), T('cmd.name'))
 
@@ -672,7 +725,7 @@ def _apply_nudge(inputs, row):
             limit = min(max_offset(line_length(line), values['count'],
                                    values['spacing'], values['width'],
                                    values['depth'], values['angle'],
-                                   values['shape'])
+                                   values['shape'], values['tolerance'])
                         for line in lines)
             if limit > EPS:
                 target = max(-limit, min(limit, target))

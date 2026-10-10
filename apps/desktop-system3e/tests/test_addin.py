@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Check an add-in without starting Fusion.
 
-    python apps/desktop-system3e/tests/test_addin.py                    # the template itself
+    python apps/desktop-system3e/tests/test_addin.py                    # this add-in
     python apps/desktop-system3e/tests/test_addin.py --path ../MyAddIn  # scaffolded next to this repository
     python apps/desktop-system3e/tests/test_addin.py --path "C:/.../AddIns/MyAddIn"
 
@@ -21,7 +21,7 @@ import argparse
 import xml.etree.ElementTree as ElementTree
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
-ADDINS = os.path.dirname(_HERE)  # apps/desktop-system3e, where the template add-in lives
+ADDINS = os.path.dirname(_HERE)  # apps/desktop-system3e, where the add-in lives
 
 failures = []
 warnings = []

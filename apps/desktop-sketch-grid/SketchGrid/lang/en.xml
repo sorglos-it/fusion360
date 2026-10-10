@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Reference language file. Every other file in this folder may omit keys;
-  anything missing falls back to the value defined here.
+  Reference language file. A key missing from another file falls back to the
+  value defined here - the test still reports it, so every file stays complete.
   Placeholders {0}, {1}, ... are filled in by the add-in and must survive
-  translation. apps/desktop/tests/test_sketchgrid.py checks both for every
-  language.
+  translation. apps/desktop-sketch-grid/tests/test_sketchgrid.py checks both
+  for every language.
 -->
 <strings language="en">
 
