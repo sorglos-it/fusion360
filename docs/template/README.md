@@ -1,4 +1,4 @@
-# fusion360-addin-template
+# AddInTemplate
 
 [![Fusion 360](https://img.shields.io/badge/Autodesk-Fusion%20360-F60?logo=autodesk&logoColor=white)](#start-in-3-steps)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS-0078D6?logo=windows&logoColor=white)](#start-in-3-steps)
@@ -9,7 +9,7 @@
 
 A starting point for your own **Fusion 360 add-in**. One command creates a working add-in with a translated
 interface, live preview, input checks and an offline test — so the first thing you write is your own geometry, not
-boilerplate.
+boilerplate. Part of the [fusion360](../../README.md) repository.
 
 | Folder | Purpose | Language | Start | Build |
 |---|---|---|---|---|

@@ -1,4 +1,4 @@
-# fusion360-sketch-grid
+# SketchGrid
 
 [![Fusion 360](https://img.shields.io/badge/Autodesk-Fusion%20360-F60?logo=autodesk&logoColor=white)](#start-in-3-steps)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS-0078D6?logo=windows&logoColor=white)](#start-in-3-steps)
@@ -7,7 +7,7 @@
 [![Donate](https://img.shields.io/badge/Donate-PayPal-00457C.svg?logo=paypal)](https://www.paypal.com/donate/?hosted_button_id=6CDEVZGJWTNQQ)
 
 A Fusion 360 add-in that builds a **grid of shapes around a sketch point**. Click a point, say how big one cell is and
-how far apart the cells sit, and get the whole array in one go — rectangles, circles, slots or polygons.
+how far apart the cells sit, and get the whole array in one go — rectangles, circles, slots or polygons. Part of the [fusion360](../../README.md) repository.
 
 | Folder | Purpose | Language | Start | Build |
 |---|---|---|---|---|

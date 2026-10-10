@@ -1,4 +1,4 @@
-# fusion360-dovetail
+# Dovetail
 
 [![Fusion 360](https://img.shields.io/badge/Autodesk-Fusion%20360-F60?logo=autodesk&logoColor=white)](#start-in-3-steps)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS-0078D6?logo=windows&logoColor=white)](#start-in-3-steps)
@@ -8,7 +8,7 @@
 
 A Fusion 360 add-in that turns **sketch lines into finished joints** — dovetail, triangle or box joint. Pick a line,
 press the button, and you get one closed band exactly as wide as the clearance. Cut that band out of a solid and you
-are left with two parts that fit.
+are left with two parts that fit. Part of the [fusion360](../../README.md) repository.
 
 | Folder | Purpose | Language | Start | Build |
 |---|---|---|---|---|
