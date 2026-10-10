@@ -32,4 +32,4 @@ Fixes from a code review; nothing new.
 - README no longer claims the dialog says which value or line is at fault — it only greys out OK and draws nothing.
 - New `CHANGELOG.md`; `.gitignore` after the project standard.
 
-Earlier versions: [Releases](https://github.com/sorglos-it/fusion360-dovetail/releases).
+Earlier versions are tags in this repository; their ZIP files went with the former single repository.

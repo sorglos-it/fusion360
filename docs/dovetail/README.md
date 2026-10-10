@@ -16,7 +16,7 @@ are left with two parts that fit.
 
 ## Start in 3 steps
 
-1. Download the latest `Dovetail-*.zip` from **[Releases](https://github.com/sorglos-it/fusion360-dovetail/releases)**
+1. Download the latest `Dovetail-*.zip` from **[Releases](https://github.com/sorglos-it/fusion360/releases)**
    — or clone this repository and take the folder `apps/desktop-dovetail/Dovetail`.
 2. Unpack or copy it into Fusion's add-ins folder, so that `Dovetail\Dovetail.py` ends up one level below it:
 
@@ -180,8 +180,8 @@ outline comes out connected.
 
 ## Related
 
-[fusion360-sketch-grid](https://github.com/sorglos-it/fusion360-sketch-grid) builds grids of shapes around a sketch
-point. [fusion360-addin-template](https://github.com/sorglos-it/fusion360-addin-template) is the scaffolding this
+[desktop-sketch-grid](https://github.com/sorglos-it/fusion360/tree/main/apps/desktop-sketch-grid) builds grids of shapes around a sketch
+point. [desktop-template](https://github.com/sorglos-it/fusion360/tree/main/apps/desktop-template) is the scaffolding this
 add-in was extracted into — the same translated interface, live preview, validation and offline tests as a starting
 point for your own add-in.
 

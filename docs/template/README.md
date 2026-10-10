@@ -26,11 +26,11 @@ boilerplate.
    selection, preview, validation and translation all work.
 
 Just want to see it run? Download the latest `AddInTemplate-*.zip` from
-**[Releases](https://github.com/sorglos-it/fusion360-addin-template/releases)** and unpack it into Fusion's add-ins
+**[Releases](https://github.com/sorglos-it/fusion360/releases)** and unpack it into Fusion's add-ins
 folder — that is the template itself, installable. The tools are only in the repository.
 
-Extracted from [fusion360-dovetail](https://github.com/sorglos-it/fusion360-dovetail) and used to build
-[fusion360-sketch-grid](https://github.com/sorglos-it/fusion360-sketch-grid).
+Extracted from [desktop-dovetail](https://github.com/sorglos-it/fusion360/tree/main/apps/desktop-dovetail) and used to build
+[desktop-sketch-grid](https://github.com/sorglos-it/fusion360/tree/main/apps/desktop-sketch-grid).
 
 ## Create an add-in
 

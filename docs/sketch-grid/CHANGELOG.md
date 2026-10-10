@@ -31,4 +31,4 @@ Fixes from a code review; nothing new.
 - README rewritten: start in 3 steps, shorter sections, a languages section, every path after the new layout.
 - New `CHANGELOG.md`; `.gitignore` after the project standard.
 
-Earlier versions: [Releases](https://github.com/sorglos-it/fusion360-sketch-grid/releases).
+Earlier versions are tags in this repository; their ZIP files went with the former single repository.

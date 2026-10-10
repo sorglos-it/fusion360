@@ -1,7 +1,7 @@
 # fusion360-system3e
 
-[![Release](https://img.shields.io/github/v/release/sorglos-it/fusion360-system3e)](https://github.com/sorglos-it/fusion360-system3e/releases)
-[![License](https://img.shields.io/github/license/sorglos-it/fusion360-system3e)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/sorglos-it/fusion360)](https://github.com/sorglos-it/fusion360/releases)
+[![License](https://img.shields.io/github/license/sorglos-it/fusion360)](LICENSE)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-blue)](https://www.paypal.com/donate/?hosted_button_id=6CDEVZGJWTNQQ)
 
 A Fusion 360 add-in for planning walls with the dry-stack elements of [SYSTEM 3E](https://www.system3e.com/).

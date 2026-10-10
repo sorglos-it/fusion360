@@ -20,4 +20,4 @@
   only shows as a message box when `execute` runs into it.
 - New `CHANGELOG.md`; `.gitignore` after the project standard.
 
-Earlier versions: [Releases](https://github.com/sorglos-it/fusion360-addin-template/releases).
+Earlier versions are tags in this repository; their ZIP files went with the former single repository.

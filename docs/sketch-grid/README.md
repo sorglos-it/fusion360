@@ -16,7 +16,7 @@ how far apart the cells sit, and get the whole array in one go — rectangles, c
 ## Start in 3 steps
 
 1. Download the latest `SketchGrid-*.zip` from
-   **[Releases](https://github.com/sorglos-it/fusion360-sketch-grid/releases)** — or clone this repository and take the
+   **[Releases](https://github.com/sorglos-it/fusion360/releases)** — or clone this repository and take the
    folder `apps/desktop-sketch-grid/SketchGrid`.
 2. Unpack or copy it into Fusion's add-ins folder, so that `SketchGrid\SketchGrid.py` ends up one level below it:
 
@@ -193,9 +193,9 @@ function, with `isComputeDeferred` set; with a few hundred cells that is the dif
 
 ## Related
 
-Scaffolded from **[fusion360-addin-template](https://github.com/sorglos-it/fusion360-addin-template)**, which carries
+Scaffolded from **[desktop-template](https://github.com/sorglos-it/fusion360/tree/main/apps/desktop-template)**, which carries
 the translated interface, the handler registry and the panel lookup used here. See also
-[fusion360-dovetail](https://github.com/sorglos-it/fusion360-dovetail) — joints on a sketch line.
+[desktop-dovetail](https://github.com/sorglos-it/fusion360/tree/main/apps/desktop-dovetail) — joints on a sketch line.
 
 ## License
 
