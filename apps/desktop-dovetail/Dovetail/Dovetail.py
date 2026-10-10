@@ -174,7 +174,7 @@ def read_version():
 
 
 def display_name():
-    """Command name with the version in brackets, e.g. "Dovetail (1.4.1)".
+    """Command name with the version in brackets, e.g. "Dovetail (1.1.0.0)".
 
     Fusion uses the command definition's name as the dialog title, so this is
     where a version has to go to be visible while the dialog is open.

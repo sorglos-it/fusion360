@@ -9,6 +9,8 @@ Click a point, choose one of the 74 elements from a list with a preview picture,
 as a solid body. Every element brings twelve points of its own to click, so the next course snaps on in bond.
 Not affiliated with SYSTEM 3E. Part of the [fusion360](../../README.md) repository.
 
+**Full documentation** in English, Deutsch, Italiano, Español and Français: [index.md](index.md).
+
 | Folder | Purpose | Language | Start | Build |
 | --- | --- | --- | --- | --- |
 | `apps/desktop-system3e/System3E` | the add-in | Python 3 (the one inside Fusion) | unpack the ZIP into Fusion's add-ins folder, then *Run* in Fusion | `python tools/release.py system3e` |

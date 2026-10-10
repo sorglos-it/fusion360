@@ -11,6 +11,8 @@ A starting point for your own **Fusion 360 add-in**. One command creates a worki
 interface, live preview, input checks and an offline test — so the first thing you write is your own geometry, not
 boilerplate. Part of the [fusion360](../../README.md) repository.
 
+**Full documentation** in English, Deutsch, Italiano, Español and Français: [index.md](index.md).
+
 | Folder | Purpose | Language | Start | Build |
 |---|---|---|---|---|
 | `apps/desktop-template/AddInTemplate` | the template: a demo command plus the shared machinery every new add-in gets | Python 3 (the one inside Fusion) | `python tools/template/new_addin.py MyAddIn --install`, then *Run* in Fusion | – (runs as is) |
@@ -25,9 +27,9 @@ boilerplate. Part of the [fusion360](../../README.md) repository.
    sits on the **SKETCH** tab: click a sketch line, press it — a small tick at the line's midpoint proves that
    selection, preview, validation and translation all work.
 
-Just want to see it run? Download the latest `AddInTemplate-*.zip` from
-**[Releases](https://github.com/sorglos-it/fusion360/releases)** and unpack it into Fusion's add-ins
-folder — that is the template itself, installable. The tools are only in the repository.
+Just want to see it run? Copy the folder `apps/desktop-template/AddInTemplate` into Fusion's add-ins folder —
+that is the template itself, installable. There is no ZIP of the current version; the tools are only in the
+repository.
 
 Extracted from [desktop-dovetail](https://github.com/sorglos-it/fusion360/tree/main/apps/desktop-dovetail) and used to build
 [desktop-sketch-grid](https://github.com/sorglos-it/fusion360/tree/main/apps/desktop-sketch-grid).

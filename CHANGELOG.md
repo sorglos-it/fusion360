@@ -4,6 +4,11 @@ Changes to the repository as a whole. Each add-in keeps its own list in `docs/<n
 
 ## 2026-10-10
 
+- Full documentation for every add-in under `docs/<name>/<language>/` in English, German, Italian, Spanish and
+  French: overview, installation, usage, settings, how it works, troubleshooting, development. English is the
+  maintained version; the other four are produced from it for a release.
+- New `tools/check_docs.py`: checks that all five languages are complete and every link leads somewhere.
+- Every add-in has its own README under `docs/<name>/`; the main README links to each.
 - PrintGear removed from the repository: add-in, tools and documentation. It stays in the history.
 - All five add-ins set to version 1.0.0.0. From now on four-part numbers `v.x.y.z`: build +1 for a fix, feature +1 for
   something new, release +1 for a release; the first number only on request.

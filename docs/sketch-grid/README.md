@@ -9,6 +9,8 @@
 A Fusion 360 add-in that builds a **grid of shapes around a sketch point**. Click a point, say how big one cell is and
 how far apart the cells sit, and get the whole array in one go — rectangles, circles, slots or polygons. Part of the [fusion360](../../README.md) repository.
 
+**Full documentation** in English, Deutsch, Italiano, Español and Français: [index.md](index.md).
+
 | Folder | Purpose | Language | Start | Build |
 |---|---|---|---|---|
 | `apps/desktop-sketch-grid/SketchGrid` | the add-in: grids of shapes around a sketch point | Python 3 (the one inside Fusion) | copy into Fusion's add-ins folder, then *Run* | – (runs as is) |

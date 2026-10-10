@@ -51,7 +51,7 @@ def render(size):
     buffer = bytearray(size * size * 4)
     for py in range(size):
         for px in range(size):
-            # Coverage per colour, later shapes painting over earlier ones.
+            # Coverage per colour. A shape listed earlier stays on top of a later one.
             red = green = blue = 0.0
             alpha = 0.0
             for colour, polygon in SHAPES:

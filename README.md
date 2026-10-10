@@ -6,12 +6,12 @@
 All Fusion 360 add-ins by Sorglos in one repository. Each add-in is a folder you copy into Fusion's add-in directory;
 none of them needs anything installed besides Fusion 360.
 
-| Folder | Purpose | Language | Start | Build | Details |
-| --- | --- | --- | --- | --- | --- |
-| `apps/desktop-dovetail` | Sketch lines become dovetail, triangle or box joints | Python | copy `Dovetail` into the add-in folder | – | [Dovetail](docs/dovetail/README.md) |
-| `apps/desktop-sketch-grid` | Grid of shapes around a sketch point | Python | copy `SketchGrid` into the add-in folder | – | [SketchGrid](docs/sketch-grid/README.md) |
-| `apps/desktop-system3e` | Places SYSTEM 3E wall elements (74 types) on a clicked point | Python | copy `System3E` into the add-in folder | – | [System3E](docs/system3e/README.md) |
-| `apps/desktop-template` | Starting point for a new add-in | Python | `python tools/template/new_addin.py MyAddIn` | – | [AddInTemplate](docs/template/README.md) |
+| Folder | Purpose | Language | Start | Build | Details | Full documentation |
+| --- | --- | --- | --- | --- | --- | --- |
+| `apps/desktop-dovetail` | Sketch lines become dovetail, triangle or box joints | Python | copy `Dovetail` into the add-in folder | – | [Dovetail](docs/dovetail/README.md) | [5 languages](docs/dovetail/index.md) |
+| `apps/desktop-sketch-grid` | Grid of shapes around a sketch point | Python | copy `SketchGrid` into the add-in folder | – | [SketchGrid](docs/sketch-grid/README.md) | [5 languages](docs/sketch-grid/index.md) |
+| `apps/desktop-system3e` | Places SYSTEM 3E wall elements (74 types) on a clicked point | Python | copy `System3E` into the add-in folder | – | [System3E](docs/system3e/README.md) | [5 languages](docs/system3e/index.md) |
+| `apps/desktop-template` | Starting point for a new add-in | Python | `python tools/template/new_addin.py MyAddIn` | – | [AddInTemplate](docs/template/README.md) | [5 languages](docs/template/index.md) |
 
 **Everything about one add-in – what it does, its dialog, its limits – is in its own README, linked under
 *Details*.** This page only lists them. Every add-in keeps its own version in `apps/desktop-<name>/VERSION` and its
@@ -31,6 +31,12 @@ The tests run without Fusion, one file per add-in:
 
 ```powershell
 python apps/desktop-dovetail/tests/test_geometry.py
+```
+
+The documentation has its own check – all five languages complete, every link valid:
+
+```powershell
+python tools/check_docs.py
 ```
 
 ## Known limits

@@ -10,6 +10,8 @@ A Fusion 360 add-in that turns **sketch lines into finished joints** — dovetai
 press the button, and you get one closed band exactly as wide as the clearance. Cut that band out of a solid and you
 are left with two parts that fit. Part of the [fusion360](../../README.md) repository.
 
+**Full documentation** in English, Deutsch, Italiano, Español and Français: [index.md](index.md).
+
 | Folder | Purpose | Language | Start | Build |
 |---|---|---|---|---|
 | `apps/desktop-dovetail/Dovetail` | the add-in: joints on sketch lines | Python 3 (the one inside Fusion) | copy into Fusion's add-ins folder, then *Run* | – (runs as is) |
