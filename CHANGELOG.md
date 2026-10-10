@@ -4,6 +4,7 @@ Changes to the repository as a whole. Each add-in keeps its own list in `docs/<n
 
 ## 2026-10-10
 
+- PrintGear removed from the repository: add-in, tools and documentation. It stays in the history.
 - All five add-ins set to version 1.0.0.0. From now on four-part numbers `v.x.y.z`: build +1 for a fix, feature +1 for
   something new, release +1 for a release; the first number only on request.
 - New `tools/set_version.py`: writes an add-in's number into `VERSION` and its manifest in one go; `--check` reports
