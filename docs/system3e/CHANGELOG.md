@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.0.0 – 2026-10-10
+
+- Version numbers now have four parts, `v.x.y.z` (version, release, feature, build). All add-ins of this repository
+  start again at 1.0.0.0; the content is unchanged. Earlier three-part numbers below keep their meaning.
+
 ## 0.3.7 – 2026-10-08
 
 - *Placed by* now offers every point of the element: the three corners and all twelve points that can be clicked.

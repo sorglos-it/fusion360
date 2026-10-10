@@ -10,7 +10,7 @@
         "fr-FR": "Engrenages a developpante dimensionnes pour la buse qui les imprime. Un point pour un engrenage ou une paire, plusieurs pour un train.",
         "it-IT": "Ingranaggi a evolvente dimensionati per l'ugello che li stampa. Un punto per uno o una coppia, piu punti per un treno."
     },
-    "version": "1.0.0",
+    "version": "1.0.0.0",
     "runOnStartup": true,
     "supportedOS": "windows|mac",
     "editEnabled": true
