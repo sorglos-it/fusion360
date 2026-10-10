@@ -32,9 +32,9 @@ Further files: [change log](../CHANGELOG.md), [licence](../LICENSE), [drawing of
 | Part | State |
 | --- | --- |
 | Placing elements | Used inside Fusion by the author |
-| The twelve points to click | Tested offline only, **not inside Fusion** |
-| The choices under **Placed by** | Tested offline only, **not inside Fusion** |
-| **Offset X**, **Offset Y**, **Offset Z** | Tested offline only, **not inside Fusion** |
+| The twelve points to click | Used inside Fusion by the author |
+| The choices under **Placed by** | Used inside Fusion by the author |
+| **Offset X**, **Offset Y**, **Offset Z** | Used inside Fusion by the author |
 | Fixes of version 1.0.0.1 (see the [change log](../CHANGELOG.md)) | Not yet confirmed inside Fusion |
 | Left/right names of the corner and window elements | Matched by eye against the manufacturer's catalogue cards, **not confirmed** |
 | Element `S0/2 200 P` | Damaged in the manufacturer's 3D file, rebuilt from `S0/2 250 P` |

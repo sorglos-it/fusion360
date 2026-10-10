@@ -89,8 +89,6 @@ languages the text is translated. Message boxes carry the title "SYSTEM 3E eleme
 
 ## Known limits
 
-- **Untested inside Fusion:** the twelve points, the choices under **Placed by** and the offsets X/Y/Z are tested
-  offline only. Placing elements as such has been used inside Fusion by the author.
 - **Untested inside Fusion:** the fixes of version 1.0.0.1 (see the [change log](../CHANGELOG.md)).
 - **Left and right:** the left/right names of the corner and window elements were matched by eye against the
   manufacturer's catalogue cards. They are not confirmed.

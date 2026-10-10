@@ -55,7 +55,7 @@ A wall in bond: choose *Placed by: bottom middle* and click the upper front or b
 
 ## State
 
-- Placing elements has been used in Fusion. The points, *Placed by* and the offsets are tested offline only.
+- Placing elements, the points, *Placed by* and the offsets have been used in Fusion by the author.
 - The left and right names of the corner and window elements were matched by eye against the catalogue cards.
 - `S0/2 200 P` is damaged in the manufacturer's 3D file and rebuilt from `S0/2 250 P`.
 

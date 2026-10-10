@@ -43,7 +43,7 @@ In this order:
 
 What each entry means is explained in [usage.md](usage.md).
 
-State: **Placed by** and the three offsets are tested offline only, **not inside Fusion**.
+State: **Placed by** and the three offsets have been used inside Fusion by the author.
 
 ## What is remembered
 

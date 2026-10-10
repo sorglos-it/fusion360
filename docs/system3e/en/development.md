@@ -68,8 +68,8 @@ Options: `--addin <name>` and `--path <folder>` point the test at another add-in
 What the tests cannot tell: whether Fusion accepts a body, creates the construction points or places the
 occurrence correctly. That is only known inside Fusion.
 
-State of testing inside Fusion: placing elements has been used by the author. The twelve points, **Placed by** and
-the offsets X/Y/Z have only been tested offline. The fixes of 1.0.0.1 are not yet confirmed inside Fusion.
+State of testing inside Fusion: placing elements, the twelve points, **Placed by** and the offsets X/Y/Z have been
+used by the author. The fixes of 1.0.0.1 are not yet confirmed inside Fusion.
 
 ## Rebuilding the element library
 

@@ -223,7 +223,7 @@ Red: can be chosen under **Placed by**. Green: both.
 
 ![The points on the element S1 WP](../s1-wp-punkte.svg)
 
-State: the points are tested offline only, **not inside Fusion**.
+State: the points have been used inside Fusion by the author.
 
 ## Placed by
 
@@ -238,7 +238,7 @@ State: the points are tested offline only, **not inside Fusion**.
 
 The two top corners use the full height of the element, not the height of the next course.
 
-State: the choices under **Placed by** are tested offline only, **not inside Fusion**.
+State: the choices under **Placed by** have been used inside Fusion by the author.
 
 ## Rotation
 
@@ -255,7 +255,7 @@ State: the choices under **Placed by** are tested offline only, **not inside Fus
 
 Example: no point clicked, **Offset Z** 300 mm. The element is placed 300 mm above the origin.
 
-State: the offsets are tested offline only, **not inside Fusion**.
+State: the offsets have been used inside Fusion by the author.
 
 ## Build a wall in bond
 
