@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0.0 – 2026-10-10
+
+- Release. Same content as build 1.0.0.1.
+
 ## 1.0.0.1 – 2026-10-10
 
 Fixes from a code review; nothing new.
