@@ -2,8 +2,8 @@
 
 Zurück zur [Übersicht](index.md).
 
-Das Add-In hat keine Einstellungsseite und keine Einstellungsdatei. Alles, was sich einstellen lässt, steht im Dialog des Befehls
-**SYSTEM 3E Baustein**.
+Das Add-In hat keine Einstellungsseite und keine Einstellungsdatei. Alles, was sich einstellen lässt, steht im Dialog
+des Befehls **SYSTEM 3E Baustein**.
 
 ## Die Felder des Dialogs
 
@@ -43,7 +43,7 @@ In dieser Reihenfolge:
 
 Was jeder Eintrag bedeutet, steht in [usage.md](usage.md).
 
-Stand: **Setzen an** und die drei Versatz-Felder sind nur offline geprüft, **nicht in Fusion**.
+Stand: **Setzen an** und die drei Versatz-Felder sind vom Autor in Fusion benutzt.
 
 ## Was gemerkt wird
 
@@ -71,7 +71,8 @@ Das Add-In hat seine Texte in fünf Sprachen: Deutsch, Englisch, Spanisch, Franz
 
 Die Sprache lässt sich im Add-In nicht wählen. Sie wird beim Start des Add-Ins festgelegt:
 
-1. Das Add-In fragt Fusion nach der Sprache, die in den Voreinstellungen von Fusion eingestellt ist. Ist es eine der fünf, wird sie benutzt.
+1. Das Add-In fragt Fusion nach der Sprache, die in den Voreinstellungen von Fusion eingestellt ist. Ist es eine der
+   fünf, wird sie benutzt.
 2. Sonst sieht es in den Spracheinstellungen des Betriebssystems nach (die Umgebungsvariablen `LANG`,
    `LANGUAGE`, `LC_ALL`, dann die Sprache des Systems).
 3. Ergibt nichts davon eine der fünf Sprachen, wird Englisch benutzt.
@@ -81,8 +82,8 @@ Weitere Einzelheiten:
 - Um die Sprache zu wechseln: die Sprache in den Voreinstellungen von Fusion ändern und das Add-In neu starten.
 - Fehlt ein Text in einer Sprache, wird stattdessen der englische Text angezeigt.
 - Namen von Bausteinen (`S1 WP`) und von Komponenten (`SYSTEM 3E S1 WP`) werden nicht übersetzt.
-- Die Namen der zwölf Punkte werden in die Konstruktion geschrieben, wenn ein Baustein zum ersten Mal gesetzt wird. Sie behalten
-  diese Sprache, auch wenn das Add-In später in einer anderen Sprache läuft.
+- Die Namen der zwölf Punkte werden in die Konstruktion geschrieben, wenn ein Baustein zum ersten Mal gesetzt wird.
+  Sie behalten diese Sprache, auch wenn das Add-In später in einer anderen Sprache läuft.
 
 ## Feste Werte, die sich im Dialog nicht ändern lassen
 

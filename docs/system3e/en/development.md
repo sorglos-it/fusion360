@@ -120,7 +120,7 @@ It prints one line per mesh with size, point and face count, volume and state.
 
 ## Version numbers
 
-A version has four parts, `v.x.y.z`: version, release, feature, build. Example: `1.1.0.0`.
+A version has four parts, `v.x.y.z`: version, release, feature, build. Example: `1.2.0.0`.
 
 The number is kept in two places: `apps/desktop-system3e/VERSION` and the `version` entry of the manifest. Fusion
 and the dialog title read the manifest. Never edit the two by hand; use the tool:
@@ -208,7 +208,6 @@ These are taken from the comments in the code.
 
 - The left/right names of the corner and window elements in the table `NAMES` were matched by eye against the
   catalogue cards. They still need a check by someone who knows the system.
-- The points, **Placed by** and the offsets need a test inside Fusion.
 
 ## Licence
 

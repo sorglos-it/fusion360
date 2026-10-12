@@ -223,13 +223,14 @@ Rosso: si può scegliere sotto **Posiziona da**. Verde: entrambe le cose.
 
 ![I punti sull'elemento S1 WP](../s1-wp-punkte.svg)
 
-Dalla 1.1.0.1 ogni punto è visibile sulla superficie dell'elemento. Se il posto della tabella è dentro il materiale o
-in aria – in una scanalatura, su una linguetta, in un incavo – il punto si sposta sulla superficie accanto: prima in
-alto o in basso, altrimenti lungo la lunghezza. Cliccandolo vale ancora il posto della tabella, quindi un muro
-sfalsato risulta uguale. Gli elementi di versioni precedenti ricevono i punti spostati alla prossima posa di un
-elemento. Lo spostamento è stato usato dall'autore dentro Fusion.
+Dalla 1.1.0.1 ogni punto è mostrato sulla superficie dell'elemento. Dove il posto della tabella è dentro il materiale
+o in aria – in una scanalatura, su un maschio, in un incavo – il punto si sposta sulla superficie accanto: prima in
+alto o in basso, altrimenti lungo la lunghezza. Cliccandolo si posiziona comunque rispetto al posto della tabella,
+quindi una parete a giunti sfalsati risulta uguale. Gli elementi posizionati con una versione precedente ricevono i
+punti spostati la prossima volta che si posiziona un elemento. Questo spostamento è stato usato dall'autore dentro
+Fusion.
 
-Stato: i punti sono testati solo offline, **non dentro Fusion**.
+Stato: i punti sono stati usati dall'autore dentro Fusion.
 
 ## Posiziona da
 
@@ -244,7 +245,7 @@ Stato: i punti sono testati solo offline, **non dentro Fusion**.
 
 I due angoli superiori usano l'altezza intera dell'elemento, non l'altezza del corso successivo.
 
-Stato: le scelte sotto **Posiziona da** sono testate solo offline, **non dentro Fusion**.
+Stato: le scelte sotto **Posiziona da** sono state usate dall'autore dentro Fusion.
 
 ## Rotazione
 
@@ -261,7 +262,7 @@ Stato: le scelte sotto **Posiziona da** sono testate solo offline, **non dentro 
 
 Esempio: nessun punto cliccato, **Spostamento Z** 300 mm. L'elemento viene posizionato 300 mm sopra l'origine.
 
-Stato: gli spostamenti sono testati solo offline, **non dentro Fusion**.
+Stato: gli spostamenti sono stati usati dall'autore dentro Fusion.
 
 ## Costruire una parete a giunti sfalsati
 

@@ -76,13 +76,15 @@ Tutte le facce sono piane e tutti gli spigoli sono rettilinei. Non ci sono super
 
 Quando si preme **OK**:
 
-1. L'add-in cerca nel progetto un componente di questo elemento.
+1. L'add-in passa in rassegna ogni elemento già presente nel progetto. I punti che mancano vengono aggiunti. I punti
+   che non sono dove devono stare vengono tolti e creati di nuovo. Così gli elementi posizionati con una versione
+   precedente vengono aggiornati.
+2. L'add-in cerca nel progetto un componente di questo elemento.
    - Cerca un contrassegno invisibile (un attributo di Fusion, gruppo `System3E`, nome `block`) con l'`id` dell'elemento.
    - Gli elementi posizionati prima che esistesse il contrassegno vengono trovati tramite il nome `SYSTEM 3E <name>`.
    - I componenti senza corpo e i componenti di un progetto collegato vengono saltati.
-2. **Trovato:** l'add-in aggiunge quelli dei dodici punti che mancano e inserisce un'altra copia di quel
-   componente nel nuovo posto.
-3. **Non trovato:** l'add-in costruisce il corpo, crea un nuovo componente di nome `SYSTEM 3E <name>` nel livello più alto
+3. **Trovato:** l'add-in inserisce un'altra copia di quel componente nel nuovo posto.
+4. **Non trovato:** l'add-in costruisce il corpo, crea un nuovo componente di nome `SYSTEM 3E <name>` nel livello più alto
    del progetto, lo contrassegna, vi mette il corpo di nome `<name>` e aggiunge i dodici punti.
 
 Poiché gli elementi uguali sono copie di un solo componente, una distinta dei pezzi li conta insieme.
@@ -96,8 +98,8 @@ annulla ciò che era stato costruito fino a quel momento.
 
 ## I punti di costruzione
 
-Ogni componente riceve dodici punti di costruzione. Con L = lunghezza, W = larghezza e S = `stack` dell'elemento, si
-trovano in questi posti nelle coordinate proprie dell'elemento (mm):
+Ogni componente riceve dodici punti di costruzione. Con L = lunghezza, W = larghezza e S = `stack` dell'elemento,
+rappresentano questi posti nelle coordinate proprie dell'elemento (mm):
 
 | Nome | x | y | z |
 | --- | --- | --- | --- |
@@ -122,8 +124,32 @@ I tre angoli offerti sotto **Posiziona da** non sono punti di costruzione. Con H
 | Angolo superiore anteriore destro | 0 | 0 | H |
 | Angolo superiore anteriore sinistro | 0 | W | H |
 
-Ogni punto porta un contrassegno invisibile (gruppo di attributi `System3E`, nome `point`) con la sua chiave. Da questo contrassegno
-l'add-in sa quali punti un componente ha già e aggiunge solo quelli mancanti.
+Questi posti derivano dalle dimensioni esterne. Su un elemento con un maschio, una scanalatura o un incavo un tale
+posto può essere dentro il materiale, dove il punto non si vede, oppure in aria. Allora il punto viene mostrato altrove:
+
+1. dritto sopra o sotto, sulla faccia più vicina;
+2. se sopra o sotto non c'è alcuna faccia, o se lì c'è già un altro punto: lungo la lunghezza;
+3. altrimenti nel posto più vicino sulla superficie, poi di traverso alla parete.
+
+Esempio `S1 WP`: "sopra centro" rappresenta l'altezza 250 mm ed è mostrato sopra il maschio a 300 mm. "sotto
+centro" rappresenta l'altezza 0 ed è mostrato nella scanalatura a 50 mm. Sui mezzi elementi d'angolo `SNL/2` e
+`SNP/2` non resta alcun posto libero per "sotto centro sinistra"; resta in aria.
+
+Ogni punto porta contrassegni invisibili (gruppo di attributi `System3E`):
+
+| Nome | Contenuto |
+| --- | --- |
+| `point` | La chiave del punto. Da essa l'add-in sa quali punti un componente ha già. |
+| `shift` | Il percorso da dove il punto è mostrato al posto che rappresenta, in mm. |
+| `asis` | Impostato quando Fusion ha messo il punto altrove e non è stato possibile correggerlo. Un tale punto viene lasciato com'è. |
+
+Quando si fa clic su uno di questi punti, l'add-in aggiunge `shift` e così posiziona rispetto al posto che il punto
+rappresenta. Una parete a giunti sfalsati risulta quindi uguale ovunque sia mostrato un punto.
+
+Dopo aver creato un punto, l'add-in rilegge dove Fusion lo ha messo. Per un nuovo tipo di elemento posizionato
+lontano dall'origine Fusion prendeva le coordinate come quelle dell'intero progetto; i punti stavano allora accanto
+all'elemento. In quel caso l'add-in trova la copia del componente il cui posizionamento spiega la differenza, rimuove
+il punto e lo crea di nuovo con coordinate corrette.
 
 Il punto appartiene al componente. Quindi ogni copia di un elemento mostra gli stessi dodici punti nel proprio posto.
 
@@ -137,6 +163,8 @@ Il punto appartiene al componente. Quindi ogni copia di un elemento mostra gli s
 Gli spostamenti vengono applicati dopo la rotazione. Quindi corrono lungo gli assi del progetto, non lungo l'elemento ruotato.
 
 La posizione di un punto di schizzo cliccato viene presa nelle coordinate dell'intero progetto, non del suo schizzo.
+La posizione di un punto di costruzione cliccato viene ricavata dal punto dentro il suo componente e dal
+posizionamento della copia che è stata cliccata.
 
 ## Unità
 

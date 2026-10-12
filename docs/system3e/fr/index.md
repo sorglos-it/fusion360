@@ -4,7 +4,7 @@ System3E est un complément pour Autodesk Fusion 360. Il place dans une concepti
 de construction à sec SYSTEM 3E. On clique sur un point, on choisit l'un des 74 éléments dans une liste, et
 l'élément est créé à cet endroit sous forme de corps solide.
 
-Cette documentation décrit la version 1.1.0.0.
+Cette documentation décrit la version 1.2.0.0.
 
 ## Sommaire
 
@@ -32,14 +32,13 @@ Autres fichiers : [journal des modifications](../CHANGELOG.md), [licence](../LIC
 | Partie | État |
 | --- | --- |
 | Placement des éléments | Utilisé dans Fusion par l'auteur |
-| Les douze points à cliquer | Testé hors ligne seulement, **pas dans Fusion** |
-| Les choix sous **Poser par** | Testé hors ligne seulement, **pas dans Fusion** |
-| **Décalage X**, **Décalage Y**, **Décalage Z** | Testé hors ligne seulement, **pas dans Fusion** |
+| Les douze points à cliquer | Utilisé dans Fusion par l'auteur |
+| Points montrés sur la surface et corrigés après la création d'un élément (depuis la 1.1.0.1) | Utilisé dans Fusion par l'auteur |
+| Les choix sous **Poser par** | Utilisé dans Fusion par l'auteur |
+| **Décalage X**, **Décalage Y**, **Décalage Z** | Utilisé dans Fusion par l'auteur |
 | Corrections de la version 1.0.0.1 (voir le [journal des modifications](../CHANGELOG.md)) | Pas encore confirmé dans Fusion |
 | Noms gauche/droite des éléments d'angle et de fenêtre | Comparés à l'œil avec les fiches du catalogue du fabricant, **non confirmés** |
 | Élément `S0/2 200 P` | Endommagé dans le fichier 3D du fabricant, reconstruit à partir de `S0/2 250 P` |
-
-« Hors ligne » signifie : vérifié par un programme de test sans Fusion. Voir [development.md](development.md).
 
 ## Mentions légales
 

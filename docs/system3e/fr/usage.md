@@ -226,13 +226,13 @@ cliqué. Rouge : peut être choisi sous **Poser par**. Vert : les deux.
 
 ![Les points sur l'élément S1 WP](../s1-wp-punkte.svg)
 
-Depuis la 1.1.0.1, chaque point est visible sur la surface de l'élément. Si l'endroit du tableau est dans la matière
+Depuis la 1.1.0.1, chaque point est montré sur la surface de l'élément. Si l'endroit du tableau est dans la matière
 ou dans le vide – dans une rainure, sur une languette, dans un évidement – le point passe sur la surface voisine :
 d'abord vers le haut ou le bas, sinon dans la longueur. Au clic, c'est toujours l'endroit du tableau qui compte ; un
-mur en appareil donne donc le même résultat. Les éléments posés par une version plus ancienne reçoivent leurs points
-déplacés à la prochaine pose d'un élément. Le déplacement a été utilisé par l'auteur dans Fusion.
+mur à joints décalés donne donc le même résultat. Les points des éléments placés par une version plus ancienne sont
+déplacés la prochaine fois qu'un élément est placé. Ce déplacement a été utilisé dans Fusion par l'auteur.
 
-État : les points sont testés hors ligne seulement, **pas dans Fusion**.
+État : les points ont été utilisés dans Fusion par l'auteur.
 
 ## Poser par
 
@@ -247,7 +247,7 @@ déplacés à la prochaine pose d'un élément. Le déplacement a été utilisé
 
 Les deux coins supérieurs utilisent la hauteur totale de l'élément, pas la hauteur du rang suivant.
 
-État : les choix sous **Poser par** sont testés hors ligne seulement, **pas dans Fusion**.
+État : les choix sous **Poser par** ont été utilisés dans Fusion par l'auteur.
 
 ## Rotation
 
@@ -265,7 +265,7 @@ Les deux coins supérieurs utilisent la hauteur totale de l'élément, pas la ha
 
 Exemple : aucun point cliqué, **Décalage Z** 300 mm. L'élément est placé 300 mm au-dessus de l'origine.
 
-État : les décalages sont testés hors ligne seulement, **pas dans Fusion**.
+État : les décalages ont été utilisés dans Fusion par l'auteur.
 
 ## Monter un mur à joints décalés
 

@@ -77,13 +77,15 @@ Toutes les faces sont planes et toutes les arêtes sont droites. Il n'y a pas de
 
 Quand on appuie sur **OK** :
 
-1. Le complément cherche dans la conception un composant de cet élément.
+1. Le complément passe en revue tous les éléments déjà présents dans la conception. Les points qui manquent sont
+   ajoutés. Les points qui ne sont pas à leur place sont retirés et créés à nouveau. Les éléments placés par une
+   version plus ancienne sont ainsi mis à jour.
+2. Le complément cherche dans la conception un composant de cet élément.
    - Il cherche une marque invisible (un attribut Fusion, groupe `System3E`, nom `block`) portant l'`id` de l'élément.
    - Les éléments placés avant l'existence de la marque sont retrouvés par le nom `SYSTEM 3E <name>`.
    - Les composants sans corps et les composants d'une conception liée sont ignorés.
-2. **Trouvé :** le complément ajoute ceux des douze points qui manquent, et insère une autre copie de ce
-   composant au nouvel endroit.
-3. **Non trouvé :** le complément construit le corps, crée un nouveau composant nommé `SYSTEM 3E <name>` au niveau
+3. **Trouvé :** le complément insère une autre copie de ce composant au nouvel endroit.
+4. **Non trouvé :** le complément construit le corps, crée un nouveau composant nommé `SYSTEM 3E <name>` au niveau
    supérieur de la conception, le marque, y place le corps nommé `<name>` et ajoute les douze points.
 
 Comme les éléments identiques sont des copies d'un seul composant, une liste de pièces les compte ensemble.
@@ -98,7 +100,7 @@ Fusion annule alors ce qui avait été construit jusque-là.
 ## Les points de construction
 
 Chaque composant reçoit douze points de construction. Avec L = longueur, W = largeur et S = `stack` de l'élément,
-ils se trouvent à ces endroits dans les coordonnées propres de l'élément (mm) :
+ils représentent ces endroits dans les coordonnées propres de l'élément (mm) :
 
 | Nom | x | y | z |
 | --- | --- | --- | --- |
@@ -124,8 +126,33 @@ trouvent en :
 | Coin supérieur avant droit | 0 | 0 | H |
 | Coin supérieur avant gauche | 0 | W | H |
 
-Chaque point porte une marque invisible (groupe d'attributs `System3E`, nom `point`) avec sa clé. Grâce à cette
-marque, le complément sait quels points un composant possède déjà et n'ajoute que ceux qui manquent.
+Ces endroits viennent des dimensions extérieures. Sur un élément qui a une languette, une rainure ou un évidement,
+un tel endroit peut être dans la matière, où le point ne se voit pas, ou dans le vide. Le point est alors montré
+ailleurs :
+
+1. juste au-dessus ou juste au-dessous, sur la face la plus proche ;
+2. s'il n'y a pas de face au-dessus ni au-dessous, ou si un autre point s'y trouve déjà : dans la longueur ;
+3. sinon à l'endroit le plus proche sur la surface, puis en travers du mur.
+
+Exemple `S1 WP` : « dessus milieu » représente la hauteur 250 mm et est montré sur le dessus de la languette, à
+300 mm. « dessous milieu » représente la hauteur 0 et est montré dans la rainure, à 50 mm. Sur les demi-éléments
+d'angle `SNL/2` et `SNP/2`, il ne reste aucun endroit libre pour « dessous milieu gauche » ; il reste dans le vide.
+
+Chaque point porte des marques invisibles (groupe d'attributs `System3E`) :
+
+| Nom | Contenu |
+| --- | --- |
+| `point` | La clé du point. Grâce à elle, le complément sait quels points un composant possède déjà. |
+| `shift` | Le chemin entre l'endroit où le point est montré et l'endroit qu'il représente, en mm. |
+| `asis` | Posée quand Fusion a mis le point ailleurs et que cela n'a pas pu être corrigé. Un tel point est laissé tel quel. |
+
+Quand on clique sur l'un de ces points, le complément ajoute `shift` et place ainsi d'après l'endroit que le point
+représente. Un mur à joints décalés donne donc le même résultat, où que le point soit montré.
+
+Après la création d'un point, le complément relit où Fusion l'a mis. Pour un nouveau type d'élément placé loin de
+l'origine, Fusion prenait les coordonnées pour celles de la conception entière ; les points se trouvaient alors à
+côté de l'élément. Dans ce cas, le complément trouve la copie du composant dont le placement explique l'écart,
+retire le point et le crée à nouveau avec des coordonnées corrigées.
 
 Le point appartient au composant. Chaque copie d'un élément montre donc les mêmes douze points à son propre
 emplacement.
@@ -141,7 +168,8 @@ Les décalages sont appliqués après la rotation. Ils suivent donc les axes de 
 tourné.
 
 La position d'un point d'esquisse cliqué est prise dans les coordonnées de la conception entière, pas dans celles
-de son esquisse.
+de son esquisse. La position d'un point de construction cliqué est calculée à partir du point dans son composant et
+du placement de la copie sur laquelle on a cliqué.
 
 ## Unités
 

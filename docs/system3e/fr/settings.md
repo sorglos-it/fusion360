@@ -43,7 +43,7 @@ Dans cet ordre :
 
 La signification de chaque entrée est expliquée dans [usage.md](usage.md).
 
-État : **Poser par** et les trois décalages sont testés hors ligne seulement, **pas dans Fusion**.
+État : **Poser par** et les trois décalages ont été utilisés dans Fusion par l'auteur.
 
 ## Ce qui est mémorisé
 

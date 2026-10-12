@@ -14,7 +14,7 @@ Retour à la [vue d'ensemble](index.md).
 ## Installer à partir du ZIP de la version
 
 1. Ouvrir <https://github.com/sorglos-it/fusion360/releases>.
-2. Télécharger le fichier `System3E-<version>.zip`, par exemple `System3E-1.1.0.0.zip`.
+2. Télécharger le fichier `System3E-<version>.zip`, par exemple `System3E-1.2.0.0.zip`.
 3. Décompresser le ZIP dans le dossier des compléments de Fusion :
 
    | Système | Dossier |
@@ -41,7 +41,7 @@ l'Explorateur et appuyer sur Entrée.
 4. Appuyer sur **Run**.
 5. Ouvrir l'onglet **SOLID**. Le bouton **Élément SYSTEM 3E** se trouve dans le panneau **Create**.
 
-Le bouton affiche la version entre parenthèses, par exemple **Élément SYSTEM 3E (1.1.0.0)**.
+Le bouton affiche la version entre parenthèses, par exemple **Élément SYSTEM 3E (1.2.0.0)**.
 
 Le complément est marqué pour démarrer en même temps que Fusion (`runOnStartup` dans son fichier manifeste). Après
 le premier démarrage, il n'est normalement plus nécessaire d'appuyer sur **Run**.

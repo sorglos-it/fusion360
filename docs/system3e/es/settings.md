@@ -2,7 +2,8 @@
 
 Volver al [resumen](index.md).
 
-El complemento no tiene página de ajustes ni archivo de ajustes. Todo lo que se puede ajustar está en el cuadro de diálogo del comando **Elemento SYSTEM 3E**.
+El complemento no tiene página de ajustes ni archivo de ajustes. Todo lo que se puede ajustar está en el cuadro de
+diálogo del comando **Elemento SYSTEM 3E**.
 
 ## Los campos del cuadro de diálogo
 
@@ -42,11 +43,12 @@ En este orden:
 
 Lo que significa cada entrada se explica en [usage.md](usage.md).
 
-Estado: **Colocar por** y los tres desplazamientos están probados solo sin conexión, **no dentro de Fusion**.
+Estado: **Colocar por** y los tres desplazamientos han sido usados dentro de Fusion por el autor.
 
 ## Qué se recuerda
 
-Después de pulsar **OK** y de que el elemento se haya creado, el complemento recuerda estos valores para la próxima vez:
+Después de pulsar **OK** y de que el elemento se haya creado, el complemento recuerda estos valores para la próxima
+vez:
 
 - **Familia**
 - **Elemento**
@@ -70,8 +72,10 @@ El complemento tiene sus textos en cinco idiomas: alemán, inglés, español, fr
 
 El idioma no se puede elegir en el complemento. Se elige cuando el complemento se inicia:
 
-1. El complemento pregunta a Fusion por el idioma ajustado en las preferencias de Fusion. Si es uno de los cinco, se usa ese.
-2. Si no, mira los ajustes de idioma del sistema operativo (las variables de entorno `LANG`, `LANGUAGE`, `LC_ALL`, y después la configuración regional del sistema).
+1. El complemento pregunta a Fusion por el idioma ajustado en las preferencias de Fusion. Si es uno de los cinco,
+   se usa ese.
+2. Si no, mira los ajustes de idioma del sistema operativo (las variables de entorno `LANG`,
+   `LANGUAGE`, `LC_ALL`, y después la configuración regional del sistema).
 3. Si nada de esto da uno de los cinco idiomas, se usa el inglés.
 
 Más detalles:
@@ -79,7 +83,8 @@ Más detalles:
 - Para cambiar el idioma, hay que cambiar el idioma en las preferencias de Fusion e iniciar el complemento otra vez.
 - Si falta un texto en un idioma, se muestra en su lugar el texto en inglés.
 - Los nombres de los elementos (`S1 WP`) y de los componentes (`SYSTEM 3E S1 WP`) no se traducen.
-- Los nombres de los doce puntos se escriben en el diseño cuando un elemento se coloca por primera vez. Conservan ese idioma, aunque el complemento funcione después en otro idioma.
+- Los nombres de los doce puntos se escriben en el diseño cuando un elemento se coloca por primera vez. Conservan
+  ese idioma, aunque el complemento funcione después en otro idioma.
 
 ## Valores fijos que no se pueden cambiar en el cuadro de diálogo
 

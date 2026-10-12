@@ -4,7 +4,8 @@ Volver al [resumen](index.md).
 
 ## Mensajes
 
-Estos son todos los mensajes que puede mostrar el complemento. Los textos se citan del archivo de idioma español. En otros idiomas el texto está traducido. Los cuadros de mensaje llevan el título "Elemento SYSTEM 3E".
+Estos son todos los mensajes que puede mostrar el complemento. Los textos se citan del archivo de idioma español.
+En otros idiomas el texto está traducido. Los cuadros de mensaje llevan el título "Elemento SYSTEM 3E".
 
 ### "Elija un elemento."
 
@@ -82,22 +83,35 @@ Estos son todos los mensajes que puede mostrar el complemento. Los textos se cit
 | El elemento está girado hacia el lado equivocado. | Un **Giro** positivo gira en sentido contrario a las agujas del reloj, visto desde arriba. | Escribir el ángulo con el otro signo. |
 | Los desplazamientos mueven el elemento en una dirección inesperada. | Los desplazamientos van a lo largo de los ejes del diseño, no a lo largo del elemento girado. | Usar el eje que corresponde a la dirección en el diseño. |
 | Los nombres de los puntos están en otro idioma que el cuadro de diálogo. | Los nombres de los puntos se escriben cuando un elemento se coloca por primera vez en un diseño y se conservan. | Cambiar el nombre de los puntos a mano si hace falta. |
-| Un elemento más antiguo tiene menos de doce puntos. | Se colocó con una versión anterior. | Colocar el mismo elemento una vez más en ese diseño. Los puntos que faltan se añaden a todas sus copias. |
+| Un elemento más antiguo tiene menos de doce puntos. | Se colocó con una versión anterior. | Colocar un elemento cualquiera una vez más en ese diseño. Cada elemento recibe los puntos que le faltan. |
+| Los puntos están al lado del elemento, no sobre él. | El elemento se colocó lejos del origen con una versión anterior a la 1.1.0.1. | Colocar un elemento cualquiera una vez más en ese diseño. Los puntos se crean de nuevo en el lugar correcto. |
+| Un punto no está exactamente en la mitad del ancho o en la cara inferior. | El lugar exacto está dentro del material o en el aire, así que el punto se muestra sobre la superficie de al lado. | Nada. Al hacer clic en él se sigue colocando por el lugar exacto. Véase [usage.md](usage.md). |
+| Después de una actualización, Fusion sigue mostrando la versión antigua en el botón. | Fusion ejecuta la copia que está en su carpeta de complementos, no la descargada. | Descomprimir el ZIP nuevo sobre la carpeta antigua, y después detener y ejecutar el complemento. Véase [installation.md](installation.md). |
 | El cuadro de diálogo empieza otra vez con los valores por defecto. | Los valores recordados duran solo hasta que Fusion se cierra o el complemento se detiene. | – |
 | Una lista de piezas muestra el mismo elemento en varias líneas. | Los elementos se colocaron con la versión 0.2.0, que creaba un componente nuevo cada vez. A partir de ahora solo se reutiliza el primero de ellos. | Sustituir los antiguos por elementos colocados de nuevo. |
 
 ## Límites conocidos
 
-- **Sin probar dentro de Fusion:** los doce puntos, las opciones de **Colocar por** y los desplazamientos X/Y/Z están probados solo sin conexión. La colocación de elementos como tal ha sido usada dentro de Fusion por el autor.
-- **Sin probar dentro de Fusion:** las correcciones de la versión 1.0.0.1 (véase el [registro de cambios](../CHANGELOG.md)).
-- **Izquierda y derecha:** los nombres izquierda/derecha de los elementos de esquina y de ventana se compararon a ojo con las fichas del catálogo del fabricante. No están confirmados.
-- **`S0/2 200 P`:** este elemento está dañado en el archivo 3D del fabricante. Se reconstruye a partir de `S0/2 250 P`.
-- **Eje vertical:** el complemento trata siempre el eje Z del diseño como «arriba». No tiene en cuenta un ajuste de orientación distinto en Fusion.
-- **Solo nivel superior:** los elementos se crean siempre en el nivel superior del diseño (el componente raíz), no en el componente que está activo en ese momento.
-- **Diseños vinculados:** un elemento que está dentro de un diseño vinculado no se reutiliza. El complemento crea su propio componente.
-- **Sin comprobación de encaje:** el complemento no comprueba si los elementos se solapan, si una junta encaja o si un muro se puede construir.
+- **Sin probar dentro de Fusion:** las correcciones de la versión 1.0.0.1 (véase el
+  [registro de cambios](../CHANGELOG.md)).
+- **Un punto en el aire:** en los medios elementos de esquina `SNL/2` y `SNP/2` el punto "abajo centro izquierda"
+  no tiene ningún lugar libre en la superficie y se queda en el aire.
+- **Izquierda y derecha:** los nombres izquierda/derecha de los elementos de esquina y de ventana se compararon a
+  ojo con las fichas del catálogo del fabricante. No están confirmados.
+- **`S0/2 200 P`:** este elemento está dañado en el archivo 3D del fabricante. Se reconstruye a partir de
+  `S0/2 250 P`.
+- **Eje vertical:** el complemento trata siempre el eje Z del diseño como «arriba». No tiene en cuenta un ajuste
+  de orientación distinto en Fusion.
+- **Solo nivel superior:** los elementos se crean siempre en el nivel superior del diseño (el componente raíz), no
+  en el componente que está activo en ese momento.
+- **Diseños vinculados:** un elemento que está dentro de un diseño vinculado no se reutiliza. El complemento crea
+  su propio componente.
+- **Sin comprobación de encaje:** el complemento no comprueba si los elementos se solapan, si una junta encaja o
+  si un muro se puede construir.
 - **Un elemento por ejecución:** no hay ninguna función para hiladas o muros enteros.
 - **Giro:** solo alrededor del eje vertical. Los elementos no se pueden inclinar en el cuadro de diálogo.
 - **Cuerpo compartido:** todas las copias de un elemento comparten un solo cuerpo. Cambiar una las cambia todas.
-- **Tamaños:** las formas proceden del archivo 3D del fabricante y están redondeadas a 0,1 mm. Los cuatro elementos de tabique son bloques lisos sin perfil.
-- **Sin afiliación:** el complemento no está afiliado a SYSTEM 3E. No sustituye a los documentos de planificación del fabricante.
+- **Tamaños:** las formas proceden del archivo 3D del fabricante y están redondeadas a 0,1 mm. Los cuatro
+  elementos de tabique son bloques lisos sin perfil.
+- **Sin afiliación:** el complemento no está afiliado a SYSTEM 3E. No sustituye a los documentos de planificación
+  del fabricante.

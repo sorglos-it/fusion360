@@ -4,7 +4,7 @@ System3E is an add-in for Autodesk Fusion 360. It places wall elements of the SY
 system in a design. You click a point, choose one of 74 elements from a list, and the element is created there
 as a solid body.
 
-This documentation describes version 1.1.0.0.
+This documentation describes version 1.2.0.0.
 
 ## Contents
 
@@ -39,8 +39,6 @@ Further files: [change log](../CHANGELOG.md), [licence](../LICENSE), [drawing of
 | Fixes of version 1.0.0.1 (see the [change log](../CHANGELOG.md)) | Not yet confirmed inside Fusion |
 | Left/right names of the corner and window elements | Matched by eye against the manufacturer's catalogue cards, **not confirmed** |
 | Element `S0/2 200 P` | Damaged in the manufacturer's 3D file, rebuilt from `S0/2 250 P` |
-
-"Offline" means: checked by a test program without Fusion. See [development.md](development.md).
 
 ## Legal
 

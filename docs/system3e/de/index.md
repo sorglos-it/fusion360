@@ -4,7 +4,7 @@ System3E ist ein Add-In für Autodesk Fusion 360. Es setzt Wandbausteine des mö
 in eine Konstruktion. Punkt anklicken, einen von 74 Bausteinen aus einer Liste wählen – der Baustein entsteht dort
 als Volumenkörper.
 
-Diese Dokumentation beschreibt die Version 1.1.0.0.
+Diese Dokumentation beschreibt die Version 1.2.0.0.
 
 ## Inhalt
 
@@ -25,21 +25,21 @@ Weitere Dateien: [Änderungsprotokoll](../CHANGELOG.md), [Lizenz](../LICENSE), [
 - Die Schaltfläche öffnet einen Dialog mit acht Feldern und einem Vorschaubild.
 - Der Baustein entsteht als Komponente mit einem Volumenkörper.
 - Jeder Baustein trägt zwölf eigene Punkte. Sie lassen sich anklicken, um den nächsten Baustein zu setzen.
-- Derselbe Baustein, noch einmal gesetzt, ist eine weitere Kopie derselben Komponente. Eine Stückliste zählt gleiche Bausteine zusammen.
+- Derselbe Baustein, noch einmal gesetzt, ist eine weitere Kopie derselben Komponente. Eine Stückliste zählt gleiche
+  Bausteine zusammen.
 
 ## Was geprüft ist und was nicht
 
 | Teil | Stand |
 | --- | --- |
 | Bausteine setzen | Vom Autor in Fusion benutzt |
-| Die zwölf Punkte zum Anklicken | Nur offline geprüft, **nicht in Fusion** |
-| Die Auswahl unter **Setzen an** | Nur offline geprüft, **nicht in Fusion** |
-| **Versatz X**, **Versatz Y**, **Versatz Z** | Nur offline geprüft, **nicht in Fusion** |
+| Die zwölf Punkte zum Anklicken | Vom Autor in Fusion benutzt |
+| Punkte sichtbar auf der Oberfläche und nach dem Erzeugen eines Bausteins korrigiert (seit 1.1.0.1) | Vom Autor in Fusion benutzt |
+| Die Auswahl unter **Setzen an** | Vom Autor in Fusion benutzt |
+| **Versatz X**, **Versatz Y**, **Versatz Z** | Vom Autor in Fusion benutzt |
 | Korrekturen der Version 1.0.0.1 (siehe [Änderungsprotokoll](../CHANGELOG.md)) | In Fusion noch nicht bestätigt |
 | Links/Rechts-Namen der Eck- und Fensterbausteine | Nach Augenmaß mit den Katalogblättern des Herstellers abgeglichen, **nicht bestätigt** |
 | Baustein `S0/2 200 P` | In der 3D-Datei des Herstellers beschädigt, aus `S0/2 250 P` nachgebaut |
-
-„Offline“ heißt: von einem Testprogramm ohne Fusion geprüft. Siehe [development.md](development.md).
 
 ## Rechtliches
 

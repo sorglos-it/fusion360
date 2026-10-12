@@ -4,7 +4,7 @@ System3E è un add-in per Autodesk Fusion 360. Posiziona in un progetto gli elem
 costruttivo a secco SYSTEM 3E. Si fa clic su un punto, si sceglie uno dei 74 elementi da un elenco e l'elemento
 viene creato lì come corpo solido.
 
-Questa documentazione descrive la versione 1.1.0.0.
+Questa documentazione descrive la versione 1.2.0.0.
 
 ## Contenuto
 
@@ -32,14 +32,13 @@ Altri file: [registro delle modifiche](../CHANGELOG.md), [licenza](../LICENSE), 
 | Parte | Stato |
 | --- | --- |
 | Posizionamento degli elementi | Usato dall'autore dentro Fusion |
-| I dodici punti da cliccare | Testati solo offline, **non dentro Fusion** |
-| Le scelte sotto **Posiziona da** | Testate solo offline, **non dentro Fusion** |
-| **Spostamento X**, **Spostamento Y**, **Spostamento Z** | Testati solo offline, **non dentro Fusion** |
+| I dodici punti da cliccare | Usati dall'autore dentro Fusion |
+| Punti mostrati sulla superficie e corretti dopo la creazione di un elemento (dalla 1.1.0.1) | Usati dall'autore dentro Fusion |
+| Le scelte sotto **Posiziona da** | Usate dall'autore dentro Fusion |
+| **Spostamento X**, **Spostamento Y**, **Spostamento Z** | Usati dall'autore dentro Fusion |
 | Correzioni della versione 1.0.0.1 (vedere il [registro delle modifiche](../CHANGELOG.md)) | Non ancora confermate dentro Fusion |
 | Nomi sinistra/destra degli elementi d'angolo e per finestra | Abbinati a occhio alle schede di catalogo del produttore, **non confermati** |
 | Elemento `S0/2 200 P` | Danneggiato nel file 3D del produttore, ricostruito da `S0/2 250 P` |
-
-"Offline" significa: controllato da un programma di test senza Fusion. Vedere [development.md](development.md).
 
 ## Note legali
 

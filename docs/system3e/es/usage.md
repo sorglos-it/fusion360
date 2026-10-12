@@ -2,7 +2,8 @@
 
 Volver al [resumen](index.md).
 
-El complemento tiene una sola función: el comando **Elemento SYSTEM 3E**. Coloca un elemento de muro cada vez que se ejecuta.
+El complemento tiene una sola función: el comando **Elemento SYSTEM 3E**. Coloca un elemento de muro cada vez que
+se ejecuta.
 
 ## Colocar un elemento
 
@@ -21,12 +22,15 @@ El complemento tiene una sola función: el comando **Elemento SYSTEM 3E**. Coloc
 6. Mirar la imagen que hay debajo de la lista. Muestra el elemento elegido.
 7. **Colocar por**: elegir qué lugar del elemento cae sobre el punto. Véase más abajo.
 8. **Giro**: escribir un ángulo si el elemento debe girarse.
-9. **Desplazamiento X**, **Desplazamiento Y**, **Desplazamiento Z**: escribir una distancia si el elemento debe alejarse del punto.
+9. **Desplazamiento X**, **Desplazamiento Y**, **Desplazamiento Z**: escribir una distancia si el elemento debe
+   alejarse del punto.
 10. Pulsar **OK**.
 
-También se puede hacer clic primero en el punto y después en el botón. El complemento pasa el punto al campo **Punto**.
+También se puede hacer clic primero en el punto y después en el botón. El complemento pasa el punto al campo
+**Punto**.
 
-Mientras el cuadro de diálogo está abierto, Fusion muestra el elemento en su lugar como vista previa. Se crea de forma definitiva al pulsar **OK**.
+Mientras el cuadro de diálogo está abierto, Fusion muestra el elemento en su lugar como vista previa. Se crea de
+forma definitiva al pulsar **OK**.
 
 ## Familia y elemento
 
@@ -165,13 +169,16 @@ Notas sobre la lista:
 
 - Los tamaños son las medidas exteriores guardadas en la biblioteca de elementos, redondeadas a mm enteros.
 - Los nombres son los nombres del catálogo. El complemento no los traduce.
-- Los nombres izquierda/derecha de los elementos de esquina y de ventana se compararon a ojo con las fichas del catálogo del fabricante. **No están confirmados**. Conviene comprobar la imagen y el cuerpo colocado antes de fiarse del nombre.
+- Los nombres izquierda/derecha de los elementos de esquina y de ventana se compararon a ojo con las fichas del
+  catálogo del fabricante. **No están confirmados**. Conviene comprobar la imagen y el cuerpo colocado antes de
+  fiarse del nombre.
 - `S0/2 200 P` está dañado en el archivo 3D del fabricante. Su forma se reconstruye a partir de `S0/2 250 P`.
 - Los cuatro elementos de tabique son bloques lisos. Sus tamaños proceden de las fichas del catálogo.
 
 ## La imagen de vista previa
 
-- La imagen muestra el elemento elegido como vista sombreada en gris, visto desde delante a la izquierda y desde arriba.
+- La imagen muestra el elemento elegido como vista sombreada en gris, visto desde delante a la izquierda y desde
+  arriba.
 - Cambia cuando se cambia **Familia** o **Elemento**.
 - Las imágenes se dibujan a partir de la biblioteca de elementos. No están tomadas del catálogo del fabricante.
 
@@ -189,11 +196,14 @@ Estas palabras se usan para los puntos y en **Colocar por**.
 
 Una hilada es una capa de elementos en un muro.
 
-Con **Giro** 0, el largo va a lo largo del eje X del diseño, el espesor del muro a lo largo de Y y el alto a lo largo de Z. «Derecha» es entonces el lado con el valor de Y más pequeño.
+Con **Giro** 0, el largo va a lo largo del eje X del diseño, el espesor del muro a lo largo de Y y el alto a lo
+largo de Z. «Derecha» es entonces el lado con el valor de Y más pequeño.
 
 ## Los doce puntos de un elemento
 
-Cada elemento colocado lleva doce puntos de construcción. Un punto de construcción es un punto auxiliar de Fusion en el que se puede hacer clic. Los puntos tienen nombre. Los nombres se escriben en el idioma que usaba el complemento cuando el elemento se colocó por primera vez.
+Cada elemento colocado lleva doce puntos de construcción. Un punto de construcción es un punto auxiliar de Fusion
+en el que se puede hacer clic. Los puntos tienen nombre. Los nombres se escriben en el idioma que usaba el
+complemento cuando el elemento se colocó por primera vez.
 
 | Nombre | Dónde está |
 | --- | --- |
@@ -210,23 +220,27 @@ Cada elemento colocado lleva doce puntos de construcción. Un punto de construcc
 | centro derecha, 50 mm arriba | 50 mm por encima de la cara inferior, mitad del largo, cara derecha del muro |
 | centro izquierda, 50 mm arriba | 50 mm por encima de la cara inferior, mitad del largo, cara izquierda del muro |
 
-«Altura de la hilada siguiente»: los elementos con el perfil en relieve en la parte superior sostienen la hilada siguiente 50 mm por debajo de su punto más alto. Los elementos planos la sostienen arriba del todo. Ejemplo: `S1 WP` mide 300 mm de alto, la hilada siguiente se apoya a 250 mm.
+«Altura de la hilada siguiente»: los elementos con el perfil en relieve en la parte superior sostienen la hilada
+siguiente 50 mm por debajo de su punto más alto. Los elementos planos la sostienen arriba del todo. Ejemplo:
+`S1 WP` mide 300 mm de alto, la hilada siguiente se apoya a 250 mm.
 
-El dibujo muestra todos los puntos sobre el elemento básico `S1 WP`. Sus rótulos están en alemán. Amarillo: se puede hacer clic. Rojo: se puede elegir en **Colocar por**. Verde: ambas cosas.
+El dibujo muestra todos los puntos sobre el elemento básico `S1 WP`. Sus rótulos están en alemán. Amarillo: se
+puede hacer clic. Rojo: se puede elegir en **Colocar por**. Verde: ambas cosas.
 
 ![Los puntos del elemento S1 WP](../s1-wp-punkte.svg)
 
-Desde la 1.1.0.1 cada punto se ve sobre la superficie del elemento. Si el lugar de la tabla está dentro del material
-o en el aire – en una ranura, sobre una lengüeta, en un hueco – el punto pasa a la superficie de al lado: primero
-hacia arriba o abajo, si no a lo largo. Al hacer clic sigue contando el lugar de la tabla, así que un muro trabado
-sale igual. Los elementos de versiones anteriores reciben sus puntos movidos la próxima vez que se coloque un
-elemento. El movimiento ha sido usado por el autor dentro de Fusion.
+Desde la 1.1.0.1 cada punto se muestra sobre la superficie del elemento. Si el lugar de la tabla está dentro del
+material o en el aire – en una ranura, sobre una lengüeta, en un hueco – el punto pasa a la superficie de al lado:
+primero hacia arriba o hacia abajo, si no a lo largo. Al hacer clic en él se sigue colocando por el lugar de la
+tabla, así que un muro a matajunta sale igual. Los elementos colocados con una versión anterior reciben sus puntos
+movidos la próxima vez que se coloque un elemento. Este movimiento ha sido usado dentro de Fusion por el autor.
 
-Estado: los puntos están probados solo sin conexión, **no dentro de Fusion**.
+Estado: los puntos han sido usados dentro de Fusion por el autor.
 
 ## Colocar por
 
-**Colocar por** decide qué lugar del elemento nuevo cae sobre el punto en el que se hizo clic. La lista tiene 15 entradas:
+**Colocar por** decide qué lugar del elemento nuevo cae sobre el punto en el que se hizo clic. La lista tiene 15
+entradas:
 
 | Entrada | Lugar del elemento |
 | --- | --- |
@@ -237,24 +251,27 @@ Estado: los puntos están probados solo sin conexión, **no dentro de Fusion**.
 
 Las dos esquinas superiores usan el alto completo del elemento, no la altura de la hilada siguiente.
 
-Estado: las opciones de **Colocar por** están probadas solo sin conexión, **no dentro de Fusion**.
+Estado: las opciones de **Colocar por** han sido usadas dentro de Fusion por el autor.
 
 ## Giro
 
 - **Giro** gira el elemento alrededor del eje vertical. Es el eje Z del diseño.
-- El giro se hace alrededor del lugar elegido en **Colocar por**. Ese lugar se queda sobre el punto en el que se hizo clic.
-- El ángulo se indica en grados. Un ángulo positivo gira en sentido contrario a las agujas del reloj, visto desde arriba.
+- El giro se hace alrededor del lugar elegido en **Colocar por**. Ese lugar se queda sobre el punto en el que se
+  hizo clic.
+- El ángulo se indica en grados. Un ángulo positivo gira en sentido contrario a las agujas del reloj, visto desde
+  arriba.
 
 ## Desplazamientos
 
-- **Desplazamiento X**, **Desplazamiento Y** y **Desplazamiento Z** alejan el elemento del punto en el que se hizo clic.
+- **Desplazamiento X**, **Desplazamiento Y** y **Desplazamiento Z** alejan el elemento del punto en el que se hizo
+  clic.
 - Los valores están en mm.
 - Van a lo largo de los ejes del diseño. No giran con el elemento.
 - Los valores negativos mueven en la otra dirección.
 
 Ejemplo: ningún punto seleccionado, **Desplazamiento Z** 300 mm. El elemento se coloca 300 mm por encima del origen.
 
-Estado: los desplazamientos están probados solo sin conexión, **no dentro de Fusion**.
+Estado: los desplazamientos han sido usados dentro de Fusion por el autor.
 
 ## Construir un muro a matajunta
 
@@ -273,15 +290,22 @@ Los ajustes se quedan como se dejaron, así que solo hay que hacer clic en el pu
 
 Notas:
 
-- El paso 6 es el camino que da la propia descripción del complemento para un muro a matajunta. Los pasos 2 a 4 se deducen de las posiciones de los puntos; **no están probados dentro de Fusion**.
-- En los elementos con lengüeta en el extremo (3 mm más largos, nombres que terminan en `WP` o `P`), los puntos **abajo delante** y **abajo detrás** están en los extremos más exteriores. Conviene comprobar en el diseño la junta entre dos elementos.
+- El paso 6 es el camino que da la propia descripción del complemento para un muro a matajunta. Los pasos 2 a 4 se
+  deducen de las posiciones de los puntos; **no están probados dentro de Fusion**.
+- En los elementos con lengüeta en el extremo (3 mm más largos, nombres que terminan en `WP` o `P`), los puntos
+  **abajo delante** y **abajo detrás** están en los extremos más exteriores. Conviene comprobar en el diseño la
+  junta entre dos elementos.
 - El complemento no comprueba si los elementos se solapan ni si un elemento cabe en un lugar.
 
 ## Lista de piezas: cómo cuentan los elementos iguales
 
-- La primera vez que se coloca un elemento, el complemento crea un componente llamado `SYSTEM 3E <name>`, por ejemplo `SYSTEM 3E S1 WP`. El cuerpo que hay dentro se llama como el elemento, por ejemplo `S1 WP`.
-- Cada vez más que se coloca el mismo elemento en ese diseño, el complemento añade otra copia de ese mismo componente. No crea un componente nuevo.
-- Por eso una lista de piezas muestra una sola línea para el elemento con su cantidad, y no `S1 WP`, `S1 WP (1)`, `S1 WP (2)`.
-- Se puede cambiar el nombre del componente. El complemento lo sigue encontrando, porque deja en él una marca invisible.
+- La primera vez que se coloca un elemento, el complemento crea un componente llamado `SYSTEM 3E <name>`,
+  por ejemplo `SYSTEM 3E S1 WP`. El cuerpo que hay dentro se llama como el elemento, por ejemplo `S1 WP`.
+- Cada vez más que se coloca el mismo elemento en ese diseño, el complemento añade otra copia de ese mismo
+  componente. No crea un componente nuevo.
+- Por eso una lista de piezas muestra una sola línea para el elemento con su cantidad, y no `S1 WP`, `S1 WP (1)`,
+  `S1 WP (2)`.
+- Se puede cambiar el nombre del componente. El complemento lo sigue encontrando, porque deja en él una marca
+  invisible.
 - Como las copias comparten un solo componente, un cambio en el cuerpo de una copia cambia todas las copias.
 - Todos los elementos se crean directamente en el nivel superior del diseño (el componente raíz).

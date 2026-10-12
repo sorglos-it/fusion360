@@ -23,11 +23,14 @@ Todos los comandos se ejecutan desde la raíz del repositorio <https://github.co
 | `assets/system3e/` | El archivo 3D del fabricante. **No está en el repositorio**, se guarda en local. |
 | `dist/` | Archivos ZIP de publicación. No están en Git. |
 
-`System3E.py` tiene dos zonas marcadas. El código propio del complemento está entre `CONFIGURE` y `END OF TEMPLATE`; los manejadores de eventos y `run`/`stop`, que están debajo, son el armazón. El complemento se generó a partir de la plantilla de complementos del repositorio.
+`System3E.py` tiene dos zonas marcadas. El código propio del complemento está entre `CONFIGURE` y `END OF TEMPLATE`;
+los manejadores de eventos y `run`/`stop`, que están debajo, son el armazón. El complemento se generó a partir de
+la plantilla de complementos del repositorio.
 
 ## Pruebas
 
-Las dos pruebas funcionan sin Fusion. Ponen sustitutos de los módulos `adsk` en `sys.modules` e importan el complemento. Solo biblioteca estándar.
+Las dos pruebas funcionan sin Fusion. Ponen sustitutos de los módulos `adsk` en `sys.modules` e importan el
+complemento. Solo biblioteca estándar.
 
 ```bash
 python apps/desktop-system3e/tests/test_addin.py
@@ -60,17 +63,21 @@ Opciones: `--addin <name>` y `--path <folder>` dirigen la prueba a otra carpeta 
 | 2) Solids | Cada elemento es un sólido cerrado con caras planas, los contornos van en el sentido correcto, el volumen es posible, la esquina está en el origen, el tamaño y los puntos concuerdan, el tamaño corresponde al nombre del catálogo, no hay dos elementos con la misma forma |
 | 3) Pictures | Cada elemento tiene un PNG, no sobran imágenes |
 | 4) Add-in | El complemento lee todos los elementos; cada familia, cada ancla y cada nombre de punto tiene un texto en los cinco idiomas; el elemento por defecto y el ancla por defecto existen |
-| 5) Points for clicking | La altura de apilado de `S1 WP` es 250 y la de `EU 200 W` es 200; posiciones de las anclas; doce puntos con nombre por elemento, todos en lugares distintos y sobre el elemento; `make_body()` convierte cada punto en un vértice, define cada cara, usa cada arista una vez en cada sentido y convierte mm a cm |
+| 5) Points for clicking | La altura de apilado de `S1 WP` es 250 y la de `EU 200 W` es 200; posiciones de las anclas; doce puntos con nombre por elemento, todos en lugares distintos y sobre el elemento; cada punto se muestra sobre la superficie sin que haya dos en un mismo lugar; los elementos de cualquier antigüedad acaban con los doce puntos; un elemento lejos del origen recibe sus puntos sobre el elemento; `make_body()` convierte cada punto en un vértice, define cada cara, usa cada arista una vez en cada sentido y convierte mm a cm |
 
-Lo que las pruebas no pueden decir: si Fusion acepta un cuerpo, crea los puntos de construcción o coloca la ocurrencia correctamente. Eso solo se sabe dentro de Fusion.
+Lo que las pruebas no pueden decir: si Fusion acepta un cuerpo, crea los puntos de construcción o coloca la
+ocurrencia correctamente. Eso solo se sabe dentro de Fusion.
 
-Estado de las pruebas dentro de Fusion: la colocación de elementos ha sido usada por el autor. Los doce puntos, **Colocar por** y los desplazamientos X/Y/Z solo se han probado sin conexión. Las correcciones de la 1.0.0.1 aún no están confirmadas dentro de Fusion.
+Estado de las pruebas dentro de Fusion: la colocación de elementos, los doce puntos, **Colocar por** y los
+desplazamientos X/Y/Z han sido usados por el autor. Las correcciones de la 1.0.0.1 aún no están confirmadas dentro
+de Fusion.
 
 ## Reconstruir la biblioteca de elementos
 
 `blocks/blocks.json` y las imágenes se generan. No hay que editarlos a mano.
 
-Origen: el archivo 3D del fabricante `assets/system3e/SYSTEM 3E START.3ds`. **No forma parte del repositorio**. Sin él no se puede reconstruir la biblioteca; el script se detiene con "Source file missing".
+Origen: el archivo 3D del fabricante `assets/system3e/SYSTEM 3E START.3ds`. **No forma parte del repositorio**.
+Sin él no se puede reconstruir la biblioteca; el script se detiene con "Source file missing".
 
 ```bash
 python tools/system3e/build_library.py
@@ -80,20 +87,27 @@ python tools/system3e/build_library.py
 python tools/system3e/build_library.py --no-pictures
 ```
 
-Las imágenes necesitan el paquete de Python Pillow. `--no-pictures` las omite. El complemento en sí no necesita ninguna de las dos cosas.
+Las imágenes necesitan el paquete de Python Pillow. `--no-pictures` las omite. El complemento en sí no necesita
+ninguna de las dos cosas.
 
 Qué hace la generación:
 
 1. `mesh_to_solid.read_3ds()` lee cada malla de triángulos del archivo y la convierte a mm.
-2. `mesh_to_solid.solid_from_mesh()` suelda los puntos que están a menos de 0,3 mm, ordena los triángulos en planos, une todos los triángulos de un plano en contornos (con agujeros), descarta los puntos que están en medio de aristas rectas y comprueba que cada arista se usa una vez en cada sentido. La esquina más baja de la caja envolvente pasa a ser el origen.
+2. `mesh_to_solid.solid_from_mesh()` suelda los puntos que están a menos de 0,3 mm, ordena los triángulos en
+   planos, une todos los triángulos de un plano en contornos (con agujeros), descarta los puntos que están en medio
+   de aristas rectas y comprueba que cada arista se usa una vez en cada sentido. La esquina más baja de la caja
+   envolvente pasa a ser el origen.
 3. La tabla `NAMES` da a cada número de malla su nombre del catálogo. El archivo 3D no lleva nombres.
 4. Los cuatro elementos de tabique se añaden como cajas lisas con los tamaños de la tabla `PARTITION`.
 5. `S0/2 200 P` se reconstruye (véase más abajo).
-6. `straighten()` da a los puntos que deben compartir una coordenada exactamente el mismo valor, con precisión de 0,1 mm.
-7. `bend()` vuelve a calcular la normal de cada cara a partir de su contorno. `stack_level()` halla la altura de apilado.
+6. `straighten()` da a los puntos que deben compartir una coordenada exactamente el mismo valor, con precisión de
+   0,1 mm.
+7. `bend()` vuelve a calcular la normal de cada cara a partir de su contorno. `stack_level()` halla la altura de
+   apilado.
 8. `blocks.json` se escribe en el orden de la tabla `FAMILIES`, y se dibuja una imagen por elemento.
 
-La generación se detiene si un elemento no es un sólido cerrado, si dos elementos comparten un id o si falla la comprobación de la reconstrucción.
+La generación se detiene si un elemento no es un sólido cerrado, si dos elementos comparten un id o si falla la
+comprobación de la reconstrucción.
 
 Para inspeccionar solo el archivo de origen:
 
@@ -112,9 +126,10 @@ Imprime una línea por malla con el tamaño, el número de puntos y de caras, el
 
 ## Números de versión
 
-Una versión tiene cuatro partes, `v.x.y.z`: versión, publicación, función, compilación. Ejemplo: `1.1.0.0`.
+Una versión tiene cuatro partes, `v.x.y.z`: versión, publicación, función, compilación. Ejemplo: `1.2.0.0`.
 
-El número se guarda en dos lugares: `apps/desktop-system3e/VERSION` y la entrada `version` del manifiesto. Fusion y el título del cuadro de diálogo leen el manifiesto. Nunca hay que editar los dos a mano; se usa la herramienta:
+El número se guarda en dos lugares: `apps/desktop-system3e/VERSION` y la entrada `version` del manifiesto. Fusion
+y el título del cuadro de diálogo leen el manifiesto. Nunca hay que editar los dos a mano; se usa la herramienta:
 
 ```bash
 python tools/set_version.py system3e 1.1.0.1
@@ -124,7 +139,8 @@ python tools/set_version.py system3e 1.1.0.1
 python tools/set_version.py --check
 ```
 
-`--check` enumera todos los complementos del repositorio e informa de aquellos cuyos dos números difieren o no son `v.x.y.z`. `all` en lugar de `system3e` ajusta todos los complementos.
+`--check` enumera todos los complementos del repositorio e informa de aquellos cuyos dos números difieren o no son
+`v.x.y.z`. `all` en lugar de `system3e` ajusta todos los complementos.
 
 Hay que anotar cada versión en `docs/system3e/CHANGELOG.md`.
 
@@ -141,16 +157,22 @@ python tools/release.py system3e
 - Después de escribirlo, el ZIP se vuelve a leer y se prueba.
 - La herramienta se niega a empaquetar cuando `VERSION` y el manifiesto no coinciden.
 
-Después, el ZIP se adjunta a una publicación en <https://github.com/sorglos-it/fusion360/releases>. Esta subida no forma parte de la herramienta.
+Después, el ZIP se adjunta a una publicación en <https://github.com/sorglos-it/fusion360/releases>. Esta subida no
+forma parte de la herramienta.
 
-Antes de una publicación: ejecutar las dos pruebas, ejecutar `set_version.py --check`, actualizar el registro de cambios y esta documentación.
+Antes de una publicación: ejecutar las dos pruebas, ejecutar `set_version.py --check`, actualizar el registro de
+cambios y esta documentación.
 
 ## Añadir o cambiar textos
 
-- `lang/en.xml` es la referencia. Todos los demás archivos de idioma deben tener las mismas claves y los mismos marcadores de posición.
-- Una clave que falta en un idioma se sirve del inglés en tiempo de ejecución, pero `test_addin.py` la notifica como fallo.
-- Los nombres de los campos del cuadro de diálogo, de las familias (`family.<id>`), de las anclas (`anchor.<id>`) y de los puntos (`point.<...>`) salen todos de estos archivos.
-- Para admitir un idioma más, hay que añadirlo a `SUPPORTED_LANGUAGES` y a `FUSION_LANGUAGE_MAP` en `system3e_core.py` y añadir el archivo de idioma.
+- `lang/en.xml` es la referencia. Todos los demás archivos de idioma deben tener las mismas claves y los mismos
+  marcadores de posición.
+- Una clave que falta en un idioma se sirve del inglés en tiempo de ejecución, pero `test_addin.py` la notifica
+  como fallo.
+- Los nombres de los campos del cuadro de diálogo, de las familias (`family.<id>`), de las anclas (`anchor.<id>`)
+  y de los puntos (`point.<...>`) salen todos de estos archivos.
+- Para admitir un idioma más, hay que añadirlo a `SUPPORTED_LANGUAGES` y a `FUSION_LANGUAGE_MAP` en
+  `system3e_core.py` y añadir el archivo de idioma.
 
 ## Decisiones y sus motivos
 
@@ -193,9 +215,10 @@ Están tomadas de los comentarios del código.
 
 ## Puntos abiertos
 
-- Los nombres izquierda/derecha de los elementos de esquina y de ventana de la tabla `NAMES` se compararon a ojo con las fichas del catálogo. Todavía necesitan que los revise alguien que conozca el sistema.
-- Los puntos, **Colocar por** y los desplazamientos necesitan una prueba dentro de Fusion.
+- Los nombres izquierda/derecha de los elementos de esquina y de ventana de la tabla `NAMES` se compararon a ojo
+  con las fichas del catálogo. Todavía necesitan que los revise alguien que conozca el sistema.
 
 ## Licencia
 
-MIT, Copyright (c) 2026 Sorglos Thomas Weirich. Véase [LICENSE](../LICENSE). El complemento no está afiliado a SYSTEM 3E.
+MIT, Copyright (c) 2026 Sorglos Thomas Weirich. Véase [LICENSE](../LICENSE). El complemento no está afiliado a
+SYSTEM 3E.

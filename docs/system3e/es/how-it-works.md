@@ -49,21 +49,27 @@ Cada elemento tiene estas entradas:
 | `points` | Los puntos de esquina de la forma, cada uno como x, y, z en mm | `[0.0, 271.0, 200.0]` |
 | `faces` | Las caras planas. Cada una tiene una dirección (`normal`) y uno o varios contornos (`loops`). | – |
 
-Un contorno es una lista de números. Cada número nombra uno de los `points`. El primer contorno de una cara es su borde exterior. Los demás contornos son agujeros en la cara.
+Un contorno es una lista de números. Cada número nombra uno de los `points`. El primer contorno de una cara es su
+borde exterior. Los demás contornos son agujeros en la cara.
 
-Cada elemento está con su esquina más baja en 0, 0, 0. Su largo va a lo largo de x, su ancho (el espesor del muro) a lo largo de y, su alto a lo largo de z.
+Cada elemento está con su esquina más baja en 0, 0, 0. Su largo va a lo largo de x, su ancho (el espesor del muro)
+a lo largo de y, su alto a lo largo de z.
 
-La biblioteca se lee una sola vez, la primera vez que se abre el cuadro de diálogo. La imagen de vista previa de un elemento es el archivo `blocks/<id>.png`.
+La biblioteca se lee una sola vez, la primera vez que se abre el cuadro de diálogo. La imagen de vista previa de un
+elemento es el archivo `blocks/<id>.png`.
 
 ## Cómo se construye un cuerpo
 
-Los elementos no están guardados como archivos de Fusion. El complemento construye cada cuerpo a partir de los puntos y las caras:
+Los elementos no están guardados como archivos de Fusion. El complemento construye cada cuerpo a partir de los
+puntos y las caras:
 
 1. Cada punto del elemento pasa a ser una esquina del cuerpo.
 2. Cada cara pasa a ser una cara plana. Su posición sale de su primer punto y de su dirección.
 3. Cada contorno pasa a ser una cadena cerrada de aristas rectas.
-4. Cada arista se define una vez y la usan sus dos caras vecinas, en sentidos opuestos. Esto hace que el cuerpo sea cerrado (un sólido).
-5. Fusion comprueba el resultado por completo y crea el cuerpo. Si Fusion lo rechaza, el complemento muestra el mensaje "No se pudo crear el elemento {0}:" con el motivo que da Fusion.
+4. Cada arista se define una vez y la usan sus dos caras vecinas, en sentidos opuestos. Esto hace que el cuerpo
+   sea cerrado (un sólido).
+5. Fusion comprueba el resultado por completo y crea el cuerpo. Si Fusion lo rechaza, el complemento muestra el
+   mensaje "No se pudo crear el elemento {0}:" con el motivo que da Fusion.
 
 Todas las caras son planas y todas las aristas son rectas. No hay superficies curvas.
 
@@ -71,22 +77,30 @@ Todas las caras son planas y todas las aristas son rectas. No hay superficies cu
 
 Al pulsar **OK**:
 
-1. El complemento busca en el diseño un componente de este elemento.
+1. El complemento recorre todos los elementos que ya hay en el diseño. Los puntos que faltan se añaden. Los puntos
+   que no están donde deben se quitan y se crean de nuevo. Así los elementos colocados con una versión anterior
+   quedan al día.
+2. El complemento busca en el diseño un componente de este elemento.
    - Busca una marca invisible (un atributo de Fusion, grupo `System3E`, nombre `block`) con el `id` del elemento.
    - Los elementos colocados antes de que existiera la marca se encuentran por el nombre `SYSTEM 3E <name>`.
    - Los componentes sin cuerpo y los componentes de un diseño vinculado se saltan.
-2. **Encontrado:** el complemento añade los que falten de los doce puntos e inserta otra copia de ese componente en el lugar nuevo.
-3. **No encontrado:** el complemento construye el cuerpo, crea un componente nuevo llamado `SYSTEM 3E <name>` en el nivel superior del diseño, lo marca, pone dentro el cuerpo llamado `<name>` y añade los doce puntos.
+3. **Encontrado:** el complemento inserta otra copia de ese componente en el lugar nuevo.
+4. **No encontrado:** el complemento construye el cuerpo, crea un componente nuevo llamado `SYSTEM 3E <name>` en el
+   nivel superior del diseño, lo marca, pone dentro el cuerpo llamado `<name>` y añade los doce puntos.
 
 Como los elementos iguales son copias de un solo componente, una lista de piezas los cuenta juntos.
 
-En un diseño con línea de tiempo (Fusion lo llama diseño paramétrico), un cuerpo ya hecho tiene que llegar dentro de una "base feature". El complemento crea una, pone dentro el cuerpo y los puntos y la cierra. En un diseño sin línea de tiempo, el cuerpo y los puntos se añaden directamente.
+En un diseño con línea de tiempo (Fusion lo llama diseño paramétrico), un cuerpo ya hecho tiene que llegar dentro
+de una "base feature". El complemento crea una, pone dentro el cuerpo y los puntos y la cierra. En un diseño sin
+línea de tiempo, el cuerpo y los puntos se añaden directamente.
 
-Si algo falla mientras se crea un elemento, el complemento avisa a Fusion de que el comando ha fallado. Fusion deshace entonces lo que se había construido hasta ese momento.
+Si algo falla mientras se crea un elemento, el complemento avisa a Fusion de que el comando ha fallado. Fusion
+deshace entonces lo que se había construido hasta ese momento.
 
 ## Los puntos de construcción
 
-Cada componente recibe doce puntos de construcción. Con L = largo, W = ancho y S = `stack` del elemento, están en estos lugares en las coordenadas propias del elemento (mm):
+Cada componente recibe doce puntos de construcción. Con L = largo, W = ancho y S = `stack` del elemento,
+representan estos lugares en las coordenadas propias del elemento (mm):
 
 | Nombre | x | y | z |
 | --- | --- | --- | --- |
@@ -111,20 +125,51 @@ Las tres esquinas que se ofrecen en **Colocar por** no son puntos de construcci�
 | Esquina superior delantera derecha | 0 | 0 | H |
 | Esquina superior delantera izquierda | 0 | W | H |
 
-Cada punto lleva una marca invisible (grupo de atributos `System3E`, nombre `point`) con su clave. Por esta marca el complemento sabe qué puntos tiene ya un componente y añade solo los que faltan.
+Estos lugares salen de las medidas exteriores. En un elemento con lengüeta, ranura o hueco, un lugar así puede
+estar dentro del material, donde el punto no se ve, o en el aire. Entonces el punto se muestra en otro sitio:
 
-El punto pertenece al componente. Por eso cada copia de un elemento muestra los mismos doce puntos en su propio lugar.
+1. justo encima o debajo, sobre la cara más cercana;
+2. si no hay ninguna cara encima ni debajo, o ya hay otro punto allí: a lo largo;
+3. si no, en el lugar más cercano de la superficie, y después a lo ancho del muro.
+
+Ejemplo `S1 WP`: "arriba centro" representa la altura 250 mm y se muestra encima de la lengüeta, a 300 mm. "abajo
+centro" representa la altura 0 y se muestra en la ranura, a 50 mm. En los medios elementos de esquina `SNL/2` y
+`SNP/2` no queda ningún lugar libre para "abajo centro izquierda"; se queda en el aire.
+
+Cada punto lleva marcas invisibles (grupo de atributos `System3E`):
+
+| Nombre | Contenido |
+| --- | --- |
+| `point` | La clave del punto. Por ella el complemento sabe qué puntos tiene ya un componente. |
+| `shift` | El camino desde donde se muestra el punto hasta el lugar que representa, en mm. |
+| `asis` | Se pone cuando Fusion colocó el punto en otro sitio y esto no se pudo corregir. Un punto así se deja como está. |
+
+Al hacer clic en uno de estos puntos, el complemento suma `shift` y así coloca por el lugar que el punto
+representa. Por eso un muro a matajunta sale igual, se muestre donde se muestre un punto.
+
+Después de crear un punto, el complemento lee dónde lo puso Fusion. En un tipo de elemento nuevo colocado lejos del
+origen, Fusion tomaba las coordenadas como las de todo el diseño; los puntos quedaban entonces al lado del
+elemento. En ese caso el complemento busca la copia del componente cuya colocación explica la diferencia, quita el
+punto y lo crea de nuevo con las coordenadas corregidas.
+
+El punto pertenece al componente. Por eso cada copia de un elemento muestra los mismos doce puntos en su propio
+lugar.
 
 ## Cómo se calcula el lugar
 
 1. El lugar elegido en **Colocar por** se mueve al origen.
 2. El elemento se gira alrededor del eje Z según **Giro**.
-3. El elemento se mueve al punto en el que se hizo clic más **Desplazamiento X**, **Desplazamiento Y**, **Desplazamiento Z**.
+3. El elemento se mueve al punto en el que se hizo clic más **Desplazamiento X**, **Desplazamiento Y**,
+   **Desplazamiento Z**.
    Si no se hizo clic en ningún punto, se usa el origen (0, 0, 0).
 
-Los desplazamientos se aplican después del giro. Por eso van a lo largo de los ejes del diseño, no a lo largo del elemento girado.
+Los desplazamientos se aplican después del giro. Por eso van a lo largo de los ejes del diseño, no a lo largo del
+elemento girado.
 
-La posición de un punto de boceto en el que se hizo clic se toma en las coordenadas de todo el diseño, no en las de su boceto.
+La posición de un punto de boceto en el que se hizo clic se toma en las coordenadas de todo el diseño, no en las de
+su boceto.
+La posición de un punto de construcción en el que se hizo clic se calcula a partir del punto dentro de su
+componente y de la colocación de la copia en la que se hizo clic.
 
 ## Unidades
 
@@ -139,5 +184,7 @@ El complemento divide entre 10 cada valor de la biblioteca cuando se lo pasa a F
 
 ## La vista previa
 
-Mientras el cuadro de diálogo está abierto, Fusion pide al complemento una vista previa después de cada cambio. El complemento ejecuta entonces los mismos pasos que para **OK**. Fusion descarta esta vista previa y ejecuta los pasos otra vez al pulsar **OK**.
+Mientras el cuadro de diálogo está abierto, Fusion pide al complemento una vista previa después de cada cambio. El
+complemento ejecuta entonces los mismos pasos que para **OK**. Fusion descarta esta vista previa y ejecuta los
+pasos otra vez al pulsar **OK**.
 Los errores durante la vista previa no se muestran.

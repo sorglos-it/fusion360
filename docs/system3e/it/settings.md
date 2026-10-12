@@ -43,7 +43,7 @@ In quest'ordine:
 
 Che cosa significa ogni voce è spiegato in [usage.md](usage.md).
 
-Stato: **Posiziona da** e i tre spostamenti sono testati solo offline, **non dentro Fusion**.
+Stato: **Posiziona da** e i tre spostamenti sono stati usati dall'autore dentro Fusion.
 
 ## Che cosa viene ricordato
 

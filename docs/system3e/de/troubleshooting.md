@@ -83,29 +83,33 @@ Sprachen ist der Text übersetzt. Meldungsfenster tragen den Titel „SYSTEM 3E 
 | Der Baustein ist falsch herum gedreht. | Eine positive **Drehung** dreht gegen den Uhrzeigersinn, von oben gesehen. | Den Winkel mit dem anderen Vorzeichen eingeben. |
 | Der Versatz schiebt den Baustein in eine unerwartete Richtung. | Der Versatz läuft entlang der Achsen der Konstruktion, nicht entlang des gedrehten Bausteins. | Die Achse benutzen, die zur Richtung in der Konstruktion passt. |
 | Die Punktnamen haben eine andere Sprache als der Dialog. | Punktnamen werden geschrieben, wenn ein Baustein zum ersten Mal in eine Konstruktion gesetzt wird, und bleiben erhalten. | Die Punkte bei Bedarf von Hand umbenennen. |
-| Ein älterer Baustein hat weniger als zwölf Punkte. | Er wurde mit einer älteren Version gesetzt. | Denselben Baustein noch einmal in diese Konstruktion setzen. Die fehlenden Punkte kommen bei allen seinen Kopien hinzu. |
+| Ein älterer Baustein hat weniger als zwölf Punkte. | Er wurde mit einer älteren Version gesetzt. | Irgendeinen Baustein noch einmal in diese Konstruktion setzen. Jeder Baustein bekommt seine fehlenden Punkte. |
+| Die Punkte liegen neben dem Baustein, nicht auf ihm. | Der Baustein wurde mit einer Version vor 1.1.0.1 abseits des Ursprungs gesetzt. | Irgendeinen Baustein noch einmal in diese Konstruktion setzen. Die Punkte werden an der richtigen Stelle neu angelegt. |
+| Ein Punkt liegt nicht genau auf halber Breite oder an der Unterseite. | Der genaue Ort liegt im Material oder in der Luft. Deshalb wird der Punkt auf der Fläche daneben gezeigt. | Nichts. Beim Anklicken zählt weiter der genaue Ort. Siehe [usage.md](usage.md). |
+| Nach einem Update zeigt Fusion auf der Schaltfläche noch die alte Version. | Fusion führt die Kopie in seinem Add-Ins-Ordner aus, nicht die heruntergeladene. | Das neue ZIP über den alten Ordner entpacken, dann das Add-In stoppen und starten. Siehe [installation.md](installation.md). |
 | Der Dialog beginnt wieder mit den Vorgaben. | Die gemerkten Werte halten nur, bis Fusion geschlossen oder das Add-In gestoppt wird. | – |
 | Eine Stückliste zeigt denselben Baustein in mehreren Zeilen. | Die Bausteine wurden mit Version 0.2.0 gesetzt, die jedes Mal eine neue Komponente angelegt hat. Nur der erste davon wird ab jetzt wiederverwendet. | Die alten durch neu gesetzte Bausteine ersetzen. |
 
 ## Bekannte Grenzen
 
-- **In Fusion ungeprüft:** Die zwölf Punkte, die Auswahl unter **Setzen an** und der Versatz X/Y/Z sind nur
-  offline geprüft. Das Setzen von Bausteinen an sich hat der Autor in Fusion benutzt.
 - **In Fusion ungeprüft:** die Korrekturen der Version 1.0.0.1 (siehe [Änderungsprotokoll](../CHANGELOG.md)).
+- **Ein Punkt in der Luft:** Bei den halben Eckbausteinen `SNL/2` und `SNP/2` hat der Punkt „unten Mitte links“ keinen
+  freien Platz auf der Oberfläche und bleibt in der Luft.
 - **Links und rechts:** Die Links/Rechts-Namen der Eck- und Fensterbausteine wurden nach Augenmaß mit den
   Katalogblättern des Herstellers abgeglichen. Sie sind nicht bestätigt.
 - **`S0/2 200 P`:** Dieser Baustein ist in der 3D-Datei des Herstellers beschädigt. Er ist aus `S0/2 250 P` nachgebaut.
 - **Senkrechte Achse:** Das Add-In behandelt immer die Z-Achse der Konstruktion als „oben“. Eine andere
   Ausrichtungseinstellung in Fusion beachtet es nicht.
-- **Nur oberste Ebene:** Bausteine entstehen immer in der obersten Ebene der Konstruktion (der Stammkomponente), nicht in der
-  Komponente, die gerade aktiv ist.
-- **Verknüpfte Konstruktionen:** Ein Baustein in einer verknüpften Konstruktion wird nicht wiederverwendet. Das Add-In legt eine eigene Komponente an.
+- **Nur oberste Ebene:** Bausteine entstehen immer in der obersten Ebene der Konstruktion (der Stammkomponente), nicht
+  in der Komponente, die gerade aktiv ist.
+- **Verknüpfte Konstruktionen:** Ein Baustein in einer verknüpften Konstruktion wird nicht wiederverwendet. Das Add-In
+  legt eine eigene Komponente an.
 - **Keine Passprüfung:** Das Add-In prüft nicht, ob sich Bausteine überschneiden, ob eine Fuge passt oder ob eine Wand
   baubar ist.
 - **Ein Baustein je Durchlauf:** Es gibt keine Funktion für ganze Schichten oder Wände.
 - **Drehen:** nur um die senkrechte Achse. Bausteine lassen sich im Dialog nicht kippen.
 - **Gemeinsamer Körper:** Alle Kopien eines Bausteins teilen sich einen Körper. Wer eine ändert, ändert alle.
-- **Größen:** Die Formen stammen aus der 3D-Datei des Herstellers und sind auf 0,1 mm gerundet. Die vier Trennwand-Bausteine
-  sind einfache Quader ohne Profil.
+- **Größen:** Die Formen stammen aus der 3D-Datei des Herstellers und sind auf 0,1 mm gerundet. Die vier
+  Trennwand-Bausteine sind einfache Quader ohne Profil.
 - **Keine Verbindung:** Das Add-In steht in keiner Verbindung zu SYSTEM 3E. Es ersetzt nicht die
   Planungsunterlagen des Herstellers.

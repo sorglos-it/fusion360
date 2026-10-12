@@ -14,7 +14,7 @@ Zurück zur [Übersicht](index.md).
 ## Aus dem Release-ZIP installieren
 
 1. <https://github.com/sorglos-it/fusion360/releases> öffnen.
-2. Die Datei `System3E-<version>.zip` herunterladen, zum Beispiel `System3E-1.1.0.0.zip`.
+2. Die Datei `System3E-<version>.zip` herunterladen, zum Beispiel `System3E-1.2.0.0.zip`.
 3. Das ZIP in den Add-Ins-Ordner von Fusion entpacken:
 
    | System | Ordner |
@@ -22,11 +22,13 @@ Zurück zur [Übersicht](index.md).
    | Windows | `%APPDATA%\Autodesk\Autodesk Fusion 360\API\AddIns` |
    | macOS | `~/Library/Application Support/Autodesk/Autodesk Fusion 360/API/AddIns` |
 
-4. Das Ergebnis prüfen. Das ZIP enthält einen Ordner namens `System3E`. Nach dem Entpacken muss diese Datei vorhanden sein:
+4. Das Ergebnis prüfen. Das ZIP enthält einen Ordner namens `System3E`. Nach dem Entpacken muss diese Datei
+   vorhanden sein:
 
    `AddIns/System3E/System3E.py`
 
-   Steht dort `AddIns/System3E/System3E/System3E.py`, liegt der Ordner eine Ebene zu tief. Den inneren Ordner nach oben verschieben.
+   Steht dort `AddIns/System3E/System3E/System3E.py`, liegt der Ordner eine Ebene zu tief. Den inneren Ordner nach
+   oben verschieben.
 
 Tipp für Windows: `%APPDATA%\Autodesk\Autodesk Fusion 360\API\AddIns` in die Adressleiste des Explorers eingeben und
 die Eingabetaste drücken.
@@ -39,17 +41,18 @@ die Eingabetaste drücken.
 4. **Run** drücken.
 5. Die Registerkarte **SOLID** öffnen. Die Schaltfläche **SYSTEM 3E Baustein** steht im Panel **Create**.
 
-Die Schaltfläche zeigt die Version in Klammern, zum Beispiel **SYSTEM 3E Baustein (1.1.0.0)**.
+Die Schaltfläche zeigt die Version in Klammern, zum Beispiel **SYSTEM 3E Baustein (1.2.0.0)**.
 
-Das Add-In ist so gekennzeichnet, dass es zusammen mit Fusion startet (`runOnStartup` in seiner Manifest-Datei). Nach dem
-ersten Start muss **Run** normalerweise nicht noch einmal gedrückt werden.
+Das Add-In ist so gekennzeichnet, dass es zusammen mit Fusion startet (`runOnStartup` in seiner Manifest-Datei).
+Nach dem ersten Start muss **Run** normalerweise nicht noch einmal gedrückt werden.
 
-Hinweis: Der Menüpfad in Schritt 2 stammt aus dem README des Projekts. Er lässt sich im Code des Add-Ins nicht prüfen, und
-Fusion-Versionen können ihn anders benennen.
+Hinweis: Der Menüpfad in Schritt 2 stammt aus dem README des Projekts. Er lässt sich im Code des Add-Ins nicht
+prüfen, und Fusion-Versionen können ihn anders benennen.
 
 ## Aktualisieren
 
-1. In Fusion das Add-In stoppen (**Utilities → ADD-INS → Add-Ins**, **System3E** auswählen, **Stop**) oder Fusion schließen.
+1. In Fusion das Add-In stoppen (**Utilities → ADD-INS → Add-Ins**, **System3E** auswählen, **Stop**) oder Fusion
+   schließen.
 2. Den alten Ordner `System3E` im Add-Ins-Ordner löschen.
 3. Das neue ZIP in den Add-Ins-Ordner entpacken, wie oben beschrieben.
 4. Fusion starten oder noch einmal **Run** drücken.
@@ -66,5 +69,6 @@ Was mit den eigenen Konstruktionen geschieht:
 1. In Fusion das Add-In stoppen oder Fusion schließen.
 2. Den Ordner `System3E` im Add-Ins-Ordner löschen.
 
-Beim Stoppen entfernt das Add-In seine Schaltfläche aus der Werkzeugleiste. Es speichert nichts außerhalb des eigenen Ordners.
+Beim Stoppen entfernt das Add-In seine Schaltfläche aus der Werkzeugleiste. Es speichert nichts außerhalb des
+eigenen Ordners.
 Bausteine in den Konstruktionen bleiben; sie brauchen das Add-In nicht.

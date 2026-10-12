@@ -84,15 +84,18 @@ français. Dans les autres langues, le texte est traduit. Les boîtes de message
 | L'élément est tourné dans le mauvais sens. | Une **Rotation** positive tourne dans le sens inverse des aiguilles d'une montre, vu d'en haut. | Saisir l'angle avec le signe opposé. |
 | Les décalages déplacent l'élément dans une direction inattendue. | Les décalages suivent les axes de la conception, pas ceux de l'élément tourné. | Utiliser l'axe qui correspond à la direction dans la conception. |
 | Les noms des points sont dans une autre langue que la boîte de dialogue. | Les noms des points sont écrits quand un élément est placé pour la première fois dans une conception, et ils sont conservés. | Renommer les points à la main si nécessaire. |
-| Un élément plus ancien a moins de douze points. | Il a été placé avec une version plus ancienne. | Placer le même élément une fois de plus dans cette conception. Les points manquants sont ajoutés à toutes ses copies. |
+| Un élément plus ancien a moins de douze points. | Il a été placé avec une version plus ancienne. | Placer une fois de plus un élément quelconque dans cette conception. Chaque élément reçoit ses points manquants. |
+| Les points se trouvent à côté de l'élément, pas dessus. | L'élément a été placé loin de l'origine avec une version antérieure à la 1.1.0.1. | Placer une fois de plus un élément quelconque dans cette conception. Les points sont créés à nouveau au bon endroit. |
+| Un point n'est pas exactement à la moitié de la largeur ou sur la face inférieure. | L'endroit exact est dans la matière ou dans le vide ; le point est donc montré sur la surface voisine. | Rien. Au clic, c'est toujours l'endroit exact qui compte. Voir [usage.md](usage.md). |
+| Après une mise à jour, Fusion affiche encore l'ancienne version sur le bouton. | Fusion exécute la copie qui se trouve dans son dossier des compléments, pas celle qui a été téléchargée. | Décompresser le nouveau ZIP par-dessus l'ancien dossier, puis arrêter le complément et le relancer. Voir [installation.md](installation.md). |
 | La boîte de dialogue démarre à nouveau avec les valeurs par défaut. | Les valeurs mémorisées ne durent que jusqu'à la fermeture de Fusion ou l'arrêt du complément. | – |
 | Une liste de pièces montre le même élément sur plusieurs lignes. | Les éléments ont été placés avec la version 0.2.0, qui créait un nouveau composant à chaque fois. Seul le premier d'entre eux est réutilisé désormais. | Remplacer les anciens par des éléments nouvellement placés. |
 
 ## Limites connues
 
-- **Non testé dans Fusion :** les douze points, les choix sous **Poser par** et les décalages X/Y/Z sont testés
-  hors ligne seulement. Le placement des éléments en tant que tel a été utilisé dans Fusion par l'auteur.
 - **Non testé dans Fusion :** les corrections de la version 1.0.0.1 (voir le [journal des modifications](../CHANGELOG.md)).
+- **Un point dans le vide :** sur les demi-éléments d'angle `SNL/2` et `SNP/2`, le point « dessous milieu gauche »
+  n'a aucun endroit libre sur la surface et reste dans le vide.
 - **Gauche et droite :** les noms gauche/droite des éléments d'angle et de fenêtre ont été comparés à l'œil avec
   les fiches du catalogue du fabricant. Ils ne sont pas confirmés.
 - **`S0/2 200 P` :** cet élément est endommagé dans le fichier 3D du fabricant. Il est reconstruit à partir de

@@ -63,14 +63,13 @@ Options : `--addin <name>` et `--path <folder>` dirigent le test vers un autre d
 | 2) Solids | Chaque élément est un solide fermé à faces planes, les contours tournent dans le bon sens, le volume est possible, le coin est à l'origine, la taille et les points concordent, la taille correspond au nom du catalogue, deux éléments n'ont jamais la même forme |
 | 3) Pictures | Chaque élément a un PNG, aucune image en trop |
 | 4) Add-in | Le complément lit chaque élément ; chaque nom de famille, d'ancrage et de point a un texte dans les cinq langues ; l'élément par défaut et l'ancrage par défaut existent |
-| 5) Points for clicking | La hauteur d'empilement de `S1 WP` est 250 et celle de `EU 200 W` est 200 ; positions des ancrages ; douze points nommés par élément, tous à des endroits différents et sur l'élément ; `make_body()` transforme chaque point en sommet, définit chaque face, utilise chaque arête une fois dans chaque sens, et convertit les mm en cm |
+| 5) Points for clicking | La hauteur d'empilement de `S1 WP` est 250 et celle de `EU 200 W` est 200 ; positions des ancrages ; douze points nommés par élément, tous à des endroits différents et sur l'élément ; chaque point est montré sur la surface sans que deux d'entre eux soient au même endroit ; les éléments de tout âge finissent avec les douze points ; un élément loin de l'origine reçoit ses points sur l'élément ; `make_body()` transforme chaque point en sommet, définit chaque face, utilise chaque arête une fois dans chaque sens, et convertit les mm en cm |
 
 Ce que les tests ne peuvent pas dire : si Fusion accepte un corps, crée les points de construction ou place
 l'occurrence correctement. Cela ne se sait que dans Fusion.
 
-État des tests dans Fusion : le placement des éléments a été utilisé par l'auteur. Les douze points, **Poser par**
-et les décalages X/Y/Z n'ont été testés que hors ligne. Les corrections de la 1.0.0.1 ne sont pas encore
-confirmées dans Fusion.
+État des tests dans Fusion : le placement des éléments, les douze points, **Poser par** et les décalages X/Y/Z ont
+été utilisés par l'auteur. Les corrections de la 1.0.0.1 ne sont pas encore confirmées dans Fusion.
 
 ## Reconstruire la bibliothèque d'éléments
 
@@ -125,7 +124,7 @@ Il affiche une ligne par maillage avec la taille, le nombre de points et de face
 
 ## Numéros de version
 
-Une version a quatre parties, `v.x.y.z` : version, release, feature, build. Exemple : `1.1.0.0`.
+Une version a quatre parties, `v.x.y.z` : version, release, feature, build. Exemple : `1.2.0.0`.
 
 Le numéro est tenu à deux endroits : `apps/desktop-system3e/VERSION` et l'entrée `version` du manifeste. Fusion et
 le titre de la boîte de dialogue lisent le manifeste. Ne jamais modifier les deux à la main ; utiliser l'outil :
@@ -216,7 +215,6 @@ Elles sont reprises des commentaires du code.
 
 - Les noms gauche/droite des éléments d'angle et de fenêtre dans la table `NAMES` ont été comparés à l'œil avec
   les fiches du catalogue. Ils doivent encore être vérifiés par quelqu'un qui connaît le système.
-- Les points, **Poser par** et les décalages ont besoin d'un test dans Fusion.
 
 ## Licence
 

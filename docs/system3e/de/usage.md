@@ -21,10 +21,12 @@ Das Add-In hat eine Funktion: den Befehl **SYSTEM 3E Baustein**. Er setzt je Dur
 6. Das Bild unter der Liste ansehen. Es zeigt den gewählten Baustein.
 7. **Setzen an**: wählen, welche Stelle des Bausteins auf dem Punkt landet. Siehe unten.
 8. **Drehung**: einen Winkel eingeben, wenn der Baustein gedreht werden soll.
-9. **Versatz X**, **Versatz Y**, **Versatz Z**: einen Abstand eingeben, wenn der Baustein vom Punkt weggeschoben werden soll.
+9. **Versatz X**, **Versatz Y**, **Versatz Z**: einen Abstand eingeben, wenn der Baustein vom Punkt weggeschoben
+   werden soll.
 10. **OK** drücken.
 
-Es geht auch umgekehrt: erst den Punkt anklicken, dann die Schaltfläche. Das Add-In übernimmt den Punkt in das Feld **Punkt**.
+Es geht auch umgekehrt: erst den Punkt anklicken, dann die Schaltfläche. Das Add-In übernimmt den Punkt in das Feld
+**Punkt**.
 
 Solange der Dialog offen ist, zeigt Fusion den Baustein an seinem Platz als Vorschau. Endgültig entsteht er mit
 **OK**.
@@ -167,7 +169,8 @@ Hinweise zur Liste:
 - Die Größen sind die Außenmaße aus der Bausteinbibliothek, auf ganze mm gerundet.
 - Die Namen sind die Katalognamen. Das Add-In übersetzt sie nicht.
 - Die Links/Rechts-Namen der Eck- und Fensterbausteine wurden nach Augenmaß mit den Katalogblättern des Herstellers
-  abgeglichen. Sie sind **nicht bestätigt**. Das Bild und den gesetzten Körper prüfen, bevor man sich auf den Namen verlässt.
+  abgeglichen. Sie sind **nicht bestätigt**. Das Bild und den gesetzten Körper prüfen, bevor man sich auf den Namen
+  verlässt.
 - `S0/2 200 P` ist in der 3D-Datei des Herstellers beschädigt. Seine Form ist aus `S0/2 250 P` nachgebaut.
 - Die vier Trennwand-Bausteine sind einfache Quader. Ihre Größen stammen von den Katalogblättern.
 
@@ -216,7 +219,8 @@ zum ersten Mal gesetzt wurde.
 | Mitte links, 50 mm hoch | 50 mm über der Unterseite, halbe Länge, linke Wandfläche |
 
 „Höhe der nächsten Schicht“: Bausteine mit dem erhöhten Profil auf der Oberseite tragen die nächste Schicht 50 mm unter
-ihrem höchsten Punkt. Flache Bausteine tragen sie obenauf. Beispiel: `S1 WP` ist 300 mm hoch, die nächste Schicht steht auf 250 mm.
+ihrem höchsten Punkt. Flache Bausteine tragen sie obenauf. Beispiel: `S1 WP` ist 300 mm hoch, die nächste Schicht
+steht auf 250 mm.
 
 Die Zeichnung zeigt alle Punkte am Basisbaustein `S1 WP`. Ihre Beschriftung ist deutsch. Gelb: lässt sich anklicken.
 Rot: lässt sich unter **Setzen an** wählen. Grün: beides.
@@ -229,7 +233,7 @@ zuerst nach oben oder unten, sonst längs. Beim Anklicken zählt weiter der Ort 
 kommt also gleich heraus. Bausteine aus älteren Versionen bekommen ihre Punkte versetzt, sobald das nächste Mal ein
 Baustein gesetzt wird. Das Versetzen ist vom Autor in Fusion benutzt.
 
-Stand: Die Punkte sind nur offline geprüft, **nicht in Fusion**.
+Stand: Die Punkte sind vom Autor in Fusion benutzt.
 
 ## Setzen an
 
@@ -244,7 +248,7 @@ Stand: Die Punkte sind nur offline geprüft, **nicht in Fusion**.
 
 Die zwei oberen Ecken nutzen die volle Höhe des Bausteins, nicht die Höhe der nächsten Schicht.
 
-Stand: Die Auswahl unter **Setzen an** ist nur offline geprüft, **nicht in Fusion**.
+Stand: Die Auswahl unter **Setzen an** ist vom Autor in Fusion benutzt.
 
 ## Drehung
 
@@ -261,7 +265,7 @@ Stand: Die Auswahl unter **Setzen an** ist nur offline geprüft, **nicht in Fusi
 
 Beispiel: kein Punkt angeklickt, **Versatz Z** 300 mm. Der Baustein wird 300 mm über dem Ursprung gesetzt.
 
-Stand: Der Versatz ist nur offline geprüft, **nicht in Fusion**.
+Stand: Der Versatz ist vom Autor in Fusion benutzt.
 
 ## Eine Wand im Verband bauen
 
@@ -282,8 +286,9 @@ Hinweise:
 
 - Schritt 6 ist der Weg, den die Beschreibung des Add-Ins selbst für eine Wand im Verband nennt. Die Schritte 2 bis 4
   ergeben sich aus der Lage der Punkte; sie sind **nicht in Fusion geprüft**.
-- Bei Bausteinen mit einer Feder am Ende (3 mm länger, Namen enden auf `WP` oder `P`) liegen die Punkte **unten vorne** und
-  **unten hinten** an den äußersten Enden. Die Fuge zwischen zwei Bausteinen in der eigenen Konstruktion prüfen.
+- Bei Bausteinen mit einer Feder am Ende (3 mm länger, Namen enden auf `WP` oder `P`) liegen die Punkte
+  **unten vorne** und **unten hinten** an den äußersten Enden. Die Fuge zwischen zwei Bausteinen in der eigenen
+  Konstruktion prüfen.
 - Das Add-In prüft nicht, ob sich Bausteine überschneiden oder ob ein Baustein an eine Stelle passt.
 
 ## Stückliste: wie gleiche Bausteine zählen
@@ -293,6 +298,7 @@ Hinweise:
 - Bei jedem weiteren Setzen desselben Bausteins in dieser Konstruktion fügt das Add-In eine weitere Kopie derselben
   Komponente ein. Es legt keine neue Komponente an.
 - Eine Stückliste zeigt deshalb eine Zeile für den Baustein mit seiner Anzahl, nicht `S1 WP`, `S1 WP (1)`, `S1 WP (2)`.
-- Die Komponente darf umbenannt werden. Das Add-In findet sie trotzdem, weil es eine unsichtbare Markierung an ihr hinterlässt.
+- Die Komponente darf umbenannt werden. Das Add-In findet sie trotzdem, weil es eine unsichtbare Markierung an ihr
+  hinterlässt.
 - Weil die Kopien sich eine Komponente teilen, ändert eine Änderung am Körper einer Kopie alle Kopien.
 - Alle Bausteine entstehen direkt in der obersten Ebene der Konstruktion (der Stammkomponente).

@@ -23,13 +23,14 @@ Alle Befehle werden im Hauptordner des Repositorys <https://github.com/sorglos-i
 | `assets/system3e/` | Die 3D-Datei des Herstellers. **Nicht im Repository**, liegt nur lokal. |
 | `dist/` | Release-ZIPs. Nicht in Git. |
 
-`System3E.py` hat zwei markierte Bereiche. Der Code, der zu diesem Add-In gehört, steht zwischen `CONFIGURE` und `END OF TEMPLATE`; die
-Ereignis-Handler und `run`/`stop` darunter sind das Gerüst. Das Add-In wurde aus der Add-In-Vorlage des Repositorys
-erzeugt.
+`System3E.py` hat zwei markierte Bereiche. Der Code, der zu diesem Add-In gehört, steht zwischen `CONFIGURE` und
+`END OF TEMPLATE`; die Ereignis-Handler und `run`/`stop` darunter sind das Gerüst. Das Add-In wurde aus der
+Add-In-Vorlage des Repositorys erzeugt.
 
 ## Tests
 
-Beide Tests laufen ohne Fusion. Sie legen Attrappen für die `adsk`-Module in `sys.modules` ab und importieren das Add-In.
+Beide Tests laufen ohne Fusion. Sie legen Attrappen für die `adsk`-Module in `sys.modules` ab und importieren das
+Add-In.
 Nur Standardbibliothek.
 
 ```bash
@@ -63,13 +64,13 @@ Optionen: `--addin <name>` und `--path <folder>` richten den Test auf einen ande
 | 2) Solids | Jeder Baustein ist ein geschlossener Volumenkörper mit ebenen Flächen, die Umrisse laufen richtig herum, das Volumen ist möglich, die Ecke liegt im Ursprung, Größe und Punkte stimmen überein, die Größe passt zum Katalognamen, keine zwei Bausteine haben dieselbe Form |
 | 3) Pictures | Jeder Baustein hat ein PNG, keine übrig gebliebenen Bilder |
 | 4) Add-in | Das Add-In liest jeden Baustein; jede Gruppe, jeder Anker und jeder Punktname hat einen Text in allen fünf Sprachen; der vorgegebene Baustein und der vorgegebene Anker sind vorhanden |
-| 5) Points for clicking | Die Stapelhöhe von `S1 WP` ist 250 und von `EU 200 W` ist 200; Lage der Anker; zwölf benannte Punkte je Baustein, alle an verschiedenen Stellen und auf dem Baustein; `make_body()` macht aus jedem Punkt eine Ecke, legt jede Fläche fest, benutzt jede Kante einmal in jeder Richtung und rechnet mm in cm um |
+| 5) Points for clicking | Die Stapelhöhe von `S1 WP` ist 250 und von `EU 200 W` ist 200; Lage der Anker; zwölf benannte Punkte je Baustein, alle an verschiedenen Stellen und auf dem Baustein; jeder Punkt wird auf der Oberfläche gezeigt, ohne dass zwei an einer Stelle liegen; Bausteine jeden Alters haben am Ende alle zwölf Punkte; ein Baustein abseits des Ursprungs bekommt seine Punkte auf dem Baustein; `make_body()` macht aus jedem Punkt eine Ecke, legt jede Fläche fest, benutzt jede Kante einmal in jeder Richtung und rechnet mm in cm um |
 
 Was die Tests nicht sagen können: ob Fusion einen Körper annimmt, die Konstruktionspunkte anlegt oder das
 Exemplar richtig setzt. Das zeigt sich nur in Fusion.
 
-Stand der Prüfung in Fusion: Das Setzen von Bausteinen hat der Autor benutzt. Die zwölf Punkte, **Setzen an** und
-der Versatz X/Y/Z sind nur offline geprüft. Die Korrekturen von 1.0.0.1 sind in Fusion noch nicht bestätigt.
+Stand der Prüfung in Fusion: Das Setzen von Bausteinen, die zwölf Punkte, **Setzen an** und den Versatz X/Y/Z hat
+der Autor benutzt. Die Korrekturen von 1.0.0.1 sind in Fusion noch nicht bestätigt.
 
 ## Die Bausteinbibliothek neu bauen
 
@@ -91,9 +92,10 @@ Die Bilder brauchen das Python-Paket Pillow. `--no-pictures` lässt sie aus. Das
 Was der Bau macht:
 
 1. `mesh_to_solid.read_3ds()` liest jedes Dreiecksnetz der Datei und rechnet es in mm um.
-2. `mesh_to_solid.solid_from_mesh()` verschmilzt Punkte, die näher als 0,3 mm beieinander liegen, sortiert die Dreiecke in Ebenen, fügt
-   alle Dreiecke einer Ebene zu Umrissen (mit Löchern) zusammen, lässt Punkte mitten auf geraden Kanten weg und
-   prüft, dass jede Kante einmal in jeder Richtung benutzt wird. Die unterste Ecke des Hüllquaders wird der Ursprung.
+2. `mesh_to_solid.solid_from_mesh()` verschmilzt Punkte, die näher als 0,3 mm beieinander liegen, sortiert die
+   Dreiecke in Ebenen, fügt alle Dreiecke einer Ebene zu Umrissen (mit Löchern) zusammen, lässt Punkte mitten auf
+   geraden Kanten weg und prüft, dass jede Kante einmal in jeder Richtung benutzt wird. Die unterste Ecke des
+   Hüllquaders wird der Ursprung.
 3. Die Tabelle `NAMES` gibt jeder Netznummer ihren Katalognamen. Die 3D-Datei enthält keine Namen.
 4. Die vier Trennwand-Bausteine kommen als einfache Quader mit den Größen aus der Tabelle `PARTITION` hinzu.
 5. `S0/2 200 P` wird nachgebaut (siehe unten).
@@ -101,7 +103,8 @@ Was der Bau macht:
 7. `bend()` berechnet jede Flächennormale neu aus ihrem Umriss. `stack_level()` ermittelt die Stapelhöhe.
 8. `blocks.json` wird in der Reihenfolge der Tabelle `FAMILIES` geschrieben, und je Baustein wird ein Bild gezeichnet.
 
-Der Bau bricht ab, wenn ein Baustein kein geschlossener Volumenkörper ist, wenn zwei Bausteine dieselbe id haben oder wenn die Prüfung des Nachbaus fehlschlägt.
+Der Bau bricht ab, wenn ein Baustein kein geschlossener Volumenkörper ist, wenn zwei Bausteine dieselbe id haben oder
+wenn die Prüfung des Nachbaus fehlschlägt.
 
 Um nur die Quelldatei zu untersuchen:
 
@@ -120,7 +123,7 @@ Es gibt je Netz eine Zeile aus, mit Größe, Anzahl der Punkte und Flächen, Vol
 
 ## Versionsnummern
 
-Eine Version hat vier Teile, `v.x.y.z`: Version, Release, Feature, Build. Beispiel: `1.1.0.0`.
+Eine Version hat vier Teile, `v.x.y.z`: Version, Release, Feature, Build. Beispiel: `1.2.0.0`.
 
 Die Nummer steht an zwei Stellen: in `apps/desktop-system3e/VERSION` und im Eintrag `version` des Manifests. Fusion
 und der Dialogtitel lesen das Manifest. Die beiden nie von Hand bearbeiten; das Werkzeug benutzen:
@@ -133,7 +136,8 @@ python tools/set_version.py system3e 1.1.0.1
 python tools/set_version.py --check
 ```
 
-`--check` listet jedes Add-In des Repositorys auf und meldet jedes, dessen zwei Nummern sich unterscheiden oder nicht `v.x.y.z` sind.
+`--check` listet jedes Add-In des Repositorys auf und meldet jedes, dessen zwei Nummern sich unterscheiden oder nicht
+`v.x.y.z` sind.
 `all` statt `system3e` setzt jedes Add-In.
 
 Jede Version in `docs/system3e/CHANGELOG.md` festhalten.
@@ -151,15 +155,17 @@ python tools/release.py system3e
 - Das ZIP wird nach dem Schreiben zurückgelesen und geprüft.
 - Das Werkzeug weigert sich zu packen, wenn `VERSION` und das Manifest nicht übereinstimmen.
 
-Das ZIP wird danach an ein Release auf <https://github.com/sorglos-it/fusion360/releases> angehängt. Dieses Hochladen gehört nicht
-zum Werkzeug.
+Das ZIP wird danach an ein Release auf <https://github.com/sorglos-it/fusion360/releases> angehängt. Dieses Hochladen
+gehört nicht zum Werkzeug.
 
-Vor einem Release: beide Tests ausführen, `set_version.py --check` ausführen, das Änderungsprotokoll und diese Dokumentation aktualisieren.
+Vor einem Release: beide Tests ausführen, `set_version.py --check` ausführen, das Änderungsprotokoll und diese
+Dokumentation aktualisieren.
 
 ## Texte hinzufügen oder ändern
 
 - `lang/en.xml` ist die Referenz. Jede andere Sprachdatei muss dieselben Schlüssel und dieselben Platzhalter haben.
-- Ein Schlüssel, der in einer Sprache fehlt, wird zur Laufzeit aus dem Englischen bedient, aber `test_addin.py` meldet ihn als Fehler.
+- Ein Schlüssel, der in einer Sprache fehlt, wird zur Laufzeit aus dem Englischen bedient, aber `test_addin.py` meldet
+  ihn als Fehler.
 - Die Namen der Dialogfelder, Gruppen (`family.<id>`), Anker (`anchor.<id>`) und Punkte (`point.<...>`) kommen alle
   aus diesen Dateien.
 - Für eine weitere Sprache: sie in `system3e_core.py` zu `SUPPORTED_LANGUAGES` und `FUSION_LANGUAGE_MAP`
@@ -208,7 +214,6 @@ Sie stammen aus den Kommentaren im Code.
 
 - Die Links/Rechts-Namen der Eck- und Fensterbausteine in der Tabelle `NAMES` wurden nach Augenmaß mit den
   Katalogblättern abgeglichen. Sie brauchen noch eine Prüfung durch jemanden, der das System kennt.
-- Die Punkte, **Setzen an** und der Versatz brauchen einen Test in Fusion.
 
 ## Lizenz
 

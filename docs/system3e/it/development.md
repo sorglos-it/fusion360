@@ -63,13 +63,13 @@ Opzioni: `--addin <name>` e `--path <folder>` indirizzano il test su un'altra ca
 | 2) Solidi | Ogni elemento è un solido chiuso con facce piane, i contorni girano nel verso giusto, il volume è possibile, l'angolo è nell'origine, dimensioni e punti concordano, le dimensioni corrispondono al nome di catalogo, non ci sono due elementi con la stessa forma |
 | 3) Immagini | Ogni elemento ha un PNG, nessuna immagine avanzata |
 | 4) Add-in | L'add-in legge ogni elemento; ogni famiglia, ancoraggio e nome di punto ha un testo in tutte e cinque le lingue; l'elemento predefinito e l'ancoraggio predefinito esistono |
-| 5) Punti da cliccare | L'altezza di impilamento di `S1 WP` è 250 e quella di `EU 200 W` è 200; posizioni degli ancoraggi; dodici punti con nome per elemento, tutti in posti diversi e sull'elemento; `make_body()` trasforma ogni punto in un vertice, definisce ogni faccia, usa ogni spigolo una volta in ciascuna direzione e converte i mm in cm |
+| 5) Punti da cliccare | L'altezza di impilamento di `S1 WP` è 250 e quella di `EU 200 W` è 200; posizioni degli ancoraggi; dodici punti con nome per elemento, tutti in posti diversi e sull'elemento; ogni punto è mostrato sulla superficie senza che due di essi stiano nello stesso posto; gli elementi di ogni età finiscono con tutti i dodici punti; un elemento lontano dall'origine riceve i suoi punti sull'elemento; `make_body()` trasforma ogni punto in un vertice, definisce ogni faccia, usa ogni spigolo una volta in ciascuna direzione e converte i mm in cm |
 
 Che cosa i test non possono dire: se Fusion accetta un corpo, crea i punti di costruzione o posiziona
 correttamente l'occorrenza. Questo si sa solo dentro Fusion.
 
-Stato dei test dentro Fusion: il posizionamento degli elementi è stato usato dall'autore. I dodici punti, **Posiziona da** e
-gli spostamenti X/Y/Z sono stati testati solo offline. Le correzioni della 1.0.0.1 non sono ancora confermate dentro Fusion.
+Stato dei test dentro Fusion: il posizionamento degli elementi, i dodici punti, **Posiziona da** e gli spostamenti
+X/Y/Z sono stati usati dall'autore. Le correzioni della 1.0.0.1 non sono ancora confermate dentro Fusion.
 
 ## Rigenerare la libreria degli elementi
 
@@ -120,7 +120,7 @@ Stampa una riga per mesh con dimensioni, numero di punti e di facce, volume e st
 
 ## Numeri di versione
 
-Una versione ha quattro parti, `v.x.y.z`: versione, rilascio, funzione, build. Esempio: `1.1.0.0`.
+Una versione ha quattro parti, `v.x.y.z`: versione, rilascio, funzione, build. Esempio: `1.2.0.0`.
 
 Il numero è tenuto in due posti: `apps/desktop-system3e/VERSION` e la voce `version` del manifest. Fusion
 e il titolo della finestra di dialogo leggono il manifest. Non modificare mai i due a mano; usare lo strumento:
@@ -208,7 +208,6 @@ Sono prese dai commenti nel codice.
 
 - I nomi sinistra/destra degli elementi d'angolo e per finestra nella tabella `NAMES` sono stati abbinati a occhio alle
   schede di catalogo. Devono ancora essere controllati da qualcuno che conosce il sistema.
-- I punti, **Posiziona da** e gli spostamenti hanno bisogno di un test dentro Fusion.
 
 ## Licenza
 

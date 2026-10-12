@@ -83,15 +83,18 @@ lingue il testo è tradotto. Le finestre di messaggio portano il titolo "Element
 | L'elemento è ruotato nel verso sbagliato. | Una **Rotazione** positiva ruota in senso antiorario visto dall'alto. | Digitare l'angolo con il segno opposto. |
 | Gli spostamenti muovono l'elemento in una direzione inattesa. | Gli spostamenti corrono lungo gli assi del progetto, non lungo l'elemento ruotato. | Usare l'asse che corrisponde alla direzione nel progetto. |
 | I nomi dei punti sono in una lingua diversa da quella della finestra di dialogo. | I nomi dei punti vengono scritti quando un elemento viene posizionato per la prima volta in un progetto e vengono mantenuti. | Rinominare i punti a mano, se serve. |
-| Un elemento più vecchio ha meno di dodici punti. | È stato posizionato con una versione precedente. | Posizionare ancora una volta lo stesso elemento in quel progetto. I punti mancanti vengono aggiunti a tutte le sue copie. |
+| Un elemento più vecchio ha meno di dodici punti. | È stato posizionato con una versione precedente. | Posizionare ancora una volta un elemento qualsiasi in quel progetto. Ogni elemento riceve i punti mancanti. |
+| I punti stanno accanto all'elemento, non su di esso. | L'elemento è stato posizionato lontano dall'origine con una versione precedente alla 1.1.0.1. | Posizionare ancora una volta un elemento qualsiasi in quel progetto. I punti vengono creati di nuovo nel posto giusto. |
+| Un punto non è esattamente a metà larghezza o sul lato inferiore. | Il posto esatto è dentro il materiale o in aria, quindi il punto è mostrato sulla superficie accanto. | Nulla. Cliccandolo si posiziona comunque rispetto al posto esatto. Vedere [usage.md](usage.md). |
+| Dopo un aggiornamento Fusion mostra ancora la vecchia versione sul pulsante. | Fusion esegue la copia nella sua cartella degli add-in, non quella scaricata. | Estrarre il nuovo ZIP sopra la vecchia cartella, poi arrestare ed eseguire l'add-in. Vedere [installation.md](installation.md). |
 | La finestra di dialogo riparte con i valori predefiniti. | I valori ricordati durano solo finché Fusion non si chiude o l'add-in non si arresta. | – |
 | Una distinta dei pezzi mostra lo stesso elemento su più righe. | Gli elementi sono stati posizionati con la versione 0.2.0, che creava ogni volta un nuovo componente. D'ora in poi viene riutilizzato solo il primo di essi. | Sostituire quelli vecchi con elementi posizionati di nuovo. |
 
 ## Limiti noti
 
-- **Non testato dentro Fusion:** i dodici punti, le scelte sotto **Posiziona da** e gli spostamenti X/Y/Z sono testati
-  solo offline. Il posizionamento degli elementi in quanto tale è stato usato dall'autore dentro Fusion.
 - **Non testato dentro Fusion:** le correzioni della versione 1.0.0.1 (vedere il [registro delle modifiche](../CHANGELOG.md)).
+- **Un punto in aria:** sui mezzi elementi d'angolo `SNL/2` e `SNP/2` il punto "sotto centro sinistra" non ha un
+  posto libero sulla superficie e resta in aria.
 - **Sinistra e destra:** i nomi sinistra/destra degli elementi d'angolo e per finestra sono stati abbinati a occhio alle
   schede di catalogo del produttore. Non sono confermati.
 - **`S0/2 200 P`:** questo elemento è danneggiato nel file 3D del produttore. È ricostruito da `S0/2 250 P`.
