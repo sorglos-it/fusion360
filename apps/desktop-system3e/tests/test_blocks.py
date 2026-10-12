@@ -206,16 +206,38 @@ def check_completion(addin, by_id):
         def add(self, group, name, value):
             self.values[name] = value
 
+    class Shift(object):
+        """A placement that only moves: enough to stand for a copy away from the origin."""
+        def __init__(self, cm):
+            self.cm = cm
+
+        def copy(self):
+            return Shift(self.cm)
+
+        def invert(self):
+            self.cm = tuple(-c for c in self.cm)
+            return True
+
     class Place(object):
         def __init__(self, cm):
             self.x, self.y, self.z = cm
+
+        @staticmethod
+        def create(x, y, z):
+            return Place((x, y, z))
+
+        def transformBy(self, shift):
+            self.x, self.y, self.z = self.x + shift.cm[0], self.y + shift.cm[1], self.z + shift.cm[2]
 
     class Point(object):
         baseFeature = None
 
         def __init__(self, owner, cm):
             self.attributes = Attributes()
-            self.owner, self.geometry = owner, Place(cm)
+            if isinstance(cm, Place):
+                cm = (cm.x, cm.y, cm.z)
+            # A component away from the origin: Fusion reads the coordinates as the design's.
+            self.owner, self.geometry = owner, Place(tuple(c - o for c, o in zip(cm, owner.away)))
 
         def deleteMe(self):
             self.owner.items.remove(self)
@@ -227,6 +249,8 @@ def check_completion(addin, by_id):
             self.cm = point
 
     class Collection(object):
+        away = (0.0, 0.0, 0.0)
+
         def __init__(self, items=()):
             self.items = list(items)
             self.count = len(self.items)
@@ -282,6 +306,33 @@ def check_completion(addin, by_id):
                     abs(c * 10.0 - s) < 1e-6 for c, s in zip((point.geometry.x, point.geometry.y, point.geometry.z), shown))
             check(ok, '%s: %s' % (component.name, turn))
     check(foreign.constructionPoints.count == 0, 'a component that is not an element stays untouched')
+
+    # A new kind of element placed away from the origin: the points must still sit on the element.
+    class Occurrence(object):
+        transform2 = Shift((70.4, 0.0, 25.0))
+
+    class Root(object):
+        def allOccurrencesByComponent(self, component):
+            return Collection([Occurrence()])
+
+    core = sys.modules['adsk.core']
+    plain, core.Point3D = core.Point3D, Place
+    try:
+        block = by_id['s1-wp']
+        moved = Component(block, True, [])
+        moved.constructionPoints.away = Occurrence.transform2.cm
+        design.rootComponent = Root()
+        design.allComponents = Collection([moved])
+        addin.complete_snap_points(design)
+        found = dict((p.attributes.values[addin.ATTRIBUTE_POINT], p) for p in moved.constructionPoints.items)
+        ok = moved.constructionPoints.count == 12
+        for key, shown, meant in addin.shown_points(block):
+            point = found.get(key)
+            ok = ok and point is not None and addin.ATTRIBUTE_ASIS not in point.attributes.values and all(
+                abs(c * 10.0 - s) < 1e-6 for c, s in zip((point.geometry.x, point.geometry.y, point.geometry.z), shown))
+        check(ok, 'an element away from the origin gets its points on the element')
+    finally:
+        core.Point3D = plain
 
 
 def check_visible(addin, blocks):

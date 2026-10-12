@@ -76,13 +76,15 @@ All faces are flat and all edges are straight. There are no curved surfaces.
 
 When you press **OK**:
 
-1. The add-in searches the design for a component of this element.
+1. The add-in goes through every element already in the design. Points that are missing are added. Points that
+   are not where they belong are taken away and made again. So elements placed by an older version are brought
+   up to date.
+2. The add-in searches the design for a component of this element.
    - It looks for an invisible mark (a Fusion attribute, group `System3E`, name `block`) with the element's `id`.
    - Elements placed before the mark existed are found by the name `SYSTEM 3E <name>`.
    - Components without a body and components of a linked design are skipped.
-2. **Found:** the add-in adds any of the twelve points that are missing, and inserts another copy of that
-   component at the new place.
-3. **Not found:** the add-in builds the body, creates a new component named `SYSTEM 3E <name>` in the top level
+3. **Found:** the add-in inserts another copy of that component at the new place.
+4. **Not found:** the add-in builds the body, creates a new component named `SYSTEM 3E <name>` in the top level
    of the design, marks it, puts the body named `<name>` into it and adds the twelve points.
 
 Because equal elements are copies of one component, a parts list counts them together.
@@ -97,7 +99,7 @@ undoes what was built so far.
 ## The construction points
 
 Each component gets twelve construction points. With L = length, W = width and S = `stack` of the element, they
-lie at these places in the element's own coordinates (mm):
+stand for these places in the element's own coordinates (mm):
 
 | Name | x | y | z |
 | --- | --- | --- | --- |
@@ -122,8 +124,32 @@ The three corners offered under **Placed by** are not construction points. With 
 | Top corner, front right | 0 | 0 | H |
 | Top corner, front left | 0 | W | H |
 
-Each point carries an invisible mark (attribute group `System3E`, name `point`) with its key. By this mark the
-add-in knows which points a component already has and adds only the missing ones.
+These places come from the outer dimensions. On an element with a tongue, a groove or a recess such a place can
+be inside the material, where the point cannot be seen, or in the air. Then the point is shown somewhere else:
+
+1. straight above or below, on the closest face;
+2. if there is no face above or below, or another point sits there already: along the length;
+3. otherwise at the closest place on the surface, then across the wall.
+
+Example `S1 WP`: "top middle" stands for the height 250 mm and is shown on top of the tongue at 300 mm. "bottom
+middle" stands for the height 0 and is shown in the groove at 50 mm. On the half corner elements `SNL/2` and
+`SNP/2` no free place is left for "bottom middle left"; it stays in the air.
+
+Each point carries invisible marks (attribute group `System3E`):
+
+| Name | Content |
+| --- | --- |
+| `point` | The key of the point. By it the add-in knows which points a component already has. |
+| `shift` | The way from where the point is shown to the place it stands for, in mm. |
+| `asis` | Set when Fusion put the point somewhere else and this could not be corrected. Such a point is left alone. |
+
+When you click one of these points, the add-in adds `shift` and so places by the place the point stands for. A
+wall in bond therefore comes out the same wherever a point is shown.
+
+After a point is made, the add-in reads back where Fusion put it. For a new kind of element placed away from the
+origin Fusion took the coordinates as those of the whole design; the points then lay beside the element. In that
+case the add-in finds the copy of the component whose placement explains the difference, removes the point and
+makes it again with corrected coordinates.
 
 The point belongs to the component. So every copy of an element shows the same twelve points at its own place.
 
@@ -137,6 +163,8 @@ The point belongs to the component. So every copy of an element shows the same t
 The offsets are applied after the turn. So they run along the axes of the design, not along the turned element.
 
 The position of a clicked sketch point is taken in the coordinates of the whole design, not of its sketch.
+The position of a clicked construction point is worked out from the point inside its component and from the
+placement of the copy that was clicked.
 
 ## Units
 

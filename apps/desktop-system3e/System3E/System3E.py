@@ -68,6 +68,7 @@ ATTRIBUTE_GROUP = 'System3E'
 ATTRIBUTE_BLOCK = 'block'
 ATTRIBUTE_POINT = 'point'
 ATTRIBUTE_SHIFT = 'shift'       # on a point: from where it is shown to what it means, mm
+ATTRIBUTE_ASIS = 'asis'         # on a point: Fusion put it elsewhere and it could not be put right
 
 # Last used values, kept for the duration of the Fusion session.
 _last = {
@@ -440,6 +441,25 @@ def component_name(block):
     return 'SYSTEM 3E %s' % block['name']
 
 
+def own_components(design):
+    """Every component of this design that can hold an element: (component, its mark or None).
+
+    Components without a body are left out, and so are those of a linked
+    design, which cannot be changed from here.
+    """
+    components = design.allComponents
+    for i in range(components.count):
+        component = components.item(i)
+        if component.bRepBodies.count == 0:
+            continue
+        try:
+            if component.parentDesign != design:
+                continue
+        except Exception:
+            pass
+        yield component, component.attributes.itemByName(ATTRIBUTE_GROUP, ATTRIBUTE_BLOCK)
+
+
 def find_component(design, block):
     """The component of this element, if the design already has one.
 
@@ -447,18 +467,7 @@ def find_component(design, block):
     Elements placed before the mark existed are found by their name.
     """
     by_name = None
-    components = design.allComponents
-    for i in range(components.count):
-        component = components.item(i)
-        if component.bRepBodies.count == 0:
-            continue
-        try:
-            # A component of a linked design cannot be changed from here.
-            if component.parentDesign != design:
-                continue
-        except Exception:
-            pass
-        mark = component.attributes.itemByName(ATTRIBUTE_GROUP, ATTRIBUTE_BLOCK)
+    for component, mark in own_components(design):
         if mark and mark.value == block['id']:
             return component
         if by_name is None and not mark and component.name == component_name(block):
@@ -525,7 +534,8 @@ def add_snap_points(design, component, block, base):
         if not mark:
             continue
         shown = wanted.get(mark.value)
-        if shown and _off(point.geometry, shown):
+        if (shown and _off(point.geometry, shown)
+                and not point.attributes.itemByName(ATTRIBUTE_GROUP, ATTRIBUTE_ASIS)):
             misplaced.append((mark.value, point))
         else:
             present.add(mark.value)
@@ -539,6 +549,7 @@ def add_snap_points(design, component, block, base):
     if base is None and design.designType == adsk.fusion.DesignTypes.ParametricDesignType:
         own = base = component.features.baseFeatures.add()
         own.startEdit()
+
     def make(shown, frame):
         place = adsk.core.Point3D.create(shown[0] / 10.0, shown[1] / 10.0, shown[2] / 10.0)
         if frame is not None:
@@ -563,6 +574,9 @@ def add_snap_points(design, component, block, base):
             point.attributes.add(ATTRIBUTE_GROUP, ATTRIBUTE_POINT, key)
             point.attributes.add(ATTRIBUTE_GROUP, ATTRIBUTE_SHIFT,
                                  json.dumps([meant[i] - shown[i] for i in range(3)]))
+            if _off(point.geometry, shown):
+                # Not to be made again on every placement: each try costs a timeline entry.
+                point.attributes.add(ATTRIBUTE_GROUP, ATTRIBUTE_ASIS, '1')
     finally:
         if own is not None:
             own.finishEdit()
@@ -578,18 +592,7 @@ def complete_snap_points(design):
     """
     by_id = library()[1]
     by_name = dict((component_name(block), block) for block in by_id.values())
-    components = design.allComponents
-    for i in range(components.count):
-        component = components.item(i)
-        if component.bRepBodies.count == 0:
-            continue
-        try:
-            # A component of a linked design cannot be changed from here.
-            if component.parentDesign != design:
-                continue
-        except Exception:
-            pass
-        mark = component.attributes.itemByName(ATTRIBUTE_GROUP, ATTRIBUTE_BLOCK)
+    for component, mark in own_components(design):
         block = by_id.get(mark.value) if mark else by_name.get(component.name)
         if block:
             add_snap_points(design, component, block, None)

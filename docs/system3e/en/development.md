@@ -63,7 +63,7 @@ Options: `--addin <name>` and `--path <folder>` point the test at another add-in
 | 2) Solids | Every element is a closed solid with flat faces, outlines run the right way round, the volume is possible, the corner is at the origin, size and points agree, the size fits the catalogue name, no two elements have the same shape |
 | 3) Pictures | Every element has a PNG, no left-over pictures |
 | 4) Add-in | The add-in reads every element; every family, anchor and point name has a text in all five languages; the default element and default anchor exist |
-| 5) Points for clicking | Stacking height of `S1 WP` is 250 and of `EU 200 W` is 200; anchor positions; twelve named points per element, all in different places and on the element; `make_body()` turns every point into a vertex, defines every face, uses every edge once in each direction, and converts mm to cm |
+| 5) Points for clicking | Stacking height of `S1 WP` is 250 and of `EU 200 W` is 200; anchor positions; twelve named points per element, all in different places and on the element; every point is shown on the surface without two of them in one place; elements of every age end up with all twelve points; an element away from the origin gets its points on the element; `make_body()` turns every point into a vertex, defines every face, uses every edge once in each direction, and converts mm to cm |
 
 What the tests cannot tell: whether Fusion accepts a body, creates the construction points or places the
 occurrence correctly. That is only known inside Fusion.

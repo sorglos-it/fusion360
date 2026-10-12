@@ -33,6 +33,7 @@ Further files: [change log](../CHANGELOG.md), [licence](../LICENSE), [drawing of
 | --- | --- |
 | Placing elements | Used inside Fusion by the author |
 | The twelve points to click | Used inside Fusion by the author |
+| Points shown on the surface and corrected after an element is made (since 1.1.0.1) | Used inside Fusion by the author |
 | The choices under **Placed by** | Used inside Fusion by the author |
 | **Offset X**, **Offset Y**, **Offset Z** | Used inside Fusion by the author |
 | Fixes of version 1.0.0.1 (see the [change log](../CHANGELOG.md)) | Not yet confirmed inside Fusion |

@@ -83,13 +83,18 @@ languages the text is translated. Message boxes carry the title "SYSTEM 3E eleme
 | The element is turned the wrong way. | A positive **Rotation** turns counter-clockwise seen from above. | Type the angle with the other sign. |
 | The offsets move the element in an unexpected direction. | Offsets run along the axes of the design, not along the turned element. | Use the axis that fits the direction in the design. |
 | The point names are in another language than the dialog. | Point names are written when an element is first placed in a design and are kept. | Rename the points by hand if needed. |
-| An older element has fewer than twelve points. | It was placed with an older version. | Place the same element once more in that design. The missing points are added to all its copies. |
+| An older element has fewer than twelve points. | It was placed with an older version. | Place any element once more in that design. Every element gets its missing points. |
+| The points lie beside the element, not on it. | The element was placed with a version before 1.1.0.1 away from the origin. | Place any element once more in that design. The points are made again in the right place. |
+| A point is not exactly at half the width or at the underside. | The exact place is inside the material or in the air, so the point is shown on the surface next to it. | Nothing. Clicking it still places by the exact place. See [usage.md](usage.md). |
+| After an update Fusion still shows the old version on the button. | Fusion runs the copy in its add-in folder, not the downloaded one. | Unpack the new ZIP over the old folder, then stop and run the add-in. See [installation.md](installation.md). |
 | The dialog starts with the defaults again. | The remembered values last only until Fusion closes or the add-in stops. | – |
 | A parts list shows the same element in several lines. | The elements were placed with version 0.2.0, which made a new component every time. Only the first of them is reused from now on. | Replace the old ones by newly placed elements. |
 
 ## Known limits
 
 - **Untested inside Fusion:** the fixes of version 1.0.0.1 (see the [change log](../CHANGELOG.md)).
+- **One point in the air:** on the half corner elements `SNL/2` and `SNP/2` the point "bottom middle left" has no
+  free place on the surface and stays in the air.
 - **Left and right:** the left/right names of the corner and window elements were matched by eye against the
   manufacturer's catalogue cards. They are not confirmed.
 - **`S0/2 200 P`:** this element is damaged in the manufacturer's 3D file. It is rebuilt from `S0/2 250 P`.

@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.0.2 – 2026-10-12
+
+Fixes from a code review; nothing new.
+
+- A point Fusion will not put in the right place is marked and left alone, instead of being made again with every
+  element placed.
+- One place in the code decides which components are elements of the design.
+- New test: an element away from the origin gets its points on the element.
+
 ## 1.1.0.1 – 2026-10-12
 
 - Every element in the design gets its missing click points when an element is placed, not only the element being
