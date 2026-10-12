@@ -123,7 +123,7 @@ Es gibt je Netz eine Zeile aus, mit Größe, Anzahl der Punkte und Flächen, Vol
 
 ## Versionsnummern
 
-Eine Version hat vier Teile, `v.x.y.z`: Version, Release, Feature, Build. Beispiel: `1.2.0.0`.
+Eine Version hat vier Teile, `v.x.y.z`: Version, Release, Feature, Build. Beispiel: `1.3.0.0`.
 
 Die Nummer steht an zwei Stellen: in `apps/desktop-system3e/VERSION` und im Eintrag `version` des Manifests. Fusion
 und der Dialogtitel lesen das Manifest. Die beiden nie von Hand bearbeiten; das Werkzeug benutzen:

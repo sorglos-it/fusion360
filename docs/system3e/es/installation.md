@@ -14,7 +14,7 @@ Volver al [resumen](index.md).
 ## Instalar desde el ZIP de la publicación
 
 1. Abrir <https://github.com/sorglos-it/fusion360/releases>.
-2. Descargar el archivo `System3E-<version>.zip`, por ejemplo `System3E-1.2.0.0.zip`.
+2. Descargar el archivo `System3E-<version>.zip`, por ejemplo `System3E-1.3.0.0.zip`.
 3. Descomprimir el ZIP en la carpeta de complementos de Fusion:
 
    | Sistema | Carpeta |
@@ -41,7 +41,7 @@ Explorador y pulsar Intro.
 4. Pulsar **Run**.
 5. Abrir la pestaña **SOLID**. El botón **Elemento SYSTEM 3E** está en el panel **Create**.
 
-El botón muestra la versión entre paréntesis, por ejemplo **Elemento SYSTEM 3E (1.2.0.0)**.
+El botón muestra la versión entre paréntesis, por ejemplo **Elemento SYSTEM 3E (1.3.0.0)**.
 
 El complemento está marcado para iniciarse junto con Fusion (`runOnStartup` en su archivo de manifiesto). Después
 del primer inicio, normalmente no hace falta volver a pulsar **Run**.

@@ -120,7 +120,7 @@ It prints one line per mesh with size, point and face count, volume and state.
 
 ## Version numbers
 
-A version has four parts, `v.x.y.z`: version, release, feature, build. Example: `1.2.0.0`.
+A version has four parts, `v.x.y.z`: version, release, feature, build. Example: `1.3.0.0`.
 
 The number is kept in two places: `apps/desktop-system3e/VERSION` and the `version` entry of the manifest. Fusion
 and the dialog title read the manifest. Never edit the two by hand; use the tool:

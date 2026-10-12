@@ -4,7 +4,7 @@ System3E es un complemento para Autodesk Fusion 360. Coloca en un diseño elemen
 construcción de apilado en seco SYSTEM 3E. Se hace clic en un punto, se elige uno de los 74 elementos de una lista
 y el elemento se crea allí como cuerpo sólido.
 
-Esta documentación describe la versión 1.2.0.0.
+Esta documentación describe la versión 1.3.0.0.
 
 ## Contenido
 

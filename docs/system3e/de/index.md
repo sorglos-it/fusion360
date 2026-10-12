@@ -4,7 +4,7 @@ System3E ist ein Add-In für Autodesk Fusion 360. Es setzt Wandbausteine des mö
 in eine Konstruktion. Punkt anklicken, einen von 74 Bausteinen aus einer Liste wählen – der Baustein entsteht dort
 als Volumenkörper.
 
-Diese Dokumentation beschreibt die Version 1.2.0.0.
+Diese Dokumentation beschreibt die Version 1.3.0.0.
 
 ## Inhalt
 

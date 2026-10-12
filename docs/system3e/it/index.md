@@ -4,7 +4,7 @@ System3E è un add-in per Autodesk Fusion 360. Posiziona in un progetto gli elem
 costruttivo a secco SYSTEM 3E. Si fa clic su un punto, si sceglie uno dei 74 elementi da un elenco e l'elemento
 viene creato lì come corpo solido.
 
-Questa documentazione descrive la versione 1.2.0.0.
+Questa documentazione descrive la versione 1.3.0.0.
 
 ## Contenuto
 

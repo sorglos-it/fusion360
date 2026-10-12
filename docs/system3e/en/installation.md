@@ -14,7 +14,7 @@ Back to the [overview](index.md).
 ## Install from the release ZIP
 
 1. Open <https://github.com/sorglos-it/fusion360/releases>.
-2. Download the file `System3E-<version>.zip`, for example `System3E-1.2.0.0.zip`.
+2. Download the file `System3E-<version>.zip`, for example `System3E-1.3.0.0.zip`.
 3. Unpack the ZIP into Fusion's add-ins folder:
 
    | System | Folder |
@@ -39,7 +39,7 @@ press Enter.
 4. Press **Run**.
 5. Open the **SOLID** tab. The button **SYSTEM 3E element** is in the **Create** panel.
 
-The button shows the version in brackets, for example **SYSTEM 3E element (1.2.0.0)**.
+The button shows the version in brackets, for example **SYSTEM 3E element (1.3.0.0)**.
 
 The add-in is marked to start together with Fusion (`runOnStartup` in its manifest file). After the first start you
 normally do not have to press **Run** again.

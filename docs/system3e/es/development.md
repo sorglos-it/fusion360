@@ -126,7 +126,7 @@ Imprime una línea por malla con el tamaño, el número de puntos y de caras, el
 
 ## Números de versión
 
-Una versión tiene cuatro partes, `v.x.y.z`: versión, publicación, función, compilación. Ejemplo: `1.2.0.0`.
+Una versión tiene cuatro partes, `v.x.y.z`: versión, publicación, función, compilación. Ejemplo: `1.3.0.0`.
 
 El número se guarda en dos lugares: `apps/desktop-system3e/VERSION` y la entrada `version` del manifiesto. Fusion
 y el título del cuadro de diálogo leen el manifiesto. Nunca hay que editar los dos a mano; se usa la herramienta:

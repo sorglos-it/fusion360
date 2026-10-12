@@ -120,7 +120,7 @@ Stampa una riga per mesh con dimensioni, numero di punti e di facce, volume e st
 
 ## Numeri di versione
 
-Una versione ha quattro parti, `v.x.y.z`: versione, rilascio, funzione, build. Esempio: `1.2.0.0`.
+Una versione ha quattro parti, `v.x.y.z`: versione, rilascio, funzione, build. Esempio: `1.3.0.0`.
 
 Il numero è tenuto in due posti: `apps/desktop-system3e/VERSION` e la voce `version` del manifest. Fusion
 e il titolo della finestra di dialogo leggono il manifest. Non modificare mai i due a mano; usare lo strumento:

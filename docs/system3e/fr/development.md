@@ -124,7 +124,7 @@ Il affiche une ligne par maillage avec la taille, le nombre de points et de face
 
 ## Numéros de version
 
-Une version a quatre parties, `v.x.y.z` : version, release, feature, build. Exemple : `1.2.0.0`.
+Une version a quatre parties, `v.x.y.z` : version, release, feature, build. Exemple : `1.3.0.0`.
 
 Le numéro est tenu à deux endroits : `apps/desktop-system3e/VERSION` et l'entrée `version` du manifeste. Fusion et
 le titre de la boîte de dialogue lisent le manifeste. Ne jamais modifier les deux à la main ; utiliser l'outil :

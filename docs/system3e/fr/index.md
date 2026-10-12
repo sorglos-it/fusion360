@@ -4,7 +4,7 @@ System3E est un complément pour Autodesk Fusion 360. Il place dans une concepti
 de construction à sec SYSTEM 3E. On clique sur un point, on choisit l'un des 74 éléments dans une liste, et
 l'élément est créé à cet endroit sous forme de corps solide.
 
-Cette documentation décrit la version 1.2.0.0.
+Cette documentation décrit la version 1.3.0.0.
 
 ## Sommaire
 
