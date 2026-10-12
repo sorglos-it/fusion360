@@ -67,6 +67,7 @@ BLOCK_DIR = os.path.join(_DIR, 'blocks')
 ATTRIBUTE_GROUP = 'System3E'
 ATTRIBUTE_BLOCK = 'block'
 ATTRIBUTE_POINT = 'point'
+ATTRIBUTE_SHIFT = 'shift'       # on a point: from where it is shown to what it means, mm
 
 # Last used values, kept for the duration of the Fusion session.
 _last = {
@@ -158,6 +159,133 @@ def snap_points(block):
                ('point.low.left', (length / 2.0, float(width), INTERLOCK))])     # same order as POINT_KEYS
 
 
+NEAR = 0.01     # mm; closer than this counts as touching
+
+
+def _in_face(face, points, p):
+    """Whether p, already in the face's plane, lies on the face. Its outline counts."""
+    normal = face['normal']
+    drop = max(range(3), key=lambda i: abs(normal[i]))
+    a, b = [i for i in range(3) if i != drop]
+    u, v = p[a], p[b]
+    inside = False
+    for loop in face['loops']:
+        for i, start in enumerate(loop):
+            p0, p1 = points[start], points[loop[(i + 1) % len(loop)]]
+            u0, v0, u1, v1 = p0[a], p0[b], p1[a], p1[b]
+            length = max(abs(u1 - u0), abs(v1 - v0), 1.0)
+            if (abs((u1 - u0) * (v - v0) - (v1 - v0) * (u - u0)) <= NEAR * length
+                    and min(u0, u1) - NEAR <= u <= max(u0, u1) + NEAR
+                    and min(v0, v1) - NEAR <= v <= max(v0, v1) + NEAR):
+                return True
+            if (v0 > v) != (v1 > v) and u < (u1 - u0) * (v - v0) / (v1 - v0) + u0:
+                inside = not inside
+    return inside
+
+
+def _surface_along(block, p, axis):
+    """How far from p, along one axis, the surface of the element is met: signed mm."""
+    points = block['points']
+    others = [i for i in range(3) if i != axis]
+    found = []
+    for face in block['faces']:
+        normal = face['normal']
+        origin = points[face['loops'][0][0]]
+        distance = sum((origin[i] - p[i]) * normal[i] for i in range(3))
+        if abs(normal[axis]) > 1e-6:
+            t = distance / normal[axis]
+            q = list(p)
+            q[axis] += t
+            if _in_face(face, points, q):
+                found.append(t)
+        elif abs(distance) < NEAR:
+            # The line runs in the plane of the face: it meets the face at its outline.
+            for loop in face['loops']:
+                for i, start in enumerate(loop):
+                    p0, p1 = points[start], points[loop[(i + 1) % len(loop)]]
+                    k = max(others, key=lambda j: abs(p1[j] - p0[j]))
+                    if abs(p1[k] - p0[k]) < 1e-6:
+                        continue
+                    s = (p[k] - p0[k]) / (p1[k] - p0[k])
+                    if -1e-6 <= s <= 1.0 + 1e-6 and all(
+                            abs(p0[j] + s * (p1[j] - p0[j]) - p[j]) < NEAR for j in others):
+                        found.append(p0[axis] + s * (p1[axis] - p0[axis]) - p[axis])
+    return found
+
+
+def _nearest_on_surface(block, p):
+    """The place on the element's surface closest to p."""
+    points = block['points']
+    best, best_distance = tuple(p), None
+    for face in block['faces']:
+        normal = face['normal']
+        origin = points[face['loops'][0][0]]
+        t = sum((origin[i] - p[i]) * normal[i] for i in range(3)) / sum(n * n for n in normal)
+        foot = tuple(p[i] + t * normal[i] for i in range(3))
+        spots = [foot] if _in_face(face, points, foot) else []
+        for loop in face['loops']:
+            for i, start in enumerate(loop):
+                p0, p1 = points[start], points[loop[(i + 1) % len(loop)]]
+                edge = [p1[j] - p0[j] for j in range(3)]
+                length = sum(e * e for e in edge)
+                s = sum((p[j] - p0[j]) * edge[j] for j in range(3)) / length if length else 0.0
+                s = min(1.0, max(0.0, s))
+                spots.append(tuple(p0[j] + s * edge[j] for j in range(3)))
+        for spot in spots:
+            distance = sum((spot[j] - p[j]) ** 2 for j in range(3))
+            if best_distance is None or distance < best_distance - 1e-9:
+                best, best_distance = spot, distance
+    return best
+
+
+def on_surface(block, position, taken=()):
+    """The place on the element's surface that stands for a point.
+
+    The points are worked out from the outer dimensions. On an element with a
+    tongue, a groove or a recess that place can be inside the material, where
+    it cannot be seen, or in the air. Such a point moves straight up or down
+    to the surface. Where there is none above or below, or another point sits
+    there already (`taken`), it moves along the length, then to the closest
+    place on the surface, then across the wall.
+    """
+    position = tuple(float(c) for c in position)
+    reach = [_surface_along(block, position, axis) for axis in range(3)]
+    if any(abs(t) < NEAR for hits in reach for t in hits):
+        return position
+    places = []
+    for axis in (2, 0, None, 1):
+        if axis is None:
+            places.append(_nearest_on_surface(block, position))
+            continue
+        for t in sorted(reach[axis], key=lambda t: (abs(t), -t)):
+            places.append(tuple(c + t if i == axis else c for i, c in enumerate(position)))
+    for place in places:
+        if all(max(abs(place[i] - other[i]) for i in range(3)) > 1.0 for other in taken):
+            return place
+    return position
+
+
+_shown = {}
+
+
+def shown_points(block):
+    """The points as they are put on the element: (text key, where it is shown, what it means).
+
+    Both in mm. Clicking a point places by what it means, so a wall in bond
+    comes out the same wherever the point had to move to be seen. A point
+    that has to move never lands on another one.
+    """
+    if block['id'] not in _shown:
+        meant = [(key, tuple(float(c) for c in position)) for key, position in snap_points(block)]
+        shown = dict((key, position) for key, position in meant
+                     if on_surface(block, position) == position)
+        for key, position in meant:
+            if key not in shown:
+                shown[key] = on_surface(block, position, list(shown.values()))
+        _shown[block['id']] = [(key, shown[key], position) for key, position in meant]
+    return _shown[block['id']]
+
+
 def point_types():
     """What may be clicked as the place for the element."""
     return (adsk.fusion.SketchPoint.classType(),
@@ -217,7 +345,32 @@ def point_of(entity):
     """Where a clicked sketch point, body corner or construction point is in the design."""
     if entity.objectType == adsk.fusion.SketchPoint.classType():
         return entity.worldGeometry
+    if entity.objectType == adsk.fusion.ConstructionPoint.classType():
+        try:
+            return meant_place(entity)
+        except Exception:
+            pass        # then the point counts where Fusion says it is
     return entity.geometry
+
+
+def meant_place(point):
+    """The place a construction point stands for, in the design, cm.
+
+    Worked out from the point inside its own component and from where that
+    copy of the component sits, rather than asked from Fusion for the copy.
+    One of the add-in's points that had to move onto the surface to be seen
+    still stands for the place it was worked out for.
+    """
+    occurrence = point.assemblyContext
+    native = point.nativeObject if occurrence else point
+    place = native.geometry
+    mark = native.attributes.itemByName(ATTRIBUTE_GROUP, ATTRIBUTE_SHIFT)
+    if mark:
+        x, y, z = json.loads(mark.value)
+        place.translateBy(adsk.core.Vector3D.create(x / 10.0, y / 10.0, z / 10.0))
+    if occurrence:
+        place.transformBy(occurrence.transform2)
+    return place
 
 
 def read_inputs(inputs):
@@ -313,40 +466,133 @@ def find_component(design, block):
     return by_name
 
 
+def remove_point(point):
+    """Take one construction point away; False when Fusion will not let go of it."""
+    try:
+        base = point.baseFeature
+        if base:
+            base.startEdit()
+        try:
+            return bool(point.deleteMe())
+        finally:
+            if base:
+                base.finishEdit()
+    except Exception:
+        return False
+
+
+def _off(place, wanted):
+    """Whether a place Fusion reports (cm) is not the wanted one (mm)."""
+    return max(abs(place.x * 10.0 - wanted[0]), abs(place.y * 10.0 - wanted[1]),
+               abs(place.z * 10.0 - wanted[2])) > NEAR
+
+
+def used_frame(design, component, wanted, got):
+    """The placement Fusion read a point's coordinates in, if it was not the component itself.
+
+    A point made at plain coordinates in a component that is placed away from
+    the origin can end up as if the coordinates were the design's: it then
+    sits off the element by the placement of one of the component's copies.
+    Returns that placement, or None when none of them explains the place.
+    """
+    copies = design.rootComponent.allOccurrencesByComponent(component)
+    for i in range(copies.count):
+        frame = copies.item(i).transform2
+        back = frame.copy()
+        if not back.invert():
+            continue
+        seen = adsk.core.Point3D.create(wanted[0] / 10.0, wanted[1] / 10.0, wanted[2] / 10.0)
+        seen.transformBy(back)
+        if not _off(got, (seen.x * 10.0, seen.y * 10.0, seen.z * 10.0)):
+            return frame
+    return None
+
+
 def add_snap_points(design, component, block, base):
     """Give the component the clickable points it does not have yet.
 
-    A component made by an older version has none or fewer; only the missing
-    ones are added. With the timeline on, a point at plain coordinates has to
-    live in a base feature: `base` while it is open for editing, otherwise one
-    of its own.
+    A component made by an older version has none or fewer, or has them where
+    they cannot be seen; only what is missing or misplaced is made. With the
+    timeline on, a point at plain coordinates has to live in a base feature:
+    `base` while it is open for editing, otherwise one of its own.
     """
     points = component.constructionPoints
-    present = set()
+    wanted = dict((key, shown) for key, shown, meant in shown_points(block))
+    present, misplaced = set(), []
     for i in range(points.count):
-        mark = points.item(i).attributes.itemByName(ATTRIBUTE_GROUP, ATTRIBUTE_POINT)
-        if mark:
+        point = points.item(i)
+        mark = point.attributes.itemByName(ATTRIBUTE_GROUP, ATTRIBUTE_POINT)
+        if not mark:
+            continue
+        shown = wanted.get(mark.value)
+        if shown and _off(point.geometry, shown):
+            misplaced.append((mark.value, point))
+        else:
             present.add(mark.value)
-    missing = [(key, position) for key, position in snap_points(block) if key not in present]
+    for key, point in misplaced:
+        if key in present or not remove_point(point):
+            present.add(key)        # better in the old place than twice
+    missing = [entry for entry in shown_points(block) if entry[0] not in present]
     if not missing:
         return
     own = None
     if base is None and design.designType == adsk.fusion.DesignTypes.ParametricDesignType:
         own = base = component.features.baseFeatures.add()
         own.startEdit()
+    def make(shown, frame):
+        place = adsk.core.Point3D.create(shown[0] / 10.0, shown[1] / 10.0, shown[2] / 10.0)
+        if frame is not None:
+            place.transformBy(frame)
+        definition = points.createInput()
+        definition.setByPoint(place)
+        if base is not None:
+            definition.targetBaseOrFormFeature = base
+        return points.add(definition)
+
+    frame = None
     try:
-        for key, position in missing:
-            definition = points.createInput()
-            definition.setByPoint(adsk.core.Point3D.create(
-                position[0] / 10.0, position[1] / 10.0, position[2] / 10.0))
-            if base is not None:
-                definition.targetBaseOrFormFeature = base
-            point = points.add(definition)
+        for key, shown, meant in missing:
+            point = make(shown, frame)
+            if frame is None and _off(point.geometry, shown):
+                # Fusion took the coordinates for the design's, not the component's.
+                frame = used_frame(design, component, shown, point.geometry)
+                if frame is not None:
+                    point.deleteMe()
+                    point = make(shown, frame)
             point.name = T(key)
             point.attributes.add(ATTRIBUTE_GROUP, ATTRIBUTE_POINT, key)
+            point.attributes.add(ATTRIBUTE_GROUP, ATTRIBUTE_SHIFT,
+                                 json.dumps([meant[i] - shown[i] for i in range(3)]))
     finally:
         if own is not None:
             own.finishEdit()
+
+
+def complete_snap_points(design):
+    """Give every element in the design the points it does not have yet.
+
+    The points arrived over several versions, so a design holds elements with
+    none, six, eight, ten or all twelve, and before 1.1.0.1 some of them sat
+    inside the material. Topping up only the element being placed would leave
+    the others short.
+    """
+    by_id = library()[1]
+    by_name = dict((component_name(block), block) for block in by_id.values())
+    components = design.allComponents
+    for i in range(components.count):
+        component = components.item(i)
+        if component.bRepBodies.count == 0:
+            continue
+        try:
+            # A component of a linked design cannot be changed from here.
+            if component.parentDesign != design:
+                continue
+        except Exception:
+            pass
+        mark = component.attributes.itemByName(ATTRIBUTE_GROUP, ATTRIBUTE_BLOCK)
+        block = by_id.get(mark.value) if mark else by_name.get(component.name)
+        if block:
+            add_snap_points(design, component, block, None)
 
 
 def build_result(values):
@@ -355,6 +601,7 @@ def build_result(values):
     design = adsk.fusion.Design.cast(adsk.core.Application.get().activeProduct)
     if not design:
         fail('err.no_design')
+    complete_snap_points(design)
 
     # Bring the anchor to the origin, turn about the vertical axis, then move
     # to the clicked point plus the offset. The offset runs along the design's
@@ -380,7 +627,6 @@ def build_result(values):
     # as three different parts instead of one part, three times.
     known = find_component(design, block)
     if known:
-        add_snap_points(design, known, block, None)     # elements from before 0.3.0 have none
         design.rootComponent.occurrences.addExistingComponent(known, placement)
         return
 

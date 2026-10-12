@@ -190,6 +190,123 @@ class Recorder(object):
         sys.modules['adsk'], sys.modules['adsk.core'], sys.modules['adsk.fusion'] = adsk, core, fusion
 
 
+def check_completion(addin, by_id):
+    """Elements of every age in one design all end up with the twelve points, each where it can be seen."""
+    class Mark(object):
+        def __init__(self, value):
+            self.value = value
+
+    class Attributes(object):
+        def __init__(self):
+            self.values = {}
+
+        def itemByName(self, group, name):
+            return Mark(self.values[name]) if name in self.values else None
+
+        def add(self, group, name, value):
+            self.values[name] = value
+
+    class Place(object):
+        def __init__(self, cm):
+            self.x, self.y, self.z = cm
+
+    class Point(object):
+        baseFeature = None
+
+        def __init__(self, owner, cm):
+            self.attributes = Attributes()
+            self.owner, self.geometry = owner, Place(cm)
+
+        def deleteMe(self):
+            self.owner.items.remove(self)
+            self.owner.count = len(self.owner.items)
+            return True
+
+    class Input(object):
+        def setByPoint(self, point):
+            self.cm = point
+
+    class Collection(object):
+        def __init__(self, items=()):
+            self.items = list(items)
+            self.count = len(self.items)
+
+        def item(self, i):
+            return self.items[i]
+
+        def createInput(self):
+            return Input()
+
+        def add(self, definition):
+            self.items.append(Point(self, definition.cm))
+            self.count = len(self.items)
+            return self.items[-1]
+
+    class Component(object):
+        def __init__(self, block, marked, keys):
+            self.name = addin.component_name(block)
+            self.attributes = Attributes()
+            if marked:
+                self.attributes.add(addin.ATTRIBUTE_GROUP, addin.ATTRIBUTE_BLOCK, block['id'])
+            self.bRepBodies = Collection(['body'])
+            self.constructionPoints = Collection()
+            for key, position in addin.snap_points(block):      # where versions up to 1.1.0.0 put them
+                if key in keys:
+                    definition = Input()
+                    definition.setByPoint(tuple(c / 10.0 for c in position))
+                    self.constructionPoints.add(definition).attributes.add(
+                        addin.ATTRIBUTE_GROUP, addin.ATTRIBUTE_POINT, key)
+
+    class Design(object):
+        designType = 'direct'
+
+    sys.modules['adsk.fusion'].DesignTypes = type('DesignTypes', (object,), {'ParametricDesignType': 'parametric'})
+    keys = list(addin.POINT_KEYS)
+    design = Design()
+    old = [(Component(by_id['s1-wp'], False, []), by_id['s1-wp']),      # before 0.3.0: no mark, no points
+           (Component(by_id['s1-w'], True, keys[:6]), by_id['s1-w']),
+           (Component(by_id['eu-200-w'], True, keys[:8]), by_id['eu-200-w']),
+           (Component(by_id['snl'], True, keys[:10]), by_id['snl']),
+           (Component(by_id['d1-115'], True, keys), by_id['d1-115'])]
+    foreign = Component(by_id['s1-wp'], False, [])
+    foreign.name = 'something else'
+    design.allComponents = Collection([component for component, block in old] + [foreign])
+    for turn in ('an older element gets its points', 'a second run changes nothing'):
+        addin.complete_snap_points(design)
+        for component, block in old:
+            found = dict((p.attributes.values[addin.ATTRIBUTE_POINT], p) for p in component.constructionPoints.items)
+            ok = sorted(found) == sorted(keys) and component.constructionPoints.count == 12
+            for key, shown, meant in addin.shown_points(block):
+                point = found.get(key)
+                ok = ok and point is not None and all(
+                    abs(c * 10.0 - s) < 1e-6 for c, s in zip((point.geometry.x, point.geometry.y, point.geometry.z), shown))
+            check(ok, '%s: %s' % (component.name, turn))
+    check(foreign.constructionPoints.count == 0, 'a component that is not an element stays untouched')
+
+
+def check_visible(addin, blocks):
+    """Every point is put where it can be seen and still means the place it was worked out for."""
+    hidden, double = [], []
+    for block in blocks:
+        entries = addin.shown_points(block)
+        check([(key, meant) for key, shown, meant in entries]
+              == [(key, tuple(float(c) for c in p)) for key, p in addin.snap_points(block)],
+              '%s: every point keeps its meaning' % block['name'])
+        for key, shown, meant in entries:
+            if not any(abs(t) < addin.NEAR for axis in range(3) for t in addin._surface_along(block, shown, axis)):
+                hidden.append('%s %s' % (block['id'], key))
+        if len({tuple(round(c) for c in shown) for key, shown, meant in entries}) != 12:
+            double.append(block['id'])
+    # Two half corner elements have no free place on the surface left for one point each.
+    check(sorted(hidden) == ['snl-2 point.bottom.left', 'snp-2 point.bottom.left'],
+          'every point lies on the surface of its element, found off it: %s' % ', '.join(hidden))
+    check(not double, 'no two points are shown in one place: %s' % ', '.join(double))
+    s1 = [b for b in blocks if b['id'] == 's1-wp'][0]
+    shown = dict((key, place) for key, place, meant in addin.shown_points(s1))
+    check(shown['point.top.centre'] == (353.5, 176.0, 300.0), 'S1 WP: top middle is shown on top of the tongue')
+    check(shown['point.bottom.centre'] == (353.5, 176.0, 50.0), 'S1 WP: bottom middle is shown in the groove')
+
+
 def main():
     print('1) Library file')
     with open(os.path.join(BLOCKS, 'blocks.json'), 'r', encoding='utf-8') as handle:
@@ -261,6 +378,8 @@ def main():
         # Bond: bottom middle of the next element on the upper end point of this one.
         check([p for key, p in spots if key == 'point.bottom.centre'][0]
               == addin.anchor_position(block, 'point.bottom.centre'), '%s: anchor and point agree' % block['name'])
+    check_visible(addin, blocks)
+    check_completion(addin, by_id)
     for block in blocks:
         recorder.vertices, recorder.edges, recorder.faces, recorder.uses = [], [], [], {}
         addin.make_body(block)

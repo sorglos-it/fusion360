@@ -226,6 +226,12 @@ cliqué. Rouge : peut être choisi sous **Poser par**. Vert : les deux.
 
 ![Les points sur l'élément S1 WP](../s1-wp-punkte.svg)
 
+Depuis la 1.1.0.1, chaque point est visible sur la surface de l'élément. Si l'endroit du tableau est dans la matière
+ou dans le vide – dans une rainure, sur une languette, dans un évidement – le point passe sur la surface voisine :
+d'abord vers le haut ou le bas, sinon dans la longueur. Au clic, c'est toujours l'endroit du tableau qui compte ; un
+mur en appareil donne donc le même résultat. Les éléments posés par une version plus ancienne reçoivent leurs points
+déplacés à la prochaine pose d'un élément. Le déplacement a été utilisé par l'auteur dans Fusion.
+
 État : les points sont testés hors ligne seulement, **pas dans Fusion**.
 
 ## Poser par

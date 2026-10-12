@@ -223,6 +223,12 @@ Red: can be chosen under **Placed by**. Green: both.
 
 ![The points on the element S1 WP](../s1-wp-punkte.svg)
 
+Since 1.1.0.1 every point is shown on the surface of the element. Where the place from the table is inside the
+material or in the air – in a groove, on a tongue, at a recess – the point moves to the surface next to it: up or
+down first, otherwise along the length. Clicking it still places by the place from the table, so a wall in bond comes
+out the same. Elements placed by an older version get their points moved the next time an element is placed. This
+move has been used inside Fusion by the author.
+
 State: the points have been used inside Fusion by the author.
 
 ## Placed by

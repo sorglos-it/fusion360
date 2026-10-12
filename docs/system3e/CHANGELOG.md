@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.1.0.1 – 2026-10-12
+
+- Every element in the design gets its missing click points when an element is placed, not only the element being
+  placed. Elements from older versions kept fewer points until now.
+- Every click point is shown on the surface of the element. Points that were inside the material (top middle on
+  every basic and starter element) or in the air under a groove move to the surface next to them. Clicking a point
+  still places by the place it stands for, so nothing changes for a wall in bond.
+- Existing elements get their points moved the next time an element is placed.
+- A new kind of element placed away from the origin had its points scattered instead of on the element. Each new
+  point is now checked after it is made and put right; scattered points of existing elements are replaced.
+- The place of a clicked element point is worked out from the element and its placement.
+- Used inside Fusion by the author: placing a basic element on a starter element.
+
 ## 1.1.0.0 – 2026-10-10
 
 - Release. Same content as build 1.0.0.1.

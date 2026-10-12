@@ -216,6 +216,12 @@ El dibujo muestra todos los puntos sobre el elemento básico `S1 WP`. Sus rótul
 
 ![Los puntos del elemento S1 WP](../s1-wp-punkte.svg)
 
+Desde la 1.1.0.1 cada punto se ve sobre la superficie del elemento. Si el lugar de la tabla está dentro del material
+o en el aire – en una ranura, sobre una lengüeta, en un hueco – el punto pasa a la superficie de al lado: primero
+hacia arriba o abajo, si no a lo largo. Al hacer clic sigue contando el lugar de la tabla, así que un muro trabado
+sale igual. Los elementos de versiones anteriores reciben sus puntos movidos la próxima vez que se coloque un
+elemento. El movimiento ha sido usado por el autor dentro de Fusion.
+
 Estado: los puntos están probados solo sin conexión, **no dentro de Fusion**.
 
 ## Colocar por

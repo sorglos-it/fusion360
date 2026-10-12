@@ -223,6 +223,12 @@ Rot: lässt sich unter **Setzen an** wählen. Grün: beides.
 
 ![Die Punkte am Baustein S1 WP](../s1-wp-punkte.svg)
 
+Seit 1.1.0.1 liegt jeder Punkt sichtbar auf der Oberfläche des Bausteins. Liegt der Ort aus der Tabelle im Material
+oder in der Luft – in einer Nut, auf einer Feder, an einer Aussparung –, rückt der Punkt auf die Fläche daneben:
+zuerst nach oben oder unten, sonst längs. Beim Anklicken zählt weiter der Ort aus der Tabelle, eine Wand im Verband
+kommt also gleich heraus. Bausteine aus älteren Versionen bekommen ihre Punkte versetzt, sobald das nächste Mal ein
+Baustein gesetzt wird. Das Versetzen ist vom Autor in Fusion benutzt.
+
 Stand: Die Punkte sind nur offline geprüft, **nicht in Fusion**.
 
 ## Setzen an

@@ -42,8 +42,8 @@ def addin_module():
 def all_points(addin, block):
     """[(text, position, kind)] - clickable points and anchors, merged where they coincide."""
     found = []
-    for key, position in addin.snap_points(block):
-        found.append([addin.T(key), tuple(position), 'click'])
+    for key, shown, meant in addin.shown_points(block):
+        found.append([addin.T(key), tuple(shown), 'click'])
     for anchor in addin.ANCHORS:
         position = tuple(addin.anchor_position(block, anchor))
         for entry in found:
