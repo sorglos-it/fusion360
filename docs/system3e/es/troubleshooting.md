@@ -94,8 +94,6 @@ En otros idiomas el texto está traducido. Los cuadros de mensaje llevan el tít
 
 - **Sin probar dentro de Fusion:** las correcciones de la versión 1.0.0.1 (véase el
   [registro de cambios](../CHANGELOG.md)).
-- **Un punto en el aire:** en los medios elementos de esquina `SNL/2` y `SNP/2` el punto "abajo centro izquierda"
-  no tiene ningún lugar libre en la superficie y se queda en el aire.
 - **Izquierda y derecha:** los nombres izquierda/derecha de los elementos de esquina y de ventana se compararon a
   ojo con las fichas del catálogo del fabricante. No están confirmados.
 - **`S0/2 200 P`:** este elemento está dañado en el archivo 3D del fabricante. Se reconstruye a partir de

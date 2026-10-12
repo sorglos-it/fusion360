@@ -134,7 +134,7 @@ estar dentro del material, donde el punto no se ve, o en el aire. Entonces el pu
 
 Ejemplo `S1 WP`: "arriba centro" representa la altura 250 mm y se muestra encima de la lengüeta, a 300 mm. "abajo
 centro" representa la altura 0 y se muestra en la ranura, a 50 mm. En los medios elementos de esquina `SNL/2` y
-`SNP/2` no queda ningún lugar libre para "abajo centro izquierda"; se queda en el aire.
+`SNP/2` ninguno de estos lugares está libre para "abajo centro izquierda"; se muestra en el lugar más cercano de la cara inferior.
 
 Cada punto lleva marcas invisibles (grupo de atributos `System3E`):
 

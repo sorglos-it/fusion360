@@ -214,8 +214,12 @@ def _surface_along(block, p, axis):
     return found
 
 
-def _nearest_on_surface(block, p):
-    """The place on the element's surface closest to p."""
+def _nearest_on_surface(block, p, level=None):
+    """The place on the element's surface closest to p; with `level`, only at that height.
+
+    Of two places equally far away the one further along the length wins.
+    Returns p itself when there is none.
+    """
     points = block['points']
     best, best_distance = tuple(p), None
     for face in block['faces']:
@@ -233,8 +237,11 @@ def _nearest_on_surface(block, p):
                 s = min(1.0, max(0.0, s))
                 spots.append(tuple(p0[j] + s * edge[j] for j in range(3)))
         for spot in spots:
+            if level is not None and abs(spot[2] - level) > NEAR:
+                continue
             distance = sum((spot[j] - p[j]) ** 2 for j in range(3))
-            if best_distance is None or distance < best_distance - 1e-9:
+            if (best_distance is None or distance < best_distance - 1e-9
+                    or (abs(distance - best_distance) <= 1e-9 and spot[0] > best[0])):
                 best, best_distance = spot, distance
     return best
 
@@ -247,7 +254,8 @@ def on_surface(block, position, taken=()):
     it cannot be seen, or in the air. Such a point moves straight up or down
     to the surface. Where there is none above or below, or another point sits
     there already (`taken`), it moves along the length, then to the closest
-    place on the surface, then across the wall.
+    place on the surface, then across the wall, and last to the closest place
+    at its own height.
     """
     position = tuple(float(c) for c in position)
     reach = [_surface_along(block, position, axis) for axis in range(3)]
@@ -260,6 +268,7 @@ def on_surface(block, position, taken=()):
             continue
         for t in sorted(reach[axis], key=lambda t: (abs(t), -t)):
             places.append(tuple(c + t if i == axis else c for i, c in enumerate(position)))
+    places.append(_nearest_on_surface(block, position, level=position[2]))
     for place in places:
         if all(max(abs(place[i] - other[i]) for i in range(3)) > 1.0 for other in taken):
             return place

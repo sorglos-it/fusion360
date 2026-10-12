@@ -348,14 +348,17 @@ def check_visible(addin, blocks):
                 hidden.append('%s %s' % (block['id'], key))
         if len({tuple(round(c) for c in shown) for key, shown, meant in entries}) != 12:
             double.append(block['id'])
-    # Two half corner elements have no free place on the surface left for one point each.
-    check(sorted(hidden) == ['snl-2 point.bottom.left', 'snp-2 point.bottom.left'],
-          'every point lies on the surface of its element, found off it: %s' % ', '.join(hidden))
+    check(not hidden, 'every point lies on the surface of its element, found off it: %s' % ', '.join(hidden))
     check(not double, 'no two points are shown in one place: %s' % ', '.join(double))
     s1 = [b for b in blocks if b['id'] == 's1-wp'][0]
     shown = dict((key, place) for key, place, meant in addin.shown_points(s1))
     check(shown['point.top.centre'] == (353.5, 176.0, 300.0), 'S1 WP: top middle is shown on top of the tongue')
     check(shown['point.bottom.centre'] == (353.5, 176.0, 50.0), 'S1 WP: bottom middle is shown in the groove')
+    for name in ('snl-2', 'snp-2'):
+        half = [b for b in blocks if b['id'] == name][0]
+        shown = dict((key, place) for key, place, meant in addin.shown_points(half))
+        check(shown['point.bottom.left'] == (245.5, 190.0, 0.0),
+              '%s: bottom middle left is shown on the underside' % half['name'])
 
 
 def main():

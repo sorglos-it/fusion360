@@ -133,7 +133,7 @@ posto può essere dentro il materiale, dove il punto non si vede, oppure in aria
 
 Esempio `S1 WP`: "sopra centro" rappresenta l'altezza 250 mm ed è mostrato sopra il maschio a 300 mm. "sotto
 centro" rappresenta l'altezza 0 ed è mostrato nella scanalatura a 50 mm. Sui mezzi elementi d'angolo `SNL/2` e
-`SNP/2` non resta alcun posto libero per "sotto centro sinistra"; resta in aria.
+`SNP/2` nessuno di questi posti è libero per "sotto centro sinistra"; è mostrato nel posto più vicino del lato inferiore.
 
 Ogni punto porta contrassegni invisibili (gruppo di attributi `System3E`):
 

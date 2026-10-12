@@ -92,9 +92,6 @@ lingue il testo è tradotto. Le finestre di messaggio portano il titolo "Element
 
 ## Limiti noti
 
-- **Non testato dentro Fusion:** le correzioni della versione 1.0.0.1 (vedere il [registro delle modifiche](../CHANGELOG.md)).
-- **Un punto in aria:** sui mezzi elementi d'angolo `SNL/2` e `SNP/2` il punto "sotto centro sinistra" non ha un
-  posto libero sulla superficie e resta in aria.
 - **Sinistra e destra:** i nomi sinistra/destra degli elementi d'angolo e per finestra sono stati abbinati a occhio alle
   schede di catalogo del produttore. Non sono confermati.
 - **`S0/2 200 P`:** questo elemento è danneggiato nel file 3D del produttore. È ricostruito da `S0/2 250 P`.

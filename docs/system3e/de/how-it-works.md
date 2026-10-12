@@ -137,7 +137,7 @@ anderen Stelle gezeigt:
 
 Beispiel `S1 WP`: „oben Mitte“ steht für die Höhe 250 mm und wird oben auf der Feder bei 300 mm gezeigt. „unten
 Mitte“ steht für die Höhe 0 und wird in der Nut bei 50 mm gezeigt. Bei den halben Eckbausteinen `SNL/2` und
-`SNP/2` bleibt für „unten Mitte links“ kein freier Platz; der Punkt bleibt in der Luft.
+`SNP/2` ist für „unten Mitte links“ keiner dieser Plätze frei; der Punkt wird an der nächsten Stelle der Unterseite gezeigt.
 
 Jeder Punkt trägt unsichtbare Markierungen (Attributgruppe `System3E`):
 

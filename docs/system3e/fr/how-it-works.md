@@ -136,7 +136,8 @@ ailleurs :
 
 Exemple `S1 WP` : « dessus milieu » représente la hauteur 250 mm et est montré sur le dessus de la languette, à
 300 mm. « dessous milieu » représente la hauteur 0 et est montré dans la rainure, à 50 mm. Sur les demi-éléments
-d'angle `SNL/2` et `SNP/2`, il ne reste aucun endroit libre pour « dessous milieu gauche » ; il reste dans le vide.
+d'angle `SNL/2` et `SNP/2`, aucun de ces endroits n'est libre pour « dessous milieu gauche » ; il est montré à l'endroit
+le plus proche de la face inférieure.
 
 Chaque point porte des marques invisibles (groupe d'attributs `System3E`) :
 

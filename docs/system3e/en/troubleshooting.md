@@ -92,9 +92,6 @@ languages the text is translated. Message boxes carry the title "SYSTEM 3E eleme
 
 ## Known limits
 
-- **Untested inside Fusion:** the fixes of version 1.0.0.1 (see the [change log](../CHANGELOG.md)).
-- **One point in the air:** on the half corner elements `SNL/2` and `SNP/2` the point "bottom middle left" has no
-  free place on the surface and stays in the air.
 - **Left and right:** the left/right names of the corner and window elements were matched by eye against the
   manufacturer's catalogue cards. They are not confirmed.
 - **`S0/2 200 P`:** this element is damaged in the manufacturer's 3D file. It is rebuilt from `S0/2 250 P`.

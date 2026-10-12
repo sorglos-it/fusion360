@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.0.1 – 2026-10-12
+
+- `SNL/2` and `SNP/2`: the point "bottom middle left" no longer hangs in the air. It is shown on the underside, at
+  the closest place at its own height. Not tested inside Fusion.
+
 ## 1.2.0.0 – 2026-10-12
 
 - Release. Same content as build 1.1.0.2.

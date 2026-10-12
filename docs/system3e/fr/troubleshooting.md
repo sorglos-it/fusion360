@@ -93,9 +93,6 @@ français. Dans les autres langues, le texte est traduit. Les boîtes de message
 
 ## Limites connues
 
-- **Non testé dans Fusion :** les corrections de la version 1.0.0.1 (voir le [journal des modifications](../CHANGELOG.md)).
-- **Un point dans le vide :** sur les demi-éléments d'angle `SNL/2` et `SNP/2`, le point « dessous milieu gauche »
-  n'a aucun endroit libre sur la surface et reste dans le vide.
 - **Gauche et droite :** les noms gauche/droite des éléments d'angle et de fenêtre ont été comparés à l'œil avec
   les fiches du catalogue du fabricant. Ils ne sont pas confirmés.
 - **`S0/2 200 P` :** cet élément est endommagé dans le fichier 3D du fabricant. Il est reconstruit à partir de

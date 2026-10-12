@@ -133,7 +133,7 @@ be inside the material, where the point cannot be seen, or in the air. Then the 
 
 Example `S1 WP`: "top middle" stands for the height 250 mm and is shown on top of the tongue at 300 mm. "bottom
 middle" stands for the height 0 and is shown in the groove at 50 mm. On the half corner elements `SNL/2` and
-`SNP/2` no free place is left for "bottom middle left"; it stays in the air.
+`SNP/2` none of these places is free for "bottom middle left"; it is shown at the closest place of the underside.
 
 Each point carries invisible marks (attribute group `System3E`):
 

@@ -92,9 +92,6 @@ Sprachen ist der Text übersetzt. Meldungsfenster tragen den Titel „SYSTEM 3E 
 
 ## Bekannte Grenzen
 
-- **In Fusion ungeprüft:** die Korrekturen der Version 1.0.0.1 (siehe [Änderungsprotokoll](../CHANGELOG.md)).
-- **Ein Punkt in der Luft:** Bei den halben Eckbausteinen `SNL/2` und `SNP/2` hat der Punkt „unten Mitte links“ keinen
-  freien Platz auf der Oberfläche und bleibt in der Luft.
 - **Links und rechts:** Die Links/Rechts-Namen der Eck- und Fensterbausteine wurden nach Augenmaß mit den
   Katalogblättern des Herstellers abgeglichen. Sie sind nicht bestätigt.
 - **`S0/2 200 P`:** Dieser Baustein ist in der 3D-Datei des Herstellers beschädigt. Er ist aus `S0/2 250 P` nachgebaut.
