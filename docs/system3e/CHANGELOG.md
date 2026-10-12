@@ -7,7 +7,7 @@
 ## 1.2.0.1 – 2026-10-12
 
 - `SNL/2` and `SNP/2`: the point "bottom middle left" no longer hangs in the air. It is shown on the underside, at
-  the closest place at its own height. Not tested inside Fusion.
+  the closest place at its own height. Used inside Fusion by the author.
 
 ## 1.2.0.0 – 2026-10-12
 
